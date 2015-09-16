@@ -1,0 +1,5 @@
+_UART_Init: CODE, 2008 0 15
+_UART_RxChar: CODE, 1985 0 11
+_main: CODE, 2023 0 25
+_UART_TxChar: CODE, 1996 0 12
+Total: 63

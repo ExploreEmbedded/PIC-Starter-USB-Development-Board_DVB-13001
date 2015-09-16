@@ -1,0 +1,9 @@
+_LCD_Init: CODE, 1811 0 43
+_LCD_GoToLineTwo: CODE, 1730 0 7
+_delay_us: CODE, 1737 0 16
+_main: CODE, 1854 0 56
+_LCD_CmdWrite: CODE, 1910 0 69
+_LCD_DataWrite: CODE, 1979 0 69
+_LCD_DisplayString: CODE, 1778 0 33
+_delay_ms: CODE, 1753 0 25
+Total: 318

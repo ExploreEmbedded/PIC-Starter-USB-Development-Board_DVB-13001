@@ -1,0 +1,10 @@
+_LCD_Init: CODE, 1867 0 43
+_UART_Init: CODE, 1775 0 15
+_UART_RxChar: CODE, 1752 0 11
+_delay_us: CODE, 1790 0 16
+_main: CODE, 1831 0 36
+_LCD_CmdWrite: CODE, 1979 0 69
+_LCD_DataWrite: CODE, 1910 0 69
+_delay_ms: CODE, 1806 0 25
+_UART_TxChar: CODE, 1763 0 12
+Total: 296

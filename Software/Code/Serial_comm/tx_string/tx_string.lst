@@ -1,0 +1,808 @@
+
+
+HI-TECH Software PIC LITE Macro Assembler V9.83 build 10920 
+                                                                                               Mon Dec 24 21:38:31 2012
+
+HI-TECH Software Omniscient Code Generator (Lite mode) build 10920
+     1  0000                     opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 10920"
+     2                           
+     3                           opt pagewidth 120
+     4                           
+     5                           	opt lm
+     6                           
+     7                           	processor	16F877A
+     8                           clrc	macro
+     9                           	bcf	3,0
+    10  0000                     	endm
+    11                           clrz	macro
+    12                           	bcf	3,2
+    13  0000                     	endm
+    14                           setc	macro
+    15                           	bsf	3,0
+    16  0000                     	endm
+    17                           setz	macro
+    18                           	bsf	3,2
+    19  0000                     	endm
+    20                           skipc	macro
+    21                           	btfss	3,0
+    22  0000                     	endm
+    23                           skipz	macro
+    24                           	btfss	3,2
+    25  0000                     	endm
+    26                           skipnc	macro
+    27                           	btfsc	3,0
+    28  0000                     	endm
+    29                           skipnz	macro
+    30                           	btfsc	3,2
+    31  0000                     	endm
+    32  0000                     indf	equ	0
+    33  0000                     indf0	equ	0
+    34  0002                     pc	equ	2
+    35  0002                     pcl	equ	2
+    36  0003                     status	equ	3
+    37  0004                     fsr	equ	4
+    38  0004                     fsr0	equ	4
+    39  0001                     c	equ	1
+    40  0000                     z	equ	0
+    41  000A                     pclath	equ	10
+    42                           	FNCALL	_main,_UART_Init
+    43                           	FNCALL	_main,_UART_TxString
+    44                           	FNCALL	_UART_TxString,_UART_TxChar
+    45                           	FNROOT	_main
+    46                           	global	main@F1102
+    47                           psect	idataBANK0,class=CODE,space=0,delta=2
+    48                           global __pidataBANK0
+    49  0762                     __pidataBANK0:
+    50                           	file	"C:\Users\Xplore_labZ\Saved Games\Desktop\Sample_Programs_updated\Pic\Ultra_Pic\Se
+                                 rial_comm\tx_string\main.c"
+    51                           	line	18
+    52                           
+    53                           ;initializer for main@F1102
+    54  0762  3468               	retlw	068h
+    55  0763  3465               	retlw	065h
+    56  0764  346C               	retlw	06Ch
+    57  0765  346C               	retlw	06Ch
+    58  0766  346F               	retlw	06Fh
+    59  0767  3420               	retlw	020h
+    60  0768  3477               	retlw	077h
+    61  0769  346F               	retlw	06Fh
+    62  076A  3472               	retlw	072h
+    63  076B  346C               	retlw	06Ch
+    64  076C  3464               	retlw	064h
+    65  076D  342C               	retlw	02Ch
+    66  076E  3420               	retlw	020h
+    67  076F  3400               	retlw	0
+    68                           	global	_RCREG
+    69  001A                     _RCREG	set	26
+    70                           	global	_RCSTA
+    71  0018                     _RCSTA	set	24
+    72                           	global	_TXREG
+    73  0019                     _TXREG	set	25
+    74                           	global	_CARRY
+    75  0018                     _CARRY	set	24
+    76                           	global	_GIE
+    77  005F                     _GIE	set	95
+    78                           	global	_RCIF
+    79  0065                     _RCIF	set	101
+    80                           	global	_TXIF
+    81  0064                     _TXIF	set	100
+    82                           	global	_SPBRG
+    83  0099                     _SPBRG	set	153
+    84                           	global	_TRISC
+    85  0087                     _TRISC	set	135
+    86                           	global	_TXSTA
+    87  0098                     _TXSTA	set	152
+    88                           	global	_EEADR
+    89  010D                     _EEADR	set	269
+    90                           	global	_EEDATA
+    91  010C                     _EEDATA	set	268
+    92                           	global	_EECON1
+    93  018C                     _EECON1	set	396
+    94                           	global	_EECON2
+    95  018D                     _EECON2	set	397
+    96                           	global	_RD
+    97  0C60                     _RD	set	3168
+    98                           	global	_WR
+    99  0C61                     _WR	set	3169
+   100                           	global	_WREN
+   101  0C62                     _WREN	set	3170
+   102                           psect	strings,class=STRING,delta=2
+   103                           global __pstrings
+   104  0003                     __pstrings:
+   105                           ;	global	stringdir,stringtab,__stringbase
+   106  0003                     stringtab:
+   107                           ;	String table - string pointers are 1 byte each
+   108  0003  1BFF               	btfsc	(btemp+1),7
+   109  0004  280D               	ljmp	stringcode
+   110  0005  1383               	bcf	status,7
+   111  0006  187F               	btfsc	(btemp+1),0
+   112  0007  1783               	bsf	status,7
+   113  0008  0800               	movf	indf,w
+   114  0009  0A84               	incf fsr
+   115  000A  1903               skipnz
+   116  000B  0AFF               incf btemp+1
+   117  000C  0008               	return
+   118  000D                     stringcode:stringdir:
+      + 000D                     stringdir:	
+   119  000D  3000               movlw high(stringdir)
+   120  000E  008A               movwf pclath
+   121  000F  0804               movf fsr,w
+   122  0010  0A84               incf fsr
+   123  0011  0782               	addwf pc
+   124  0012                     __stringbase:
+   125  0012  3400               	retlw	0
+   126                           psect	strings
+   127                           	
+   128  0013                     STR_1:	
+   129  0013  3477               	retlw	119	;'w'
+   130  0014  3465               	retlw	101	;'e'
+   131  0015  346C               	retlw	108	;'l'
+   132  0016  3463               	retlw	99	;'c'
+   133  0017  346F               	retlw	111	;'o'
+   134  0018  346D               	retlw	109	;'m'
+   135  0019  3465               	retlw	101	;'e'
+   136  001A  3420               	retlw	32	;' '
+   137  001B  3474               	retlw	116	;'t'
+   138  001C  346F               	retlw	111	;'o'
+   139  001D  3420               	retlw	32	;' '
+   140  001E  3450               	retlw	80	;'P'
+   141  001F  3449               	retlw	73	;'I'
+   142  0020  3443               	retlw	67	;'C'
+   143  0021  3420               	retlw	32	;' '
+   144  0022  3470               	retlw	112	;'p'
+   145  0023  3472               	retlw	114	;'r'
+   146  0024  346F               	retlw	111	;'o'
+   147  0025  3467               	retlw	103	;'g'
+   148  0026  3472               	retlw	114	;'r'
+   149  0027  3461               	retlw	97	;'a'
+   150  0028  346D               	retlw	109	;'m'
+   151  0029  346D               	retlw	109	;'m'
+   152  002A  3469               	retlw	105	;'i'
+   153  002B  346E               	retlw	110	;'n'
+   154  002C  3467               	retlw	103	;'g'
+   155  002D  340A               	retlw	10
+   156  002E  340D               	retlw	13
+   157  002F  3400               	retlw	0
+   158                           psect	strings
+   159                           	file	"tx_string.as"
+   160                           	line	#
+   161                           psect cinit,class=CODE,delta=2
+   162                           global start_initialization
+   163  077F                     start_initialization:
+   164                           
+   165                           psect	dataBANK0,class=BANK0,space=1
+   166                           global __pdataBANK0
+   167  0020                     __pdataBANK0:
+   168                           	file	"C:\Users\Xplore_labZ\Saved Games\Desktop\Sample_Programs_updated\Pic\Ultra_Pic\Se
+                                 rial_comm\tx_string\main.c"
+   169  0020                     main@F1102:
+   170  0020                            ds      14
+   171                           
+   172                           global btemp
+   173                           psect inittext,class=CODE,delta=2
+   174                           global init_fetch,btemp
+   175                           ;	Called with low address in FSR and high address in W
+   176  0791                     init_fetch:
+   177  0791  087E               	movf btemp,w
+   178  0792  008A               	movwf pclath
+   179  0793  087F               	movf btemp+1,w
+   180  0794  0082               	movwf pc
+   181                           global init_ram
+   182                           ;Called with:
+   183                           ;	high address of idata address in btemp 
+   184                           ;	low address of idata address in btemp+1 
+   185                           ;	low address of data in FSR
+   186                           ;	high address + 1 of data in btemp-1
+   187  0795                     init_ram:
+   188  0795  120A  118A  2791   	fcall init_fetch
+              120A  118A         
+   189  079A  0080               	movwf indf,f
+   190  079B  0A84               	incf fsr,f
+   191  079C  0804               	movf fsr,w
+   192  079D  067D               	xorwf btemp-1,w
+   193  079E  1903               	btfsc status,2
+   194  079F  3400               	retlw 0
+   195  07A0  0AFF               	incf btemp+1,f
+   196  07A1  1903               	btfsc status,2
+   197  07A2  0AFE               	incf btemp,f
+   198  07A3  2F95               	goto init_ram
+   199                           ; Initialize objects allocated to BANK0
+   200                           psect cinit,class=CODE,delta=2
+   201                           global init_ram, __pidataBANK0
+   202  077F  1383               	bcf	status, 7	;select IRP bank0
+   203  0780  302E               	movlw low(__pdataBANK0+14)
+   204  0781  00FD               	movwf btemp-1,f
+   205  0782  3007               	movlw high(__pidataBANK0)
+   206  0783  00FE               	movwf btemp,f
+   207  0784  3062               	movlw low(__pidataBANK0)
+   208  0785  00FF               	movwf btemp+1,f
+   209  0786  3020               	movlw low(__pdataBANK0)
+   210  0787  0084               	movwf fsr,f
+   211  0788  120A  118A  2795   	fcall init_ram
+              120A  118A         
+   212                           psect cinit,class=CODE,delta=2
+   213                           global end_of_initialization
+   214                           
+   215                           ;End of C runtime variable initialization code
+   216                           
+   217  078D                     end_of_initialization:
+   218  078D  0183               clrf status
+   219  078E  120A  118A  2FCE   ljmp _main	;jump to C main() function
+   220                           psect	cstackCOMMON,class=COMMON,space=1
+   221                           global __pcstackCOMMON
+   222  0070                     __pcstackCOMMON:
+   223                           	global	?_UART_Init
+   224  0070                     ?_UART_Init:	; 0 bytes @ 0x0
+   225                           	global	??_UART_Init
+   226  0070                     ??_UART_Init:	; 0 bytes @ 0x0
+   227                           	global	?_main
+   228  0070                     ?_main:	; 0 bytes @ 0x0
+   229                           	global	?_UART_TxChar
+   230  0070                     ?_UART_TxChar:	; 0 bytes @ 0x0
+   231                           	global	??_UART_TxChar
+   232  0070                     ??_UART_TxChar:	; 0 bytes @ 0x0
+   233                           	global	UART_TxChar@ch
+   234  0070                     UART_TxChar@ch:	; 1 bytes @ 0x0
+   235  0070                     	ds	1
+   236                           	global	?_UART_TxString
+   237  0071                     ?_UART_TxString:	; 0 bytes @ 0x1
+   238                           	global	UART_TxString@string_ptr
+   239  0071                     UART_TxString@string_ptr:	; 2 bytes @ 0x1
+   240  0071                     	ds	2
+   241                           	global	??_UART_TxString
+   242  0073                     ??_UART_TxString:	; 0 bytes @ 0x3
+   243                           	global	??_main
+   244  0073                     ??_main:	; 0 bytes @ 0x3
+   245  0073                     	ds	4
+   246                           psect	cstackBANK0,class=BANK0,space=1
+   247                           global __pcstackBANK0
+   248  002E                     __pcstackBANK0:
+   249                           	global	main@msg
+   250  002E                     main@msg:	; 14 bytes @ 0x0
+   251  002E                     	ds	14
+   252 ;;Data sizes: Strings 29, constant 0, data 14, bss 0, persistent 0 stack 0
+   253 ;;Auto spaces:   Size  Autos    Used
+   254 ;; COMMON          14      7       7
+   255 ;; BANK0           80     14      28
+   256 ;; BANK1           80      0       0
+   257 ;; BANK3           96      0       0
+   258 ;; BANK2           96      0       0
+   259                           
+   260 ;;
+   261 ;; Pointer list with targets:
+   262                           
+   263 ;; UART_TxString@string_ptr	PTR unsigned char  size(2) Largest target is 29
+   264 ;;		 -> STR_1(CODE[29]), main@msg(BANK0[14]), 
+   265 ;;
+   266                           
+   267                           
+   268 ;;
+   269 ;; Critical Paths under _main in COMMON
+   270 ;;
+   271 ;;   _main->_UART_TxString
+   272 ;;   _UART_TxString->_UART_TxChar
+   273 ;;
+   274 ;; Critical Paths under _main in BANK0
+   275 ;;
+   276 ;;   None.
+   277 ;;
+   278 ;; Critical Paths under _main in BANK1
+   279 ;;
+   280 ;;   None.
+   281 ;;
+   282 ;; Critical Paths under _main in BANK3
+   283 ;;
+   284 ;;   None.
+   285 ;;
+   286 ;; Critical Paths under _main in BANK2
+   287 ;;
+   288 ;;   None.
+   289                           
+   290 ;;
+   291 ;;Main: autosize = 0, tempsize = 4, incstack = 0, save=0
+   292 ;;
+   293                           
+   294 ;;
+   295 ;;Call Graph Tables:
+   296 ;;
+   297 ;; ---------------------------------------------------------------------------------
+   298 ;; (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+   299 ;; ---------------------------------------------------------------------------------
+   300 ;; (0) _main                                                18    18      0      92
+   301 ;;                                              3 COMMON     4     4      0
+   302 ;;                                              0 BANK0     14    14      0
+   303 ;;                          _UART_Init
+   304 ;;                      _UART_TxString
+   305 ;; ---------------------------------------------------------------------------------
+   306 ;; (1) _UART_TxString                                        2     0      2      67
+   307 ;;                                              1 COMMON     2     0      2
+   308 ;;                        _UART_TxChar
+   309 ;; ---------------------------------------------------------------------------------
+   310 ;; (2) _UART_TxChar                                          1     1      0      22
+   311 ;;                                              0 COMMON     1     1      0
+   312 ;; ---------------------------------------------------------------------------------
+   313 ;; (1) _UART_Init                                            0     0      0       0
+   314 ;; ---------------------------------------------------------------------------------
+   315 ;; Estimated maximum stack depth 2
+   316 ;; ---------------------------------------------------------------------------------
+   317                           
+   318 ;; Call Graph Graphs:
+   319                           
+   320 ;; _main (ROOT)
+   321 ;;   _UART_Init
+   322 ;;   _UART_TxString
+   323 ;;     _UART_TxChar
+   324 ;;
+   325                           
+   326 ;; Address spaces:
+   327                           
+   328 ;;Name               Size   Autos  Total    Cost      Usage
+   329 ;;BANK3               60      0       0       9        0.0%
+   330 ;;BITBANK3            60      0       0       8        0.0%
+   331 ;;SFR3                 0      0       0       4        0.0%
+   332 ;;BITSFR3              0      0       0       4        0.0%
+   333 ;;BANK2               60      0       0      11        0.0%
+   334 ;;BITBANK2            60      0       0      10        0.0%
+   335 ;;SFR2                 0      0       0       5        0.0%
+   336 ;;BITSFR2              0      0       0       5        0.0%
+   337 ;;SFR1                 0      0       0       2        0.0%
+   338 ;;BITSFR1              0      0       0       2        0.0%
+   339 ;;BANK1               50      0       0       7        0.0%
+   340 ;;BITBANK1            50      0       0       6        0.0%
+   341 ;;CODE                 0      0       0       0        0.0%
+   342 ;;DATA                 0      0      25      12        0.0%
+   343 ;;ABS                  0      0      23       3        0.0%
+   344 ;;NULL                 0      0       0       0        0.0%
+   345 ;;STACK                0      0       2       2        0.0%
+   346 ;;BANK0               50      E      1C       5       35.0%
+   347 ;;BITBANK0            50      0       0       4        0.0%
+   348 ;;SFR0                 0      0       0       1        0.0%
+   349 ;;BITSFR0              0      0       0       1        0.0%
+   350 ;;COMMON               E      7       7       1       50.0%
+   351 ;;BITCOMMON            E      0       0       0        0.0%
+   352 ;;EEDATA             100      0       0       0        0.0%
+   353                           
+   354                           	global	_main
+   355                           psect	maintext,global,class=CODE,delta=2
+   356                           global __pmaintext
+   357  07CE                     __pmaintext:
+   358                           
+   359 ;; *************** function _main *****************
+   360 ;; Defined at:
+   361 ;;		line 17 in file "C:\Users\Xplore_labZ\Saved Games\Desktop\Sample_Programs_updated\Pic\Ultra_Pic\Serial_comm\tx_strin
+       g\main.c"
+   362 ;; Parameters:    Size  Location     Type
+   363 ;;		None
+   364 ;; Auto vars:     Size  Location     Type
+   365 ;;  msg            14    0[BANK0 ] unsigned char [14]
+   366 ;; Return value:  Size  Location     Type
+   367 ;;		None               void
+   368 ;; Registers used:
+   369 ;;		wreg, fsr0l, fsr0h, status,2, status,0, btemp+1, pclath, cstack
+   370 ;; Tracked objects:
+   371 ;;		On entry : 17F/0
+   372 ;;		On exit  : 0/0
+   373 ;;		Unchanged: 0/0
+   374 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   375 ;;      Params:         0       0       0       0       0
+   376 ;;      Locals:         0      14       0       0       0
+   377 ;;      Temps:          4       0       0       0       0
+   378 ;;      Totals:         4      14       0       0       0
+   379 ;;Total ram usage:       18 bytes
+   380 ;; Hardware stack levels required when called:    2
+   381 ;; This function calls:
+   382 ;;		_UART_Init
+   383 ;;		_UART_TxString
+   384 ;; This function is called by:
+   385 ;;		Startup code after reset
+   386 ;; This function uses a non-reentrant model
+   387 ;;
+   388                           psect	maintext
+   389                           	file	"C:\Users\Xplore_labZ\Saved Games\Desktop\Sample_Programs_updated\Pic\Ultra_Pic\Se
+                                 rial_comm\tx_string\main.c"
+   390                           	line	17
+   391                           	global	__size_of_main
+   392  0032                     	__size_of_main	equ	__end_of_main-_main
+   393                           	
+   394  07CE                     _main:	
+   395                           	opt	stack 6
+   396                           ; Regs used in _main: [wreg-fsr0h+status,2+status,0+btemp+1+pclath+cstack]
+   397                           	line	18
+   398                           	
+   399  07CE                     l3516:	
+   400                           ;main.c: 18: char msg[]={"hello world, "};
+   401  07CE  302E               	movlw	(main@msg)&0ffh
+   402  07CF  0084               	movwf	fsr0
+   403  07D0  3020               	movlw	low(main@F1102)
+   404  07D1  00F3               	movwf	(??_main+0)+0
+   405  07D2  0804               	movf	fsr0,w
+   406  07D3  00F4               	movwf	((??_main+0)+0+1)
+   407  07D4  300E               	movlw	14
+   408  07D5  00F5               	movwf	((??_main+0)+0+2)
+   409  07D6                     u2320:
+   410  07D6  0873               	movf	(??_main+0)+0,w
+   411  07D7  0084               	movwf	fsr0
+   412  07D8  1383               	bcf	status, 7	;select IRP bank0
+   413                           	
+   414  07D9  0800               	movf	indf,w
+   415  07DA  00F6               	movwf	((??_main+0)+0+3)
+   416  07DB  0AF3               	incf	(??_main+0)+0,f
+   417  07DC  0874               	movf	((??_main+0)+0+1),w
+   418  07DD  0084               	movwf	fsr0
+   419                           	
+   420  07DE  0876               	movf	((??_main+0)+0+3),w
+   421  07DF  0080               	movwf	indf
+   422  07E0  0AF4               	incf	((??_main+0)+0+1),f
+   423  07E1  0BF5               	decfsz	((??_main+0)+0+2),f
+   424  07E2  2FD6               	goto	u2320
+   425                           	line	21
+   426                           	
+   427  07E3                     l3518:	
+   428                           ;main.c: 21: UART_Init();
+   429  07E3  120A  118A  2770   	fcall	_UART_Init
+              120A  118A         
+   430  07E8  2FE9               	goto	l3520
+   431                           	line	23
+   432                           ;main.c: 23: while(1)
+   433                           	
+   434  07E9                     l691:	
+   435                           	line	26
+   436                           	
+   437  07E9                     l3520:	
+   438                           ;main.c: 24: {
+   439                           ;main.c: 26: UART_TxString(msg);
+   440  07E9  302E               	movlw	(main@msg&0ffh)
+   441  07EA  00F1               	movwf	(?_UART_TxString)
+   442  07EB  3000               	movlw	(0x0/2)
+   443  07EC  00F2               	movwf	(?_UART_TxString+1)
+   444  07ED  120A  118A  27A4   	fcall	_UART_TxString
+              120A  118A         
+   445                           	line	27
+   446                           	
+   447  07F2                     l3522:	
+   448                           ;main.c: 27: UART_TxString("welcome to PIC programming\n\r");
+   449  07F2  3001               	movlw	low((STR_1-__stringbase))
+   450  07F3  00F1               	movwf	(?_UART_TxString)
+   451  07F4  3080               	movlw	80h
+   452  07F5  00F2               	movwf	(?_UART_TxString+1)
+   453  07F6  120A  118A  27A4   	fcall	_UART_TxString
+              120A  118A         
+   454  07FB  2FE9               	goto	l3520
+   455                           	line	28
+   456                           	
+   457  07FC                     l692:	
+   458                           	line	23
+   459  07FC  2FE9               	goto	l3520
+   460                           	
+   461  07FD                     l693:	
+   462                           	line	30
+   463                           	
+   464  07FD                     l694:	
+   465                           	global	start
+   466  07FD  120A  118A  2800   	ljmp	start
+   467                           	opt stack 0
+   468                           GLOBAL	__end_of_main
+   469  0800                     	__end_of_main:
+   470 ;; =============== function _main ends ============
+   471                           
+   472                           	signat	_main,88
+   473                           	global	_UART_TxString
+   474                           psect	text155,local,class=CODE,delta=2
+   475                           global __ptext155
+   476  07A4                     __ptext155:
+   477                           
+   478 ;; *************** function _UART_TxString *****************
+   479 ;; Defined at:
+   480 ;;		line 107 in file "C:\Users\Xplore_labZ\Saved Games\Desktop\Sample_Programs_updated\Pic\Ultra_Pic\Serial_comm\tx_stri
+       ng\uart.c"
+   481 ;; Parameters:    Size  Location     Type
+   482 ;;  string_ptr      2    1[COMMON] PTR unsigned char 
+   483 ;;		 -> STR_1(29), main@msg(14), 
+   484 ;; Auto vars:     Size  Location     Type
+   485 ;;		None
+   486 ;; Return value:  Size  Location     Type
+   487 ;;		None               void
+   488 ;; Registers used:
+   489 ;;		wreg, fsr0l, fsr0h, status,2, status,0, btemp+1, pclath, cstack
+   490 ;; Tracked objects:
+   491 ;;		On entry : 0/0
+   492 ;;		On exit  : 0/0
+   493 ;;		Unchanged: 0/0
+   494 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   495 ;;      Params:         2       0       0       0       0
+   496 ;;      Locals:         0       0       0       0       0
+   497 ;;      Temps:          0       0       0       0       0
+   498 ;;      Totals:         2       0       0       0       0
+   499 ;;Total ram usage:        2 bytes
+   500 ;; Hardware stack levels used:    1
+   501 ;; Hardware stack levels required when called:    1
+   502 ;; This function calls:
+   503 ;;		_UART_TxChar
+   504 ;; This function is called by:
+   505 ;;		_main
+   506 ;; This function uses a non-reentrant model
+   507 ;;
+   508                           psect	text155
+   509                           	file	"C:\Users\Xplore_labZ\Saved Games\Desktop\Sample_Programs_updated\Pic\Ultra_Pic\Se
+                                 rial_comm\tx_string\uart.c"
+   510                           	line	107
+   511                           	global	__size_of_UART_TxString
+   512  002A                     	__size_of_UART_TxString	equ	__end_of_UART_TxString-_UART_TxString
+   513                           	
+   514  07A4                     _UART_TxString:	
+   515                           	opt	stack 6
+   516                           ; Regs used in _UART_TxString: [wreg-fsr0h+status,2+status,0+btemp+1+pclath+cstack]
+   517                           	line	108
+   518                           	
+   519  07A4                     l3508:	
+   520                           ;uart.c: 108: while(*string_ptr)
+   521  07A4  2FBC               	goto	l3514
+   522                           	
+   523  07A5                     l1395:	
+   524                           	line	109
+   525                           	
+   526  07A5                     l3510:	
+   527                           ;uart.c: 109: UART_TxChar(*string_ptr++);
+   528  07A5  0872               	movf	(UART_TxString@string_ptr+1),w
+   529  07A6  1283               	bcf	status, 5	;RP0=0, select bank0
+   530  07A7  1303               	bcf	status, 6	;RP1=0, select bank0
+   531  07A8  00FF               	movwf	btemp+1
+   532  07A9  0871               	movf	(UART_TxString@string_ptr),w
+   533  07AA  0084               	movwf	fsr0
+   534  07AB  120A  118A  2003   	fcall	stringtab
+              120A  118A         
+   535  07B0  120A  118A  2756   	fcall	_UART_TxChar
+              120A  118A         
+   536                           	
+   537  07B5                     l3512:	
+   538  07B5  3001               	movlw	low(01h)
+   539  07B6  07F1               	addwf	(UART_TxString@string_ptr),f
+   540  07B7  1803               	skipnc
+   541  07B8  0AF2               	incf	(UART_TxString@string_ptr+1),f
+   542  07B9  3000               	movlw	high(01h)
+   543  07BA  07F2               	addwf	(UART_TxString@string_ptr+1),f
+   544  07BB  2FBC               	goto	l3514
+   545                           	
+   546  07BC                     l1394:	
+   547                           	line	108
+   548                           	
+   549  07BC                     l3514:	
+   550  07BC  0872               	movf	(UART_TxString@string_ptr+1),w
+   551  07BD  1283               	bcf	status, 5	;RP0=0, select bank0
+   552  07BE  1303               	bcf	status, 6	;RP1=0, select bank0
+   553  07BF  00FF               	movwf	btemp+1
+   554  07C0  0871               	movf	(UART_TxString@string_ptr),w
+   555  07C1  0084               	movwf	fsr0
+   556  07C2  120A  118A  2003   	fcall	stringtab
+              120A  118A         
+   557  07C7  3800               	iorlw	0
+   558  07C8  1D03               	skipz
+   559  07C9  2FCB               	goto	u2311
+   560  07CA  2FCC               	goto	u2310
+   561  07CB                     u2311:
+   562  07CB  2FA5               	goto	l3510
+   563  07CC                     u2310:
+   564  07CC  2FCD               	goto	l1397
+   565                           	
+   566  07CD                     l1396:	
+   567                           	line	110
+   568                           	
+   569  07CD                     l1397:	
+   570  07CD  0008               	return
+   571                           	opt stack 0
+   572                           GLOBAL	__end_of_UART_TxString
+   573  07CE                     	__end_of_UART_TxString:
+   574 ;; =============== function _UART_TxString ends ============
+   575                           
+   576                           	signat	_UART_TxString,4216
+   577                           	global	_UART_TxChar
+   578                           psect	text156,local,class=CODE,delta=2
+   579                           global __ptext156
+   580  0756                     __ptext156:
+   581                           
+   582 ;; *************** function _UART_TxChar *****************
+   583 ;; Defined at:
+   584 ;;		line 80 in file "C:\Users\Xplore_labZ\Saved Games\Desktop\Sample_Programs_updated\Pic\Ultra_Pic\Serial_comm\tx_strin
+       g\uart.c"
+   585 ;; Parameters:    Size  Location     Type
+   586 ;;  ch              1    wreg     unsigned char 
+   587 ;; Auto vars:     Size  Location     Type
+   588 ;;  ch              1    0[COMMON] unsigned char 
+   589 ;; Return value:  Size  Location     Type
+   590 ;;		None               void
+   591 ;; Registers used:
+   592 ;;		wreg
+   593 ;; Tracked objects:
+   594 ;;		On entry : 0/0
+   595 ;;		On exit  : 0/0
+   596 ;;		Unchanged: 0/0
+   597 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   598 ;;      Params:         0       0       0       0       0
+   599 ;;      Locals:         1       0       0       0       0
+   600 ;;      Temps:          0       0       0       0       0
+   601 ;;      Totals:         1       0       0       0       0
+   602 ;;Total ram usage:        1 bytes
+   603 ;; Hardware stack levels used:    1
+   604 ;; This function calls:
+   605 ;;		Nothing
+   606 ;; This function is called by:
+   607 ;;		_UART_TxString
+   608 ;;		_UART_RxString
+   609 ;;		_UART_TxNumber
+   610 ;; This function uses a non-reentrant model
+   611 ;;
+   612                           psect	text156
+   613                           	file	"C:\Users\Xplore_labZ\Saved Games\Desktop\Sample_Programs_updated\Pic\Ultra_Pic\Se
+                                 rial_comm\tx_string\uart.c"
+   614                           	line	80
+   615                           	global	__size_of_UART_TxChar
+   616  000C                     	__size_of_UART_TxChar	equ	__end_of_UART_TxChar-_UART_TxChar
+   617                           	
+   618  0756                     _UART_TxChar:	
+   619                           	opt	stack 6
+   620                           ; Regs used in _UART_TxChar: [wreg]
+   621                           ;UART_TxChar@ch stored from wreg
+   622  0756  00F0               	movwf	(UART_TxChar@ch)
+   623                           	line	81
+   624                           	
+   625  0757                     l3492:	
+   626                           ;uart.c: 81: while(TXIF==0);
+   627  0757  2F58               	goto	l1388
+   628                           	
+   629  0758                     l1389:	
+   630                           	
+   631  0758                     l1388:	
+   632  0758  1283               	bcf	status, 5	;RP0=0, select bank0
+   633  0759  1303               	bcf	status, 6	;RP1=0, select bank0
+   634  075A  1E0C               	btfss	(100/8),(100)&7
+   635  075B  2F5D               	goto	u2281
+   636  075C  2F5E               	goto	u2280
+   637  075D                     u2281:
+   638  075D  2F58               	goto	l1388
+   639  075E                     u2280:
+   640                           	
+   641  075E                     l1390:	
+   642                           	line	82
+   643                           ;uart.c: 82: TXIF=0;
+   644  075E  120C               	bcf	(100/8),(100)&7
+   645                           	line	83
+   646                           	
+   647  075F                     l3494:	
+   648                           ;uart.c: 83: TXREG=ch;
+   649  075F  0870               	movf	(UART_TxChar@ch),w
+   650  0760  0099               	movwf	(25)	;volatile
+   651                           	line	84
+   652                           	
+   653  0761                     l1391:	
+   654  0761  0008               	return
+   655                           	opt stack 0
+   656                           GLOBAL	__end_of_UART_TxChar
+   657  0762                     	__end_of_UART_TxChar:
+   658 ;; =============== function _UART_TxChar ends ============
+   659                           
+   660                           	signat	_UART_TxChar,4216
+   661                           	global	_UART_Init
+   662                           psect	text157,local,class=CODE,delta=2
+   663                           global __ptext157
+   664  0770                     __ptext157:
+   665                           
+   666 ;; *************** function _UART_Init *****************
+   667 ;; Defined at:
+   668 ;;		line 31 in file "C:\Users\Xplore_labZ\Saved Games\Desktop\Sample_Programs_updated\Pic\Ultra_Pic\Serial_comm\tx_strin
+       g\uart.c"
+   669 ;; Parameters:    Size  Location     Type
+   670 ;;		None
+   671 ;; Auto vars:     Size  Location     Type
+   672 ;;		None
+   673 ;; Return value:  Size  Location     Type
+   674 ;;		None               void
+   675 ;; Registers used:
+   676 ;;		wreg
+   677 ;; Tracked objects:
+   678 ;;		On entry : 0/0
+   679 ;;		On exit  : 0/0
+   680 ;;		Unchanged: 0/0
+   681 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   682 ;;      Params:         0       0       0       0       0
+   683 ;;      Locals:         0       0       0       0       0
+   684 ;;      Temps:          0       0       0       0       0
+   685 ;;      Totals:         0       0       0       0       0
+   686 ;;Total ram usage:        0 bytes
+   687 ;; Hardware stack levels used:    1
+   688 ;; This function calls:
+   689 ;;		Nothing
+   690 ;; This function is called by:
+   691 ;;		_main
+   692 ;; This function uses a non-reentrant model
+   693 ;;
+   694                           psect	text157
+   695                           	file	"C:\Users\Xplore_labZ\Saved Games\Desktop\Sample_Programs_updated\Pic\Ultra_Pic\Se
+                                 rial_comm\tx_string\uart.c"
+   696                           	line	31
+   697                           	global	__size_of_UART_Init
+   698  000F                     	__size_of_UART_Init	equ	__end_of_UART_Init-_UART_Init
+   699                           	
+   700  0770                     _UART_Init:	
+   701                           	opt	stack 7
+   702                           ; Regs used in _UART_Init: [wreg]
+   703                           	line	32
+   704                           	
+   705  0770                     l3490:	
+   706                           ;uart.c: 32: TRISC=0x80;
+   707  0770  3080               	movlw	(080h)
+   708  0771  1683               	bsf	status, 5	;RP0=1, select bank1
+   709  0772  1303               	bcf	status, 6	;RP1=0, select bank1
+   710  0773  0087               	movwf	(135)^080h	;volatile
+   711                           	line	33
+   712                           ;uart.c: 33: TXSTA=0x20;
+   713  0774  3020               	movlw	(020h)
+   714  0775  0098               	movwf	(152)^080h	;volatile
+   715                           	line	34
+   716                           ;uart.c: 34: RCSTA=0x90;
+   717  0776  3090               	movlw	(090h)
+   718  0777  1283               	bcf	status, 5	;RP0=0, select bank0
+   719  0778  1303               	bcf	status, 6	;RP1=0, select bank0
+   720  0779  0098               	movwf	(24)	;volatile
+   721                           	line	35
+   722                           ;uart.c: 35: SPBRG=31;
+   723  077A  301F               	movlw	(01Fh)
+   724  077B  1683               	bsf	status, 5	;RP0=1, select bank1
+   725  077C  1303               	bcf	status, 6	;RP1=0, select bank1
+   726  077D  0099               	movwf	(153)^080h	;volatile
+   727                           	line	36
+   728                           	
+   729  077E                     l1379:	
+   730  077E  0008               	return
+   731                           	opt stack 0
+   732                           GLOBAL	__end_of_UART_Init
+   733  077F                     	__end_of_UART_Init:
+   734 ;; =============== function _UART_Init ends ============
+   735                           
+   736                           	signat	_UART_Init,88
+   737                           psect	text158,local,class=CODE,delta=2
+   738                           global __ptext158
+   739  0000                     __ptext158:
+   740                           	global	btemp
+   741  007E                     	btemp set 07Eh
+   742                           
+   743                           	DABS	1,126,2	;btemp
+   744                           	global	wtemp0
+   745  007E                     	wtemp0 set btemp
+
+
+HI-TECH Software PICC Macro Assembler V9.83 build 10920 
+Symbol Table                                                                                   Mon Dec 24 21:38:31 2012
+
+                      pc 0002                       _RD 0C60                       _WR 0C61  
+                     fsr 0004                      l691 07E9                      l692 07FC  
+                    l693 07FD                      l694 07FD                      _GIE 005F  
+                    fsr0 0004                      indf 0000                     l1390 075E  
+                   l1391 0761                     l1394 07BC                     l1379 077E  
+                   l1395 07A5                     l1388 0758                     l1396 07CD  
+                   l1389 0758                     l1397 07CD                     l3510 07A5  
+                   l3512 07B5                     l3520 07E9                     l3514 07BC  
+                   l3522 07F2                     l3508 07A4                     l3516 07CE  
+                   l3518 07E3                     l3490 0770                     l3492 0757  
+                   l3494 075F                     STR_1 0013                     u2310 07CC  
+                   u2311 07CB                     u2320 07D6                     u2280 075E  
+                   u2281 075D                     _RCIF 0065                     _WREN 0C62  
+                   _TXIF 0064                     _main 07CE                     btemp 007E  
+                   start 0000                    ?_main 0070                    _EEADR 010D  
+                  _CARRY 0018                    _RCREG 001A                    _RCSTA 0018  
+                  _SPBRG 0099                    _TRISC 0087                    _TXREG 0019  
+                  _TXSTA 0098       __size_of_UART_Init 000F                    pclath 000A  
+                  status 0003                    wtemp0 007E             __end_of_main 0800  
+                 ??_main 0073                   _EEDATA 010C                   _EECON1 018C  
+                 _EECON2 018D             ?_UART_TxChar 0070        __end_of_UART_Init 077F  
+  __end_of_UART_TxString 07CE           __pcstackCOMMON 0070             __pidataBANK0 0762  
+             __pmaintext 07CE     __size_of_UART_TxChar 000C                  main@msg 002E  
+   end_of_initialization 078D                  init_ram 0795                _UART_Init 0770  
+             ?_UART_Init 0070      start_initialization 077F              __pdataBANK0 0020  
+ __size_of_UART_TxString 002A            __pcstackBANK0 002E                __ptext155 07A4  
+              __ptext156 0756                __ptext157 0770                __ptext158 0000  
+            ??_UART_Init 0070                __pstrings 0003            UART_TxChar@ch 0070  
+          ??_UART_TxChar 0070            _UART_TxString 07A4                main@F1102 0020  
+            __stringbase 0012  UART_TxString@string_ptr 0071           ?_UART_TxString 0071  
+              init_fetch 0791      __end_of_UART_TxChar 0762            __size_of_main 0032  
+        ??_UART_TxString 0073                stringcode 000D              _UART_TxChar 0756  
+               stringdir 000D                 stringtab 0003  

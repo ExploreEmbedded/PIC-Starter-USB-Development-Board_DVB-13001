@@ -1,0 +1,14 @@
+_LCD_Init: CODE, 1578 0 38
+_LCD_GoToLineTwo: CODE, 1429 0 7
+_delay_us: CODE, 1444 0 16
+_main: CODE, 1616 0 50
+_LCD_CmdWrite: CODE, 1485 0 30
+_LCD_DataWrite: CODE, 1515 0 30
+___lwdiv: CODE, 1796 0 78
+_LCD_DisplayString: CODE, 1545 0 33
+_ADC_StartConversion: CODE, 1666 0 62
+_LCD_DisplayNumber: CODE, 1874 0 174
+___lwmod: CODE, 1728 0 68
+_delay_ms: CODE, 1460 0 25
+_ADC_Init: CODE, 1436 0 8
+Total: 619

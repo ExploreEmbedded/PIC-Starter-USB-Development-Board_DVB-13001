@@ -1,0 +1,7 @@
+_UART_TxString: CODE, 1915 0 42
+_UART_Init: CODE, 1900 0 15
+_UART_RxChar: CODE, 1877 0 11
+_main: CODE, 1957 0 44
+_UART_RxString: CODE, 2001 0 47
+_UART_TxChar: CODE, 1888 0 12
+Total: 171

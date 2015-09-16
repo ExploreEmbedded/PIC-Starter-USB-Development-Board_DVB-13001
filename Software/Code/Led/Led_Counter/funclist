@@ -1,0 +1,5 @@
+_delay_us: CODE, 1952 0 14
+_main: CODE, 2012 0 36
+_delay_ms: CODE, 1987 0 25
+_delay_sec: CODE, 1966 0 21
+Total: 96

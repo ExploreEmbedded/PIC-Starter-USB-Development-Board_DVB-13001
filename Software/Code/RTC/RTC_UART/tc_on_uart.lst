@@ -1,0 +1,3249 @@
+
+
+HI-TECH Software PIC LITE Macro Assembler V9.83 build 10920 
+                                                                                               Mon Dec 24 22:22:25 2012
+
+HI-TECH Software Omniscient Code Generator (Lite mode) build 10920
+     1  0000                     opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 10920"
+     2                           
+     3                           opt pagewidth 120
+     4                           
+     5                           	opt lm
+     6                           
+     7                           	processor	16F877A
+     8                           clrc	macro
+     9                           	bcf	3,0
+    10  0000                     	endm
+    11                           clrz	macro
+    12                           	bcf	3,2
+    13  0000                     	endm
+    14                           setc	macro
+    15                           	bsf	3,0
+    16  0000                     	endm
+    17                           setz	macro
+    18                           	bsf	3,2
+    19  0000                     	endm
+    20                           skipc	macro
+    21                           	btfss	3,0
+    22  0000                     	endm
+    23                           skipz	macro
+    24                           	btfss	3,2
+    25  0000                     	endm
+    26                           skipnc	macro
+    27                           	btfsc	3,0
+    28  0000                     	endm
+    29                           skipnz	macro
+    30                           	btfsc	3,2
+    31  0000                     	endm
+    32  0000                     indf	equ	0
+    33  0000                     indf0	equ	0
+    34  0002                     pc	equ	2
+    35  0002                     pcl	equ	2
+    36  0003                     status	equ	3
+    37  0004                     fsr	equ	4
+    38  0004                     fsr0	equ	4
+    39  0001                     c	equ	1
+    40  0000                     z	equ	0
+    41  000A                     pclath	equ	10
+    42                           	FNCALL	_main,_UART_Init
+    43                           	FNCALL	_main,_DS1307_Init
+    44                           	FNCALL	_main,_DS1307_SetTime
+    45                           	FNCALL	_main,_DS1307_SetDate
+    46                           	FNCALL	_main,_DS1307_GetDate
+    47                           	FNCALL	_main,_DisplayRtcDate
+    48                           	FNCALL	_main,_DS1307_GetTime
+    49                           	FNCALL	_main,_DisplayRtcTime
+    50                           	FNCALL	_DS1307_GetDate,_I2C_Start
+    51                           	FNCALL	_DS1307_GetDate,_DS1307_Write
+    52                           	FNCALL	_DS1307_GetDate,_I2C_Stop
+    53                           	FNCALL	_DS1307_GetDate,_DS1307_Read
+    54                           	FNCALL	_DS1307_GetDate,_I2C_Ack
+    55                           	FNCALL	_DS1307_GetDate,_I2C_NoAck
+    56                           	FNCALL	_DS1307_GetTime,_I2C_Start
+    57                           	FNCALL	_DS1307_GetTime,_DS1307_Write
+    58                           	FNCALL	_DS1307_GetTime,_I2C_Stop
+    59                           	FNCALL	_DS1307_GetTime,_DS1307_Read
+    60                           	FNCALL	_DS1307_GetTime,_I2C_Ack
+    61                           	FNCALL	_DS1307_GetTime,_I2C_NoAck
+    62                           	FNCALL	_DS1307_SetDate,_I2C_Start
+    63                           	FNCALL	_DS1307_SetDate,_DS1307_Write
+    64                           	FNCALL	_DS1307_SetDate,_I2C_Stop
+    65                           	FNCALL	_DS1307_SetTime,_I2C_Start
+    66                           	FNCALL	_DS1307_SetTime,_DS1307_Write
+    67                           	FNCALL	_DS1307_SetTime,_I2C_Stop
+    68                           	FNCALL	_DS1307_Init,_I2C_Init
+    69                           	FNCALL	_DS1307_Init,_I2C_Start
+    70                           	FNCALL	_DS1307_Init,_DS1307_Write
+    71                           	FNCALL	_DS1307_Init,_I2C_Stop
+    72                           	FNCALL	_DS1307_Write,_I2C_Write
+    73                           	FNCALL	_DS1307_Write,_I2C_Clock
+    74                           	FNCALL	_DisplayRtcTime,_UART_TxString
+    75                           	FNCALL	_DisplayRtcTime,_UART_TxChar
+    76                           	FNCALL	_DisplayRtcDate,_UART_TxString
+    77                           	FNCALL	_DisplayRtcDate,_UART_TxChar
+    78                           	FNCALL	_I2C_NoAck,_I2C_Clock
+    79                           	FNCALL	_I2C_Ack,_I2C_Clock
+    80                           	FNCALL	_DS1307_Read,_I2C_Read
+    81                           	FNCALL	_I2C_Write,_I2C_Clock
+    82                           	FNCALL	_UART_TxString,_UART_TxChar
+    83                           	FNCALL	_I2C_Read,_delay_us
+    84                           	FNCALL	_I2C_Clock,_delay_us
+    85                           	FNCALL	_I2C_Stop,_delay_us
+    86                           	FNCALL	_I2C_Start,_delay_us
+    87                           	FNROOT	_main
+    88                           	global	_RCREG
+    89                           psect	text458,local,class=CODE,delta=2
+    90                           global __ptext458
+    91  0000                     __ptext458:
+    92  001A                     _RCREG	set	26
+    93                           	global	_RCSTA
+    94  0018                     _RCSTA	set	24
+    95                           	global	_TXREG
+    96  0019                     _TXREG	set	25
+    97                           	global	_CARRY
+    98  0018                     _CARRY	set	24
+    99                           	global	_GIE
+   100  005F                     _GIE	set	95
+   101                           	global	_RC3
+   102  003B                     _RC3	set	59
+   103                           	global	_RC4
+   104  003C                     _RC4	set	60
+   105                           	global	_RCIF
+   106  0065                     _RCIF	set	101
+   107                           	global	_TXIF
+   108  0064                     _TXIF	set	100
+   109                           	global	_SPBRG
+   110  0099                     _SPBRG	set	153
+   111                           	global	_TRISC
+   112  0087                     _TRISC	set	135
+   113                           	global	_TXSTA
+   114  0098                     _TXSTA	set	152
+   115                           	global	_TRISC3
+   116  043B                     _TRISC3	set	1083
+   117                           	global	_TRISC4
+   118  043C                     _TRISC4	set	1084
+   119                           	global	_EEADR
+   120  010D                     _EEADR	set	269
+   121                           	global	_EEDATA
+   122  010C                     _EEDATA	set	268
+   123                           	global	_EECON1
+   124  018C                     _EECON1	set	396
+   125                           	global	_EECON2
+   126  018D                     _EECON2	set	397
+   127                           	global	_RD
+   128  0C60                     _RD	set	3168
+   129                           	global	_WR
+   130  0C61                     _WR	set	3169
+   131                           	global	_WREN
+   132  0C62                     _WREN	set	3170
+   133                           psect	strings,class=STRING,delta=2
+   134                           global __pstrings
+   135  0003                     __pstrings:
+   136                           ;	global	stringdir,stringtab,__stringbase
+   137  0003                     stringtab:
+   138                           ;	String table - string pointers are 1 byte each
+   139  0003                     stringcode:stringdir:
+      + 0003                     stringdir:	
+   140  0003  3000               movlw high(stringdir)
+   141  0004  008A               movwf pclath
+   142  0005  0804               movf fsr,w
+   143  0006  0A84               incf fsr
+   144  0007  0782               	addwf pc
+   145  0008                     __stringbase:
+   146  0008  3400               	retlw	0
+   147                           psect	strings
+   148                           	
+   149  0009                     STR_2:	
+   150  0009  340A               	retlw	10
+   151  000A  340D               	retlw	13
+   152  000B  3464               	retlw	100	;'d'
+   153  000C  3461               	retlw	97	;'a'
+   154  000D  3474               	retlw	116	;'t'
+   155  000E  3465               	retlw	101	;'e'
+   156  000F  343A               	retlw	58	;':'
+   157  0010  3420               	retlw	32	;' '
+   158  0011  3400               	retlw	0
+   159                           psect	strings
+   160                           	
+   161  0012                     STR_1:	
+   162  0012  3420               	retlw	32	;' '
+   163  0013  3454               	retlw	84	;'T'
+   164  0014  3469               	retlw	105	;'i'
+   165  0015  346D               	retlw	109	;'m'
+   166  0016  3465               	retlw	101	;'e'
+   167  0017  343A               	retlw	58	;':'
+   168  0018  3420               	retlw	32	;' '
+   169  0019  3400               	retlw	0
+   170                           psect	strings
+   171                           	file	"tc_on_uart.as"
+   172                           	line	#
+   173                           psect cinit,class=CODE,delta=2
+   174                           global start_initialization
+   175  0454                     start_initialization:
+   176                           
+   177                           psect cinit,class=CODE,delta=2
+   178                           global end_of_initialization
+   179                           
+   180                           ;End of C runtime variable initialization code
+   181                           
+   182  0454                     end_of_initialization:
+   183  0454  0183               clrf status
+   184  0455  120A  118A  2F98   ljmp _main	;jump to C main() function
+   185                           psect	cstackCOMMON,class=COMMON,space=1
+   186                           global __pcstackCOMMON
+   187  0070                     __pcstackCOMMON:
+   188                           	global	?_I2C_Init
+   189  0070                     ?_I2C_Init:	; 0 bytes @ 0x0
+   190                           	global	??_I2C_Init
+   191  0070                     ??_I2C_Init:	; 0 bytes @ 0x0
+   192                           	global	?_I2C_Start
+   193  0070                     ?_I2C_Start:	; 0 bytes @ 0x0
+   194                           	global	?_DS1307_Write
+   195  0070                     ?_DS1307_Write:	; 0 bytes @ 0x0
+   196                           	global	?_I2C_Stop
+   197  0070                     ?_I2C_Stop:	; 0 bytes @ 0x0
+   198                           	global	?_I2C_Write
+   199  0070                     ?_I2C_Write:	; 0 bytes @ 0x0
+   200                           	global	?_I2C_Clock
+   201  0070                     ?_I2C_Clock:	; 0 bytes @ 0x0
+   202                           	global	?_I2C_Ack
+   203  0070                     ?_I2C_Ack:	; 0 bytes @ 0x0
+   204                           	global	?_I2C_NoAck
+   205  0070                     ?_I2C_NoAck:	; 0 bytes @ 0x0
+   206                           	global	?_UART_Init
+   207  0070                     ?_UART_Init:	; 0 bytes @ 0x0
+   208                           	global	??_UART_Init
+   209  0070                     ??_UART_Init:	; 0 bytes @ 0x0
+   210                           	global	?_UART_TxString
+   211  0070                     ?_UART_TxString:	; 0 bytes @ 0x0
+   212                           	global	?_UART_TxChar
+   213  0070                     ?_UART_TxChar:	; 0 bytes @ 0x0
+   214                           	global	??_UART_TxChar
+   215  0070                     ??_UART_TxChar:	; 0 bytes @ 0x0
+   216                           	global	?_delay_us
+   217  0070                     ?_delay_us:	; 0 bytes @ 0x0
+   218                           	global	?_DS1307_Init
+   219  0070                     ?_DS1307_Init:	; 0 bytes @ 0x0
+   220                           	global	?_main
+   221  0070                     ?_main:	; 0 bytes @ 0x0
+   222                           	global	?_I2C_Read
+   223  0070                     ?_I2C_Read:	; 1 bytes @ 0x0
+   224                           	global	?_DS1307_Read
+   225  0070                     ?_DS1307_Read:	; 1 bytes @ 0x0
+   226                           	global	UART_TxChar@ch
+   227  0070                     UART_TxChar@ch:	; 1 bytes @ 0x0
+   228                           	global	delay_us@us_count
+   229  0070                     delay_us@us_count:	; 2 bytes @ 0x0
+   230  0070                     	ds	1
+   231                           	global	??_UART_TxString
+   232  0071                     ??_UART_TxString:	; 0 bytes @ 0x1
+   233  0071                     	ds	1
+   234                           	global	??_I2C_Start
+   235  0072                     ??_I2C_Start:	; 0 bytes @ 0x2
+   236                           	global	??_I2C_Stop
+   237  0072                     ??_I2C_Stop:	; 0 bytes @ 0x2
+   238                           	global	??_I2C_Write
+   239  0072                     ??_I2C_Write:	; 0 bytes @ 0x2
+   240                           	global	??_I2C_Clock
+   241  0072                     ??_I2C_Clock:	; 0 bytes @ 0x2
+   242                           	global	??_I2C_Read
+   243  0072                     ??_I2C_Read:	; 0 bytes @ 0x2
+   244                           	global	??_I2C_Ack
+   245  0072                     ??_I2C_Ack:	; 0 bytes @ 0x2
+   246                           	global	??_I2C_NoAck
+   247  0072                     ??_I2C_NoAck:	; 0 bytes @ 0x2
+   248                           	global	??_delay_us
+   249  0072                     ??_delay_us:	; 0 bytes @ 0x2
+   250                           	global	UART_TxString@string_ptr
+   251  0072                     UART_TxString@string_ptr:	; 1 bytes @ 0x2
+   252  0072                     	ds	1
+   253                           	global	?_DisplayRtcDate
+   254  0073                     ?_DisplayRtcDate:	; 0 bytes @ 0x3
+   255                           	global	?_DisplayRtcTime
+   256  0073                     ?_DisplayRtcTime:	; 0 bytes @ 0x3
+   257                           	global	DisplayRtcTime@min
+   258  0073                     DisplayRtcTime@min:	; 1 bytes @ 0x3
+   259                           	global	DisplayRtcDate@month
+   260  0073                     DisplayRtcDate@month:	; 1 bytes @ 0x3
+   261  0073                     	ds	1
+   262                           	global	I2C_Write@dat
+   263  0074                     I2C_Write@dat:	; 1 bytes @ 0x4
+   264                           	global	I2C_Read@i
+   265  0074                     I2C_Read@i:	; 1 bytes @ 0x4
+   266                           	global	DisplayRtcTime@sec
+   267  0074                     DisplayRtcTime@sec:	; 1 bytes @ 0x4
+   268                           	global	DisplayRtcDate@year
+   269  0074                     DisplayRtcDate@year:	; 1 bytes @ 0x4
+   270  0074                     	ds	1
+   271                           	global	??_DisplayRtcDate
+   272  0075                     ??_DisplayRtcDate:	; 0 bytes @ 0x5
+   273                           	global	??_DisplayRtcTime
+   274  0075                     ??_DisplayRtcTime:	; 0 bytes @ 0x5
+   275                           	global	I2C_Write@i
+   276  0075                     I2C_Write@i:	; 1 bytes @ 0x5
+   277                           	global	I2C_Read@dat
+   278  0075                     I2C_Read@dat:	; 1 bytes @ 0x5
+   279  0075                     	ds	1
+   280                           	global	??_DS1307_Write
+   281  0076                     ??_DS1307_Write:	; 0 bytes @ 0x6
+   282                           	global	??_DS1307_Read
+   283  0076                     ??_DS1307_Read:	; 0 bytes @ 0x6
+   284                           	global	DS1307_Write@dat
+   285  0076                     DS1307_Write@dat:	; 1 bytes @ 0x6
+   286                           	global	DisplayRtcTime@hour
+   287  0076                     DisplayRtcTime@hour:	; 1 bytes @ 0x6
+   288                           	global	DisplayRtcDate@day
+   289  0076                     DisplayRtcDate@day:	; 1 bytes @ 0x6
+   290  0076                     	ds	1
+   291                           	global	??_DS1307_Init
+   292  0077                     ??_DS1307_Init:	; 0 bytes @ 0x7
+   293                           	global	?_DS1307_SetTime
+   294  0077                     ?_DS1307_SetTime:	; 0 bytes @ 0x7
+   295                           	global	?_DS1307_SetDate
+   296  0077                     ?_DS1307_SetDate:	; 0 bytes @ 0x7
+   297                           	global	DS1307_Read@dat
+   298  0077                     DS1307_Read@dat:	; 1 bytes @ 0x7
+   299                           	global	DS1307_SetTime@mm
+   300  0077                     DS1307_SetTime@mm:	; 1 bytes @ 0x7
+   301                           	global	DS1307_SetDate@mm
+   302  0077                     DS1307_SetDate@mm:	; 1 bytes @ 0x7
+   303  0077                     	ds	1
+   304                           	global	?_DS1307_GetTime
+   305  0078                     ?_DS1307_GetTime:	; 0 bytes @ 0x8
+   306                           	global	?_DS1307_GetDate
+   307  0078                     ?_DS1307_GetDate:	; 0 bytes @ 0x8
+   308                           	global	DS1307_SetTime@ss
+   309  0078                     DS1307_SetTime@ss:	; 1 bytes @ 0x8
+   310                           	global	DS1307_SetDate@yy
+   311  0078                     DS1307_SetDate@yy:	; 1 bytes @ 0x8
+   312                           	global	DS1307_GetTime@m_ptr
+   313  0078                     DS1307_GetTime@m_ptr:	; 1 bytes @ 0x8
+   314                           	global	DS1307_GetDate@m_ptr
+   315  0078                     DS1307_GetDate@m_ptr:	; 1 bytes @ 0x8
+   316  0078                     	ds	1
+   317                           	global	??_DS1307_SetTime
+   318  0079                     ??_DS1307_SetTime:	; 0 bytes @ 0x9
+   319                           	global	??_DS1307_SetDate
+   320  0079                     ??_DS1307_SetDate:	; 0 bytes @ 0x9
+   321                           	global	DS1307_SetTime@hh
+   322  0079                     DS1307_SetTime@hh:	; 1 bytes @ 0x9
+   323                           	global	DS1307_SetDate@dd
+   324  0079                     DS1307_SetDate@dd:	; 1 bytes @ 0x9
+   325                           	global	DS1307_GetTime@s_ptr
+   326  0079                     DS1307_GetTime@s_ptr:	; 1 bytes @ 0x9
+   327                           	global	DS1307_GetDate@y_ptr
+   328  0079                     DS1307_GetDate@y_ptr:	; 1 bytes @ 0x9
+   329  0079                     	ds	1
+   330                           	global	??_DS1307_GetTime
+   331  007A                     ??_DS1307_GetTime:	; 0 bytes @ 0xA
+   332                           	global	??_DS1307_GetDate
+   333  007A                     ??_DS1307_GetDate:	; 0 bytes @ 0xA
+   334  007A                     	ds	1
+   335                           	global	DS1307_GetTime@h_ptr
+   336  007B                     DS1307_GetTime@h_ptr:	; 1 bytes @ 0xB
+   337                           	global	DS1307_GetDate@d_ptr
+   338  007B                     DS1307_GetDate@d_ptr:	; 1 bytes @ 0xB
+   339  007B                     	ds	1
+   340                           	global	??_main
+   341  007C                     ??_main:	; 0 bytes @ 0xC
+   342  007C                     	ds	2
+   343                           psect	cstackBANK0,class=BANK0,space=1
+   344                           global __pcstackBANK0
+   345  0020                     __pcstackBANK0:
+   346                           	global	main@sec
+   347  0020                     main@sec:	; 1 bytes @ 0x0
+   348  0020                     	ds	1
+   349                           	global	main@min
+   350  0021                     main@min:	; 1 bytes @ 0x1
+   351  0021                     	ds	1
+   352                           	global	main@hour
+   353  0022                     main@hour:	; 1 bytes @ 0x2
+   354  0022                     	ds	1
+   355                           	global	main@day
+   356  0023                     main@day:	; 1 bytes @ 0x3
+   357  0023                     	ds	1
+   358                           	global	main@month
+   359  0024                     main@month:	; 1 bytes @ 0x4
+   360  0024                     	ds	1
+   361                           	global	main@year
+   362  0025                     main@year:	; 1 bytes @ 0x5
+   363  0025                     	ds	1
+   364 ;;Data sizes: Strings 17, constant 0, data 0, bss 0, persistent 0 stack 0
+   365 ;;Auto spaces:   Size  Autos    Used
+   366 ;; COMMON          14     14      14
+   367 ;; BANK0           80      6       6
+   368 ;; BANK1           80      0       0
+   369 ;; BANK3           96      0       0
+   370 ;; BANK2           96      0       0
+   371                           
+   372 ;;
+   373 ;; Pointer list with targets:
+   374                           
+   375 ;; UART_TxString@string_ptr	PTR unsigned char  size(1) Largest target is 9
+   376 ;;		 -> STR_2(CODE[9]), STR_1(CODE[8]), 
+   377 ;;
+   378 ;; DS1307_GetDate@y_ptr	PTR unsigned char  size(1) Largest target is 1
+   379 ;;		 -> main@year(BANK0[1]), 
+   380 ;;
+   381 ;; DS1307_GetDate@m_ptr	PTR unsigned char  size(1) Largest target is 1
+   382 ;;		 -> main@month(BANK0[1]), 
+   383 ;;
+   384 ;; DS1307_GetDate@d_ptr	PTR unsigned char  size(1) Largest target is 1
+   385 ;;		 -> main@day(BANK0[1]), 
+   386 ;;
+   387 ;; DS1307_GetTime@h_ptr	PTR unsigned char  size(1) Largest target is 1
+   388 ;;		 -> main@hour(BANK0[1]), 
+   389 ;;
+   390 ;; DS1307_GetTime@m_ptr	PTR unsigned char  size(1) Largest target is 1
+   391 ;;		 -> main@min(BANK0[1]), 
+   392 ;;
+   393 ;; DS1307_GetTime@s_ptr	PTR unsigned char  size(1) Largest target is 1
+   394 ;;		 -> main@sec(BANK0[1]), 
+   395 ;;
+   396                           
+   397                           
+   398 ;;
+   399 ;; Critical Paths under _main in COMMON
+   400 ;;
+   401 ;;   _main->_DS1307_GetDate
+   402 ;;   _main->_DS1307_GetTime
+   403 ;;   _DS1307_GetDate->_DS1307_Read
+   404 ;;   _DS1307_GetTime->_DS1307_Read
+   405 ;;   _DS1307_SetDate->_DS1307_Write
+   406 ;;   _DS1307_SetTime->_DS1307_Write
+   407 ;;   _DS1307_Init->_DS1307_Write
+   408 ;;   _DS1307_Write->_I2C_Write
+   409 ;;   _DisplayRtcTime->_UART_TxString
+   410 ;;   _DisplayRtcDate->_UART_TxString
+   411 ;;   _DS1307_Read->_I2C_Read
+   412 ;;   _UART_TxString->_UART_TxChar
+   413 ;;   _I2C_Read->_delay_us
+   414 ;;   _I2C_Clock->_delay_us
+   415 ;;   _I2C_Stop->_delay_us
+   416 ;;   _I2C_Start->_delay_us
+   417 ;;
+   418 ;; Critical Paths under _main in BANK0
+   419 ;;
+   420 ;;   None.
+   421 ;;
+   422 ;; Critical Paths under _main in BANK1
+   423 ;;
+   424 ;;   None.
+   425 ;;
+   426 ;; Critical Paths under _main in BANK3
+   427 ;;
+   428 ;;   None.
+   429 ;;
+   430 ;; Critical Paths under _main in BANK2
+   431 ;;
+   432 ;;   None.
+   433                           
+   434 ;;
+   435 ;;Main: autosize = 0, tempsize = 2, incstack = 0, save=0
+   436 ;;
+   437                           
+   438 ;;
+   439 ;;Call Graph Tables:
+   440 ;;
+   441 ;; ---------------------------------------------------------------------------------
+   442 ;; (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+   443 ;; ---------------------------------------------------------------------------------
+   444 ;; (0) _main                                                 8     8      0    2421
+   445 ;;                                             12 COMMON     2     2      0
+   446 ;;                                              0 BANK0      6     6      0
+   447 ;;                          _UART_Init
+   448 ;;                        _DS1307_Init
+   449 ;;                     _DS1307_SetTime
+   450 ;;                     _DS1307_SetDate
+   451 ;;                     _DS1307_GetDate
+   452 ;;                     _DisplayRtcDate
+   453 ;;                     _DS1307_GetTime
+   454 ;;                     _DisplayRtcTime
+   455 ;; ---------------------------------------------------------------------------------
+   456 ;; (1) _DS1307_GetDate                                       4     2      2     478
+   457 ;;                                              8 COMMON     4     2      2
+   458 ;;                          _I2C_Start
+   459 ;;                       _DS1307_Write
+   460 ;;                           _I2C_Stop
+   461 ;;                        _DS1307_Read
+   462 ;;                            _I2C_Ack
+   463 ;;                          _I2C_NoAck
+   464 ;; ---------------------------------------------------------------------------------
+   465 ;; (1) _DS1307_GetTime                                       4     2      2     478
+   466 ;;                                              8 COMMON     4     2      2
+   467 ;;                          _I2C_Start
+   468 ;;                       _DS1307_Write
+   469 ;;                           _I2C_Stop
+   470 ;;                        _DS1307_Read
+   471 ;;                            _I2C_Ack
+   472 ;;                          _I2C_NoAck
+   473 ;; ---------------------------------------------------------------------------------
+   474 ;; (1) _DS1307_SetDate                                       3     1      2     271
+   475 ;;                                              7 COMMON     3     1      2
+   476 ;;                          _I2C_Start
+   477 ;;                       _DS1307_Write
+   478 ;;                           _I2C_Stop
+   479 ;; ---------------------------------------------------------------------------------
+   480 ;; (1) _DS1307_SetTime                                       3     1      2     271
+   481 ;;                                              7 COMMON     3     1      2
+   482 ;;                          _I2C_Start
+   483 ;;                       _DS1307_Write
+   484 ;;                           _I2C_Stop
+   485 ;; ---------------------------------------------------------------------------------
+   486 ;; (1) _DS1307_Init                                          0     0      0     205
+   487 ;;                           _I2C_Init
+   488 ;;                          _I2C_Start
+   489 ;;                       _DS1307_Write
+   490 ;;                           _I2C_Stop
+   491 ;; ---------------------------------------------------------------------------------
+   492 ;; (2) _DS1307_Write                                         1     1      0     159
+   493 ;;                                              6 COMMON     1     1      0
+   494 ;;                          _I2C_Write
+   495 ;;                          _I2C_Clock
+   496 ;; ---------------------------------------------------------------------------------
+   497 ;; (1) _DisplayRtcTime                                       4     2      2     221
+   498 ;;                                              3 COMMON     4     2      2
+   499 ;;                      _UART_TxString
+   500 ;;                        _UART_TxChar
+   501 ;; ---------------------------------------------------------------------------------
+   502 ;; (1) _DisplayRtcDate                                       4     2      2     221
+   503 ;;                                              3 COMMON     4     2      2
+   504 ;;                      _UART_TxString
+   505 ;;                        _UART_TxChar
+   506 ;; ---------------------------------------------------------------------------------
+   507 ;; (2) _I2C_NoAck                                            0     0      0      23
+   508 ;;                          _I2C_Clock
+   509 ;; ---------------------------------------------------------------------------------
+   510 ;; (2) _I2C_Ack                                              0     0      0      23
+   511 ;;                          _I2C_Clock
+   512 ;; ---------------------------------------------------------------------------------
+   513 ;; (2) _DS1307_Read                                          2     2      0     161
+   514 ;;                                              6 COMMON     2     2      0
+   515 ;;                           _I2C_Read
+   516 ;; ---------------------------------------------------------------------------------
+   517 ;; (3) _I2C_Write                                            4     4      0     114
+   518 ;;                                              2 COMMON     4     4      0
+   519 ;;                          _I2C_Clock
+   520 ;; ---------------------------------------------------------------------------------
+   521 ;; (2) _UART_TxString                                        2     2      0      67
+   522 ;;                                              1 COMMON     2     2      0
+   523 ;;                        _UART_TxChar
+   524 ;; ---------------------------------------------------------------------------------
+   525 ;; (3) _I2C_Read                                             4     4      0     138
+   526 ;;                                              2 COMMON     4     4      0
+   527 ;;                           _delay_us
+   528 ;; ---------------------------------------------------------------------------------
+   529 ;; (3) _I2C_Clock                                            0     0      0      23
+   530 ;;                           _delay_us
+   531 ;; ---------------------------------------------------------------------------------
+   532 ;; (2) _I2C_Stop                                             0     0      0      23
+   533 ;;                           _delay_us
+   534 ;; ---------------------------------------------------------------------------------
+   535 ;; (2) _I2C_Start                                            0     0      0      23
+   536 ;;                           _delay_us
+   537 ;; ---------------------------------------------------------------------------------
+   538 ;; (2) _UART_TxChar                                          1     1      0      22
+   539 ;;                                              0 COMMON     1     1      0
+   540 ;; ---------------------------------------------------------------------------------
+   541 ;; (1) _UART_Init                                            0     0      0       0
+   542 ;; ---------------------------------------------------------------------------------
+   543 ;; (2) _I2C_Init                                             0     0      0       0
+   544 ;; ---------------------------------------------------------------------------------
+   545 ;; (4) _delay_us                                             2     0      2      23
+   546 ;;                                              0 COMMON     2     0      2
+   547 ;; ---------------------------------------------------------------------------------
+   548 ;; Estimated maximum stack depth 4
+   549 ;; ---------------------------------------------------------------------------------
+   550                           
+   551 ;; Call Graph Graphs:
+   552                           
+   553 ;; _main (ROOT)
+   554 ;;   _UART_Init
+   555 ;;   _DS1307_Init
+   556 ;;     _I2C_Init
+   557 ;;     _I2C_Start
+   558 ;;       _delay_us
+   559 ;;     _DS1307_Write
+   560 ;;       _I2C_Write
+   561 ;;         _I2C_Clock
+   562 ;;           _delay_us
+   563 ;;       _I2C_Clock
+   564 ;;         _delay_us
+   565 ;;     _I2C_Stop
+   566 ;;       _delay_us
+   567 ;;   _DS1307_SetTime
+   568 ;;     _I2C_Start
+   569 ;;       _delay_us
+   570 ;;     _DS1307_Write
+   571 ;;       _I2C_Write
+   572 ;;         _I2C_Clock
+   573 ;;           _delay_us
+   574 ;;       _I2C_Clock
+   575 ;;         _delay_us
+   576 ;;     _I2C_Stop
+   577 ;;       _delay_us
+   578 ;;   _DS1307_SetDate
+   579 ;;     _I2C_Start
+   580 ;;       _delay_us
+   581 ;;     _DS1307_Write
+   582 ;;       _I2C_Write
+   583 ;;         _I2C_Clock
+   584 ;;           _delay_us
+   585 ;;       _I2C_Clock
+   586 ;;         _delay_us
+   587 ;;     _I2C_Stop
+   588 ;;       _delay_us
+   589 ;;   _DS1307_GetDate
+   590 ;;     _I2C_Start
+   591 ;;       _delay_us
+   592 ;;     _DS1307_Write
+   593 ;;       _I2C_Write
+   594 ;;         _I2C_Clock
+   595 ;;           _delay_us
+   596 ;;       _I2C_Clock
+   597 ;;         _delay_us
+   598 ;;     _I2C_Stop
+   599 ;;       _delay_us
+   600 ;;     _DS1307_Read
+   601 ;;       _I2C_Read
+   602 ;;         _delay_us
+   603 ;;     _I2C_Ack
+   604 ;;       _I2C_Clock
+   605 ;;         _delay_us
+   606 ;;     _I2C_NoAck
+   607 ;;       _I2C_Clock
+   608 ;;         _delay_us
+   609 ;;   _DisplayRtcDate
+   610 ;;     _UART_TxString
+   611 ;;       _UART_TxChar
+   612 ;;     _UART_TxChar
+   613 ;;   _DS1307_GetTime
+   614 ;;     _I2C_Start
+   615 ;;       _delay_us
+   616 ;;     _DS1307_Write
+   617 ;;       _I2C_Write
+   618 ;;         _I2C_Clock
+   619 ;;           _delay_us
+   620 ;;       _I2C_Clock
+   621 ;;         _delay_us
+   622 ;;     _I2C_Stop
+   623 ;;       _delay_us
+   624 ;;     _DS1307_Read
+   625 ;;       _I2C_Read
+   626 ;;         _delay_us
+   627 ;;     _I2C_Ack
+   628 ;;       _I2C_Clock
+   629 ;;         _delay_us
+   630 ;;     _I2C_NoAck
+   631 ;;       _I2C_Clock
+   632 ;;         _delay_us
+   633 ;;   _DisplayRtcTime
+   634 ;;     _UART_TxString
+   635 ;;       _UART_TxChar
+   636 ;;     _UART_TxChar
+   637 ;;
+   638                           
+   639 ;; Address spaces:
+   640                           
+   641 ;;Name               Size   Autos  Total    Cost      Usage
+   642 ;;BITCOMMON            E      0       0       0        0.0%
+   643 ;;EEDATA             100      0       0       0        0.0%
+   644 ;;NULL                 0      0       0       0        0.0%
+   645 ;;CODE                 0      0       0       0        0.0%
+   646 ;;COMMON               E      E       E       1      100.0%
+   647 ;;BITSFR0              0      0       0       1        0.0%
+   648 ;;SFR0                 0      0       0       1        0.0%
+   649 ;;BITSFR1              0      0       0       2        0.0%
+   650 ;;SFR1                 0      0       0       2        0.0%
+   651 ;;STACK                0      0       5       2        0.0%
+   652 ;;ABS                  0      0       0       3        0.0%
+   653 ;;BITBANK0            50      0       0       4        0.0%
+   654 ;;BITSFR3              0      0       0       4        0.0%
+   655 ;;SFR3                 0      0       0       4        0.0%
+   656 ;;BANK0               50      6       6       5        7.5%
+   657 ;;BITSFR2              0      0       0       5        0.0%
+   658 ;;SFR2                 0      0       0       5        0.0%
+   659 ;;BITBANK1            50      0       0       6        0.0%
+   660 ;;BANK1               50      0       0       7        0.0%
+   661 ;;BITBANK3            60      0       0       8        0.0%
+   662 ;;BANK3               60      0       0       9        0.0%
+   663 ;;BITBANK2            60      0       0      10        0.0%
+   664 ;;BANK2               60      0       0      11        0.0%
+   665 ;;DATA                 0      0       0      12        0.0%
+   666                           
+   667                           	global	_main
+   668                           psect	maintext,global,class=CODE,delta=2
+   669                           global __pmaintext
+   670  0798                     __pmaintext:
+   671                           
+   672 ;; *************** function _main *****************
+   673 ;; Defined at:
+   674 ;;		line 22 in file "C:\Users\Xplore_labZ\Saved Games\Desktop\Sample_Programs_updated\Pic\Ultra_Pic\RTC\RTC_UART\main.c"
+   675 ;; Parameters:    Size  Location     Type
+   676 ;;		None
+   677 ;; Auto vars:     Size  Location     Type
+   678 ;;  year            1    5[BANK0 ] unsigned char 
+   679 ;;  month           1    4[BANK0 ] unsigned char 
+   680 ;;  day             1    3[BANK0 ] unsigned char 
+   681 ;;  hour            1    2[BANK0 ] unsigned char 
+   682 ;;  min             1    1[BANK0 ] unsigned char 
+   683 ;;  sec             1    0[BANK0 ] unsigned char 
+   684 ;; Return value:  Size  Location     Type
+   685 ;;		None               void
+   686 ;; Registers used:
+   687 ;;		wreg, fsr0l, fsr0h, status,2, status,0, pclath, cstack
+   688 ;; Tracked objects:
+   689 ;;		On entry : 17F/0
+   690 ;;		On exit  : 0/0
+   691 ;;		Unchanged: 0/0
+   692 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   693 ;;      Params:         0       0       0       0       0
+   694 ;;      Locals:         0       6       0       0       0
+   695 ;;      Temps:          2       0       0       0       0
+   696 ;;      Totals:         2       6       0       0       0
+   697 ;;Total ram usage:        8 bytes
+   698 ;; Hardware stack levels required when called:    5
+   699 ;; This function calls:
+   700 ;;		_UART_Init
+   701 ;;		_DS1307_Init
+   702 ;;		_DS1307_SetTime
+   703 ;;		_DS1307_SetDate
+   704 ;;		_DS1307_GetDate
+   705 ;;		_DisplayRtcDate
+   706 ;;		_DS1307_GetTime
+   707 ;;		_DisplayRtcTime
+   708 ;; This function is called by:
+   709 ;;		Startup code after reset
+   710 ;; This function uses a non-reentrant model
+   711 ;;
+   712                           psect	maintext
+   713                           	file	"C:\Users\Xplore_labZ\Saved Games\Desktop\Sample_Programs_updated\Pic\Ultra_Pic\RT
+                                 C\RTC_UART\main.c"
+   714                           	line	22
+   715                           	global	__size_of_main
+   716  0068                     	__size_of_main	equ	__end_of_main-_main
+   717                           	
+   718  0798                     _main:	
+   719                           	opt	stack 3
+   720                           ; Regs used in _main: [wreg-fsr0h+status,2+status,0+pclath+cstack]
+   721                           	line	26
+   722                           	
+   723  0798                     l6035:	
+   724                           ;main.c: 23: unsigned char sec,min,hour,day,month,year;
+   725                           ;main.c: 26: UART_Init();
+   726  0798  120A  118A  2499   	fcall	_UART_Init
+              120A  118A         
+   727                           	line	29
+   728                           ;main.c: 29: DS1307_Init();
+   729  079D  120A  118A  24F2   	fcall	_DS1307_Init
+              120A  118A         
+   730                           	line	33
+   731                           ;main.c: 33: DS1307_SetTime(0x10,0x40,0x20);
+   732  07A2  3040               	movlw	(040h)
+   733  07A3  00FC               	movwf	(??_main+0)+0
+   734  07A4  087C               	movf	(??_main+0)+0,w
+   735  07A5  00F7               	movwf	(?_DS1307_SetTime)
+   736  07A6  3020               	movlw	(020h)
+   737  07A7  00FD               	movwf	(??_main+1)+0
+   738  07A8  087D               	movf	(??_main+1)+0,w
+   739  07A9  00F8               	movwf	0+(?_DS1307_SetTime)+01h
+   740  07AA  3010               	movlw	(010h)
+   741  07AB  120A  118A  2565   	fcall	_DS1307_SetTime
+              120A  118A         
+   742                           	line	34
+   743                           ;main.c: 34: DS1307_SetDate(0x14,0x11,0x12);
+   744  07B0  3011               	movlw	(011h)
+   745  07B1  00FC               	movwf	(??_main+0)+0
+   746  07B2  087C               	movf	(??_main+0)+0,w
+   747  07B3  00F7               	movwf	(?_DS1307_SetDate)
+   748  07B4  3012               	movlw	(012h)
+   749  07B5  00FD               	movwf	(??_main+1)+0
+   750  07B6  087D               	movf	(??_main+1)+0,w
+   751  07B7  00F8               	movwf	0+(?_DS1307_SetDate)+01h
+   752  07B8  3014               	movlw	(014h)
+   753  07B9  120A  118A  258F   	fcall	_DS1307_SetDate
+              120A  118A         
+   754  07BE  2FBF               	goto	l6037
+   755                           	line	40
+   756                           ;main.c: 40: while(1)
+   757                           	
+   758  07BF                     l2838:	
+   759                           	line	43
+   760                           	
+   761  07BF                     l6037:	
+   762                           ;main.c: 41: {
+   763                           ;main.c: 43: DS1307_GetDate(&day,&month,&year);
+   764  07BF  3024               	movlw	(main@month)&0ffh
+   765  07C0  00FC               	movwf	(??_main+0)+0
+   766  07C1  087C               	movf	(??_main+0)+0,w
+   767  07C2  00F8               	movwf	(?_DS1307_GetDate)
+   768  07C3  3025               	movlw	(main@year)&0ffh
+   769  07C4  00FD               	movwf	(??_main+1)+0
+   770  07C5  087D               	movf	(??_main+1)+0,w
+   771  07C6  00F9               	movwf	0+(?_DS1307_GetDate)+01h
+   772  07C7  3023               	movlw	(main@day)&0ffh
+   773  07C8  120A  118A  2688   	fcall	_DS1307_GetDate
+              120A  118A         
+   774                           	line	46
+   775                           	
+   776  07CD                     l6039:	
+   777                           ;main.c: 46: DisplayRtcDate(day,month,year);
+   778  07CD  1283               	bcf	status, 5	;RP0=0, select bank0
+   779  07CE  1303               	bcf	status, 6	;RP1=0, select bank0
+   780  07CF  0824               	movf	(main@month),w
+   781  07D0  00FC               	movwf	(??_main+0)+0
+   782  07D1  087C               	movf	(??_main+0)+0,w
+   783  07D2  00F3               	movwf	(?_DisplayRtcDate)
+   784  07D3  0825               	movf	(main@year),w
+   785  07D4  00FD               	movwf	(??_main+1)+0
+   786  07D5  087D               	movf	(??_main+1)+0,w
+   787  07D6  00F4               	movwf	0+(?_DisplayRtcDate)+01h
+   788  07D7  0823               	movf	(main@day),w
+   789  07D8  120A  118A  26E0   	fcall	_DisplayRtcDate
+              120A  118A         
+   790                           	line	51
+   791                           	
+   792  07DD                     l6041:	
+   793                           ;main.c: 51: DS1307_GetTime(&hour,&min,&sec);
+   794  07DD  3021               	movlw	(main@min)&0ffh
+   795  07DE  00FC               	movwf	(??_main+0)+0
+   796  07DF  087C               	movf	(??_main+0)+0,w
+   797  07E0  00F8               	movwf	(?_DS1307_GetTime)
+   798  07E1  3020               	movlw	(main@sec)&0ffh
+   799  07E2  00FD               	movwf	(??_main+1)+0
+   800  07E3  087D               	movf	(??_main+1)+0,w
+   801  07E4  00F9               	movwf	0+(?_DS1307_GetTime)+01h
+   802  07E5  3022               	movlw	(main@hour)&0ffh
+   803  07E6  120A  118A  2630   	fcall	_DS1307_GetTime
+              120A  118A         
+   804                           	line	54
+   805                           	
+   806  07EB                     l6043:	
+   807                           ;main.c: 54: DisplayRtcTime(hour,min,sec);
+   808  07EB  1283               	bcf	status, 5	;RP0=0, select bank0
+   809  07EC  1303               	bcf	status, 6	;RP1=0, select bank0
+   810  07ED  0821               	movf	(main@min),w
+   811  07EE  00FC               	movwf	(??_main+0)+0
+   812  07EF  087C               	movf	(??_main+0)+0,w
+   813  07F0  00F3               	movwf	(?_DisplayRtcTime)
+   814  07F1  0820               	movf	(main@sec),w
+   815  07F2  00FD               	movwf	(??_main+1)+0
+   816  07F3  087D               	movf	(??_main+1)+0,w
+   817  07F4  00F4               	movwf	0+(?_DisplayRtcTime)+01h
+   818  07F5  0822               	movf	(main@hour),w
+   819  07F6  120A  118A  273C   	fcall	_DisplayRtcTime
+              120A  118A         
+   820  07FB  2FBF               	goto	l6037
+   821                           	line	58
+   822                           	
+   823  07FC                     l2839:	
+   824                           	line	40
+   825  07FC  2FBF               	goto	l6037
+   826                           	
+   827  07FD                     l2840:	
+   828                           	line	60
+   829                           	
+   830  07FD                     l2841:	
+   831                           	global	start
+   832  07FD  120A  118A  2800   	ljmp	start
+   833                           	opt stack 0
+   834                           GLOBAL	__end_of_main
+   835  0800                     	__end_of_main:
+   836 ;; =============== function _main ends ============
+   837                           
+   838                           	signat	_main,88
+   839                           	global	_DS1307_GetDate
+   840                           psect	text459,local,class=CODE,delta=2
+   841                           global __ptext459
+   842  0688                     __ptext459:
+   843                           
+   844 ;; *************** function _DS1307_GetDate *****************
+   845 ;; Defined at:
+   846 ;;		line 218 in file "C:\Users\Xplore_labZ\Saved Games\Desktop\Sample_Programs_updated\Pic\Ultra_Pic\RTC\RTC_UART\ds1307
+       .c"
+   847 ;; Parameters:    Size  Location     Type
+   848 ;;  d_ptr           1    wreg     PTR unsigned char 
+   849 ;;		 -> main@day(1), 
+   850 ;;  m_ptr           1    8[COMMON] PTR unsigned char 
+   851 ;;		 -> main@month(1), 
+   852 ;;  y_ptr           1    9[COMMON] PTR unsigned char 
+   853 ;;		 -> main@year(1), 
+   854 ;; Auto vars:     Size  Location     Type
+   855 ;;  d_ptr           1   11[COMMON] PTR unsigned char 
+   856 ;;		 -> main@day(1), 
+   857 ;; Return value:  Size  Location     Type
+   858 ;;		None               void
+   859 ;; Registers used:
+   860 ;;		wreg, fsr0l, fsr0h, status,2, status,0, pclath, cstack
+   861 ;; Tracked objects:
+   862 ;;		On entry : 0/0
+   863 ;;		On exit  : 0/0
+   864 ;;		Unchanged: 0/0
+   865 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   866 ;;      Params:         2       0       0       0       0
+   867 ;;      Locals:         1       0       0       0       0
+   868 ;;      Temps:          1       0       0       0       0
+   869 ;;      Totals:         4       0       0       0       0
+   870 ;;Total ram usage:        4 bytes
+   871 ;; Hardware stack levels used:    1
+   872 ;; Hardware stack levels required when called:    4
+   873 ;; This function calls:
+   874 ;;		_I2C_Start
+   875 ;;		_DS1307_Write
+   876 ;;		_I2C_Stop
+   877 ;;		_DS1307_Read
+   878 ;;		_I2C_Ack
+   879 ;;		_I2C_NoAck
+   880 ;; This function is called by:
+   881 ;;		_main
+   882 ;; This function uses a non-reentrant model
+   883 ;;
+   884                           psect	text459
+   885                           	file	"C:\Users\Xplore_labZ\Saved Games\Desktop\Sample_Programs_updated\Pic\Ultra_Pic\RT
+                                 C\RTC_UART\ds1307.c"
+   886                           	line	218
+   887                           	global	__size_of_DS1307_GetDate
+   888  0058                     	__size_of_DS1307_GetDate	equ	__end_of_DS1307_GetDate-_DS1307_GetDate
+   889                           	
+   890  0688                     _DS1307_GetDate:	
+   891                           	opt	stack 3
+   892                           ; Regs used in _DS1307_GetDate: [wreg-fsr0h+status,2+status,0+pclath+cstack]
+   893                           ;DS1307_GetDate@d_ptr stored from wreg
+   894  0688  00FB               	movwf	(DS1307_GetDate@d_ptr)
+   895                           	line	219
+   896                           	
+   897  0689                     l6025:	
+   898                           ;ds1307.c: 219: I2C_Start();
+   899  0689  120A  118A  253C   	fcall	_I2C_Start
+              120A  118A         
+   900                           	line	221
+   901                           ;ds1307.c: 221: DS1307_Write(0xD0);
+   902  068E  30D0               	movlw	(0D0h)
+   903  068F  120A  118A  248C   	fcall	_DS1307_Write
+              120A  118A         
+   904                           	line	222
+   905                           ;ds1307.c: 222: DS1307_Write(0x04);
+   906  0694  3004               	movlw	(04h)
+   907  0695  120A  118A  248C   	fcall	_DS1307_Write
+              120A  118A         
+   908                           	line	224
+   909                           ;ds1307.c: 224: I2C_Stop();
+   910  069A  120A  118A  2514   	fcall	_I2C_Stop
+              120A  118A         
+   911                           	line	227
+   912                           ;ds1307.c: 227: I2C_Start();
+   913  069F  120A  118A  253C   	fcall	_I2C_Start
+              120A  118A         
+   914                           	line	228
+   915                           ;ds1307.c: 228: DS1307_Write(0xD1);
+   916  06A4  30D1               	movlw	(0D1h)
+   917  06A5  120A  118A  248C   	fcall	_DS1307_Write
+              120A  118A         
+   918                           	line	231
+   919                           	
+   920  06AA                     l6027:	
+   921                           ;ds1307.c: 231: *d_ptr = DS1307_Read(); I2C_Ack();
+   922  06AA  120A  118A  245D   	fcall	_DS1307_Read
+              120A  118A         
+   923  06AF  00FA               	movwf	(??_DS1307_GetDate+0)+0
+   924  06B0  087B               	movf	(DS1307_GetDate@d_ptr),w
+   925  06B1  0084               	movwf	fsr0
+   926  06B2  087A               	movf	(??_DS1307_GetDate+0)+0,w
+   927  06B3  1383               	bcf	status, 7	;select IRP bank0
+   928  06B4  0080               	movwf	indf
+   929                           	
+   930  06B5                     l6029:	
+   931  06B5  120A  118A  2474   	fcall	_I2C_Ack
+              120A  118A         
+   932                           	line	232
+   933                           ;ds1307.c: 232: *m_ptr = DS1307_Read(); I2C_Ack();
+   934  06BA  120A  118A  245D   	fcall	_DS1307_Read
+              120A  118A         
+   935  06BF  00FA               	movwf	(??_DS1307_GetDate+0)+0
+   936  06C0  0878               	movf	(DS1307_GetDate@m_ptr),w
+   937  06C1  0084               	movwf	fsr0
+   938  06C2  087A               	movf	(??_DS1307_GetDate+0)+0,w
+   939  06C3  1383               	bcf	status, 7	;select IRP bank0
+   940  06C4  0080               	movwf	indf
+   941                           	
+   942  06C5                     l6031:	
+   943  06C5  120A  118A  2474   	fcall	_I2C_Ack
+              120A  118A         
+   944                           	line	233
+   945                           	
+   946  06CA                     l6033:	
+   947                           ;ds1307.c: 233: *y_ptr = DS1307_Read(); I2C_NoAck();
+   948  06CA  120A  118A  245D   	fcall	_DS1307_Read
+              120A  118A         
+   949  06CF  00FA               	movwf	(??_DS1307_GetDate+0)+0
+   950  06D0  0879               	movf	(DS1307_GetDate@y_ptr),w
+   951  06D1  0084               	movwf	fsr0
+   952  06D2  087A               	movf	(??_DS1307_GetDate+0)+0,w
+   953  06D3  1383               	bcf	status, 7	;select IRP bank0
+   954  06D4  0080               	movwf	indf
+   955  06D5  120A  118A  2480   	fcall	_I2C_NoAck
+              120A  118A         
+   956                           	line	235
+   957                           ;ds1307.c: 235: I2C_Stop();
+   958  06DA  120A  118A  2514   	fcall	_I2C_Stop
+              120A  118A         
+   959                           	line	236
+   960                           	
+   961  06DF                     l1421:	
+   962  06DF  0008               	return
+   963                           	opt stack 0
+   964                           GLOBAL	__end_of_DS1307_GetDate
+   965  06E0                     	__end_of_DS1307_GetDate:
+   966 ;; =============== function _DS1307_GetDate ends ============
+   967                           
+   968                           	signat	_DS1307_GetDate,12408
+   969                           	global	_DS1307_GetTime
+   970                           psect	text460,local,class=CODE,delta=2
+   971                           global __ptext460
+   972  0630                     __ptext460:
+   973                           
+   974 ;; *************** function _DS1307_GetTime *****************
+   975 ;; Defined at:
+   976 ;;		line 180 in file "C:\Users\Xplore_labZ\Saved Games\Desktop\Sample_Programs_updated\Pic\Ultra_Pic\RTC\RTC_UART\ds1307
+       .c"
+   977 ;; Parameters:    Size  Location     Type
+   978 ;;  h_ptr           1    wreg     PTR unsigned char 
+   979 ;;		 -> main@hour(1), 
+   980 ;;  m_ptr           1    8[COMMON] PTR unsigned char 
+   981 ;;		 -> main@min(1), 
+   982 ;;  s_ptr           1    9[COMMON] PTR unsigned char 
+   983 ;;		 -> main@sec(1), 
+   984 ;; Auto vars:     Size  Location     Type
+   985 ;;  h_ptr           1   11[COMMON] PTR unsigned char 
+   986 ;;		 -> main@hour(1), 
+   987 ;; Return value:  Size  Location     Type
+   988 ;;		None               void
+   989 ;; Registers used:
+   990 ;;		wreg, fsr0l, fsr0h, status,2, status,0, pclath, cstack
+   991 ;; Tracked objects:
+   992 ;;		On entry : 0/0
+   993 ;;		On exit  : 0/0
+   994 ;;		Unchanged: 0/0
+   995 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   996 ;;      Params:         2       0       0       0       0
+   997 ;;      Locals:         1       0       0       0       0
+   998 ;;      Temps:          1       0       0       0       0
+   999 ;;      Totals:         4       0       0       0       0
+  1000 ;;Total ram usage:        4 bytes
+  1001 ;; Hardware stack levels used:    1
+  1002 ;; Hardware stack levels required when called:    4
+  1003 ;; This function calls:
+  1004 ;;		_I2C_Start
+  1005 ;;		_DS1307_Write
+  1006 ;;		_I2C_Stop
+  1007 ;;		_DS1307_Read
+  1008 ;;		_I2C_Ack
+  1009 ;;		_I2C_NoAck
+  1010 ;; This function is called by:
+  1011 ;;		_main
+  1012 ;; This function uses a non-reentrant model
+  1013 ;;
+  1014                           psect	text460
+  1015                           	file	"C:\Users\Xplore_labZ\Saved Games\Desktop\Sample_Programs_updated\Pic\Ultra_Pic\RT
+                                 C\RTC_UART\ds1307.c"
+  1016                           	line	180
+  1017                           	global	__size_of_DS1307_GetTime
+  1018  0058                     	__size_of_DS1307_GetTime	equ	__end_of_DS1307_GetTime-_DS1307_GetTime
+  1019                           	
+  1020  0630                     _DS1307_GetTime:	
+  1021                           	opt	stack 3
+  1022                           ; Regs used in _DS1307_GetTime: [wreg-fsr0h+status,2+status,0+pclath+cstack]
+  1023                           ;DS1307_GetTime@h_ptr stored from wreg
+  1024  0630  00FB               	movwf	(DS1307_GetTime@h_ptr)
+  1025                           	line	181
+  1026                           	
+  1027  0631                     l6015:	
+  1028                           ;ds1307.c: 181: I2C_Start();
+  1029  0631  120A  118A  253C   	fcall	_I2C_Start
+              120A  118A         
+  1030                           	line	183
+  1031                           ;ds1307.c: 183: DS1307_Write(0xD0);
+  1032  0636  30D0               	movlw	(0D0h)
+  1033  0637  120A  118A  248C   	fcall	_DS1307_Write
+              120A  118A         
+  1034                           	line	184
+  1035                           ;ds1307.c: 184: DS1307_Write(0x00);
+  1036  063C  3000               	movlw	(0)
+  1037  063D  120A  118A  248C   	fcall	_DS1307_Write
+              120A  118A         
+  1038                           	line	186
+  1039                           ;ds1307.c: 186: I2C_Stop();
+  1040  0642  120A  118A  2514   	fcall	_I2C_Stop
+              120A  118A         
+  1041                           	line	188
+  1042                           ;ds1307.c: 188: I2C_Start();
+  1043  0647  120A  118A  253C   	fcall	_I2C_Start
+              120A  118A         
+  1044                           	line	189
+  1045                           ;ds1307.c: 189: DS1307_Write(0xD1);
+  1046  064C  30D1               	movlw	(0D1h)
+  1047  064D  120A  118A  248C   	fcall	_DS1307_Write
+              120A  118A         
+  1048                           	line	192
+  1049                           	
+  1050  0652                     l6017:	
+  1051                           ;ds1307.c: 192: *s_ptr = DS1307_Read(); I2C_Ack();
+  1052  0652  120A  118A  245D   	fcall	_DS1307_Read
+              120A  118A         
+  1053  0657  00FA               	movwf	(??_DS1307_GetTime+0)+0
+  1054  0658  0879               	movf	(DS1307_GetTime@s_ptr),w
+  1055  0659  0084               	movwf	fsr0
+  1056  065A  087A               	movf	(??_DS1307_GetTime+0)+0,w
+  1057  065B  1383               	bcf	status, 7	;select IRP bank0
+  1058  065C  0080               	movwf	indf
+  1059                           	
+  1060  065D                     l6019:	
+  1061  065D  120A  118A  2474   	fcall	_I2C_Ack
+              120A  118A         
+  1062                           	line	193
+  1063                           ;ds1307.c: 193: *m_ptr = DS1307_Read(); I2C_Ack();
+  1064  0662  120A  118A  245D   	fcall	_DS1307_Read
+              120A  118A         
+  1065  0667  00FA               	movwf	(??_DS1307_GetTime+0)+0
+  1066  0668  0878               	movf	(DS1307_GetTime@m_ptr),w
+  1067  0669  0084               	movwf	fsr0
+  1068  066A  087A               	movf	(??_DS1307_GetTime+0)+0,w
+  1069  066B  1383               	bcf	status, 7	;select IRP bank0
+  1070  066C  0080               	movwf	indf
+  1071                           	
+  1072  066D                     l6021:	
+  1073  066D  120A  118A  2474   	fcall	_I2C_Ack
+              120A  118A         
+  1074                           	line	194
+  1075                           	
+  1076  0672                     l6023:	
+  1077                           ;ds1307.c: 194: *h_ptr = DS1307_Read(); I2C_NoAck();
+  1078  0672  120A  118A  245D   	fcall	_DS1307_Read
+              120A  118A         
+  1079  0677  00FA               	movwf	(??_DS1307_GetTime+0)+0
+  1080  0678  087B               	movf	(DS1307_GetTime@h_ptr),w
+  1081  0679  0084               	movwf	fsr0
+  1082  067A  087A               	movf	(??_DS1307_GetTime+0)+0,w
+  1083  067B  1383               	bcf	status, 7	;select IRP bank0
+  1084  067C  0080               	movwf	indf
+  1085  067D  120A  118A  2480   	fcall	_I2C_NoAck
+              120A  118A         
+  1086                           	line	196
+  1087                           ;ds1307.c: 196: I2C_Stop();
+  1088  0682  120A  118A  2514   	fcall	_I2C_Stop
+              120A  118A         
+  1089                           	line	197
+  1090                           	
+  1091  0687                     l1418:	
+  1092  0687  0008               	return
+  1093                           	opt stack 0
+  1094                           GLOBAL	__end_of_DS1307_GetTime
+  1095  0688                     	__end_of_DS1307_GetTime:
+  1096 ;; =============== function _DS1307_GetTime ends ============
+  1097                           
+  1098                           	signat	_DS1307_GetTime,12408
+  1099                           	global	_DS1307_SetDate
+  1100                           psect	text461,local,class=CODE,delta=2
+  1101                           global __ptext461
+  1102  058F                     __ptext461:
+  1103                           
+  1104 ;; *************** function _DS1307_SetDate *****************
+  1105 ;; Defined at:
+  1106 ;;		line 149 in file "C:\Users\Xplore_labZ\Saved Games\Desktop\Sample_Programs_updated\Pic\Ultra_Pic\RTC\RTC_UART\ds1307
+       .c"
+  1107 ;; Parameters:    Size  Location     Type
+  1108 ;;  dd              1    wreg     unsigned char 
+  1109 ;;  mm              1    7[COMMON] unsigned char 
+  1110 ;;  yy              1    8[COMMON] unsigned char 
+  1111 ;; Auto vars:     Size  Location     Type
+  1112 ;;  dd              1    9[COMMON] unsigned char 
+  1113 ;; Return value:  Size  Location     Type
+  1114 ;;		None               void
+  1115 ;; Registers used:
+  1116 ;;		wreg, status,2, status,0, pclath, cstack
+  1117 ;; Tracked objects:
+  1118 ;;		On entry : 0/0
+  1119 ;;		On exit  : 0/0
+  1120 ;;		Unchanged: 0/0
+  1121 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  1122 ;;      Params:         2       0       0       0       0
+  1123 ;;      Locals:         1       0       0       0       0
+  1124 ;;      Temps:          0       0       0       0       0
+  1125 ;;      Totals:         3       0       0       0       0
+  1126 ;;Total ram usage:        3 bytes
+  1127 ;; Hardware stack levels used:    1
+  1128 ;; Hardware stack levels required when called:    4
+  1129 ;; This function calls:
+  1130 ;;		_I2C_Start
+  1131 ;;		_DS1307_Write
+  1132 ;;		_I2C_Stop
+  1133 ;; This function is called by:
+  1134 ;;		_main
+  1135 ;; This function uses a non-reentrant model
+  1136 ;;
+  1137                           psect	text461
+  1138                           	file	"C:\Users\Xplore_labZ\Saved Games\Desktop\Sample_Programs_updated\Pic\Ultra_Pic\RT
+                                 C\RTC_UART\ds1307.c"
+  1139                           	line	149
+  1140                           	global	__size_of_DS1307_SetDate
+  1141  002A                     	__size_of_DS1307_SetDate	equ	__end_of_DS1307_SetDate-_DS1307_SetDate
+  1142                           	
+  1143  058F                     _DS1307_SetDate:	
+  1144                           	opt	stack 3
+  1145                           ; Regs used in _DS1307_SetDate: [wreg+status,2+status,0+pclath+cstack]
+  1146                           ;DS1307_SetDate@dd stored from wreg
+  1147  058F  00F9               	movwf	(DS1307_SetDate@dd)
+  1148                           	line	150
+  1149                           	
+  1150  0590                     l6013:	
+  1151                           ;ds1307.c: 150: I2C_Start();
+  1152  0590  120A  118A  253C   	fcall	_I2C_Start
+              120A  118A         
+  1153                           	line	152
+  1154                           ;ds1307.c: 152: DS1307_Write(0xD0);
+  1155  0595  30D0               	movlw	(0D0h)
+  1156  0596  120A  118A  248C   	fcall	_DS1307_Write
+              120A  118A         
+  1157                           	line	153
+  1158                           ;ds1307.c: 153: DS1307_Write(0x04);
+  1159  059B  3004               	movlw	(04h)
+  1160  059C  120A  118A  248C   	fcall	_DS1307_Write
+              120A  118A         
+  1161                           	line	155
+  1162                           ;ds1307.c: 155: DS1307_Write(dd);
+  1163  05A1  0879               	movf	(DS1307_SetDate@dd),w
+  1164  05A2  120A  118A  248C   	fcall	_DS1307_Write
+              120A  118A         
+  1165                           	line	156
+  1166                           ;ds1307.c: 156: DS1307_Write(mm);
+  1167  05A7  0877               	movf	(DS1307_SetDate@mm),w
+  1168  05A8  120A  118A  248C   	fcall	_DS1307_Write
+              120A  118A         
+  1169                           	line	157
+  1170                           ;ds1307.c: 157: DS1307_Write(yy);
+  1171  05AD  0878               	movf	(DS1307_SetDate@yy),w
+  1172  05AE  120A  118A  248C   	fcall	_DS1307_Write
+              120A  118A         
+  1173                           	line	159
+  1174                           ;ds1307.c: 159: I2C_Stop();
+  1175  05B3  120A  118A  2514   	fcall	_I2C_Stop
+              120A  118A         
+  1176                           	line	160
+  1177                           	
+  1178  05B8                     l1415:	
+  1179  05B8  0008               	return
+  1180                           	opt stack 0
+  1181                           GLOBAL	__end_of_DS1307_SetDate
+  1182  05B9                     	__end_of_DS1307_SetDate:
+  1183 ;; =============== function _DS1307_SetDate ends ============
+  1184                           
+  1185                           	signat	_DS1307_SetDate,12408
+  1186                           	global	_DS1307_SetTime
+  1187                           psect	text462,local,class=CODE,delta=2
+  1188                           global __ptext462
+  1189  0565                     __ptext462:
+  1190                           
+  1191 ;; *************** function _DS1307_SetTime *****************
+  1192 ;; Defined at:
+  1193 ;;		line 117 in file "C:\Users\Xplore_labZ\Saved Games\Desktop\Sample_Programs_updated\Pic\Ultra_Pic\RTC\RTC_UART\ds1307
+       .c"
+  1194 ;; Parameters:    Size  Location     Type
+  1195 ;;  hh              1    wreg     unsigned char 
+  1196 ;;  mm              1    7[COMMON] unsigned char 
+  1197 ;;  ss              1    8[COMMON] unsigned char 
+  1198 ;; Auto vars:     Size  Location     Type
+  1199 ;;  hh              1    9[COMMON] unsigned char 
+  1200 ;; Return value:  Size  Location     Type
+  1201 ;;		None               void
+  1202 ;; Registers used:
+  1203 ;;		wreg, status,2, status,0, pclath, cstack
+  1204 ;; Tracked objects:
+  1205 ;;		On entry : 0/0
+  1206 ;;		On exit  : 0/0
+  1207 ;;		Unchanged: 0/0
+  1208 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  1209 ;;      Params:         2       0       0       0       0
+  1210 ;;      Locals:         1       0       0       0       0
+  1211 ;;      Temps:          0       0       0       0       0
+  1212 ;;      Totals:         3       0       0       0       0
+  1213 ;;Total ram usage:        3 bytes
+  1214 ;; Hardware stack levels used:    1
+  1215 ;; Hardware stack levels required when called:    4
+  1216 ;; This function calls:
+  1217 ;;		_I2C_Start
+  1218 ;;		_DS1307_Write
+  1219 ;;		_I2C_Stop
+  1220 ;; This function is called by:
+  1221 ;;		_main
+  1222 ;; This function uses a non-reentrant model
+  1223 ;;
+  1224                           psect	text462
+  1225                           	file	"C:\Users\Xplore_labZ\Saved Games\Desktop\Sample_Programs_updated\Pic\Ultra_Pic\RT
+                                 C\RTC_UART\ds1307.c"
+  1226                           	line	117
+  1227                           	global	__size_of_DS1307_SetTime
+  1228  002A                     	__size_of_DS1307_SetTime	equ	__end_of_DS1307_SetTime-_DS1307_SetTime
+  1229                           	
+  1230  0565                     _DS1307_SetTime:	
+  1231                           	opt	stack 3
+  1232                           ; Regs used in _DS1307_SetTime: [wreg+status,2+status,0+pclath+cstack]
+  1233                           ;DS1307_SetTime@hh stored from wreg
+  1234  0565  00F9               	movwf	(DS1307_SetTime@hh)
+  1235                           	line	118
+  1236                           	
+  1237  0566                     l6011:	
+  1238                           ;ds1307.c: 118: I2C_Start();
+  1239  0566  120A  118A  253C   	fcall	_I2C_Start
+              120A  118A         
+  1240                           	line	120
+  1241                           ;ds1307.c: 120: DS1307_Write(0xD0);
+  1242  056B  30D0               	movlw	(0D0h)
+  1243  056C  120A  118A  248C   	fcall	_DS1307_Write
+              120A  118A         
+  1244                           	line	121
+  1245                           ;ds1307.c: 121: DS1307_Write(0x00);
+  1246  0571  3000               	movlw	(0)
+  1247  0572  120A  118A  248C   	fcall	_DS1307_Write
+              120A  118A         
+  1248                           	line	123
+  1249                           ;ds1307.c: 123: DS1307_Write(ss);
+  1250  0577  0878               	movf	(DS1307_SetTime@ss),w
+  1251  0578  120A  118A  248C   	fcall	_DS1307_Write
+              120A  118A         
+  1252                           	line	124
+  1253                           ;ds1307.c: 124: DS1307_Write(mm);
+  1254  057D  0877               	movf	(DS1307_SetTime@mm),w
+  1255  057E  120A  118A  248C   	fcall	_DS1307_Write
+              120A  118A         
+  1256                           	line	125
+  1257                           ;ds1307.c: 125: DS1307_Write(hh);
+  1258  0583  0879               	movf	(DS1307_SetTime@hh),w
+  1259  0584  120A  118A  248C   	fcall	_DS1307_Write
+              120A  118A         
+  1260                           	line	127
+  1261                           ;ds1307.c: 127: I2C_Stop();
+  1262  0589  120A  118A  2514   	fcall	_I2C_Stop
+              120A  118A         
+  1263                           	line	128
+  1264                           	
+  1265  058E                     l1412:	
+  1266  058E  0008               	return
+  1267                           	opt stack 0
+  1268                           GLOBAL	__end_of_DS1307_SetTime
+  1269  058F                     	__end_of_DS1307_SetTime:
+  1270 ;; =============== function _DS1307_SetTime ends ============
+  1271                           
+  1272                           	signat	_DS1307_SetTime,12408
+  1273                           	global	_DS1307_Init
+  1274                           psect	text463,local,class=CODE,delta=2
+  1275                           global __ptext463
+  1276  04F2                     __ptext463:
+  1277                           
+  1278 ;; *************** function _DS1307_Init *****************
+  1279 ;; Defined at:
+  1280 ;;		line 43 in file "C:\Users\Xplore_labZ\Saved Games\Desktop\Sample_Programs_updated\Pic\Ultra_Pic\RTC\RTC_UART\ds1307.
+       c"
+  1281 ;; Parameters:    Size  Location     Type
+  1282 ;;		None
+  1283 ;; Auto vars:     Size  Location     Type
+  1284 ;;		None
+  1285 ;; Return value:  Size  Location     Type
+  1286 ;;		None               void
+  1287 ;; Registers used:
+  1288 ;;		wreg, status,2, status,0, pclath, cstack
+  1289 ;; Tracked objects:
+  1290 ;;		On entry : 0/0
+  1291 ;;		On exit  : 0/0
+  1292 ;;		Unchanged: 0/0
+  1293 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  1294 ;;      Params:         0       0       0       0       0
+  1295 ;;      Locals:         0       0       0       0       0
+  1296 ;;      Temps:          0       0       0       0       0
+  1297 ;;      Totals:         0       0       0       0       0
+  1298 ;;Total ram usage:        0 bytes
+  1299 ;; Hardware stack levels used:    1
+  1300 ;; Hardware stack levels required when called:    4
+  1301 ;; This function calls:
+  1302 ;;		_I2C_Init
+  1303 ;;		_I2C_Start
+  1304 ;;		_DS1307_Write
+  1305 ;;		_I2C_Stop
+  1306 ;; This function is called by:
+  1307 ;;		_main
+  1308 ;; This function uses a non-reentrant model
+  1309 ;;
+  1310                           psect	text463
+  1311                           	file	"C:\Users\Xplore_labZ\Saved Games\Desktop\Sample_Programs_updated\Pic\Ultra_Pic\RT
+                                 C\RTC_UART\ds1307.c"
+  1312                           	line	43
+  1313                           	global	__size_of_DS1307_Init
+  1314  0022                     	__size_of_DS1307_Init	equ	__end_of_DS1307_Init-_DS1307_Init
+  1315                           	
+  1316  04F2                     _DS1307_Init:	
+  1317                           	opt	stack 3
+  1318                           ; Regs used in _DS1307_Init: [wreg+status,2+status,0+pclath+cstack]
+  1319                           	line	44
+  1320                           	
+  1321  04F2                     l5999:	
+  1322                           ;ds1307.c: 44: I2C_Init();
+  1323  04F2  120A  118A  2458   	fcall	_I2C_Init
+              120A  118A         
+  1324                           	line	45
+  1325                           	
+  1326  04F7                     l6001:	
+  1327                           ;ds1307.c: 45: I2C_Start();
+  1328  04F7  120A  118A  253C   	fcall	_I2C_Start
+              120A  118A         
+  1329                           	line	47
+  1330                           	
+  1331  04FC                     l6003:	
+  1332                           ;ds1307.c: 47: DS1307_Write(0xD0);
+  1333  04FC  30D0               	movlw	(0D0h)
+  1334  04FD  120A  118A  248C   	fcall	_DS1307_Write
+              120A  118A         
+  1335                           	line	48
+  1336                           	
+  1337  0502                     l6005:	
+  1338                           ;ds1307.c: 48: DS1307_Write(0x07);
+  1339  0502  3007               	movlw	(07h)
+  1340  0503  120A  118A  248C   	fcall	_DS1307_Write
+              120A  118A         
+  1341                           	line	50
+  1342                           	
+  1343  0508                     l6007:	
+  1344                           ;ds1307.c: 50: DS1307_Write(0x00);
+  1345  0508  3000               	movlw	(0)
+  1346  0509  120A  118A  248C   	fcall	_DS1307_Write
+              120A  118A         
+  1347                           	line	52
+  1348                           	
+  1349  050E                     l6009:	
+  1350                           ;ds1307.c: 52: I2C_Stop();
+  1351  050E  120A  118A  2514   	fcall	_I2C_Stop
+              120A  118A         
+  1352                           	line	54
+  1353                           	
+  1354  0513                     l1403:	
+  1355  0513  0008               	return
+  1356                           	opt stack 0
+  1357                           GLOBAL	__end_of_DS1307_Init
+  1358  0514                     	__end_of_DS1307_Init:
+  1359 ;; =============== function _DS1307_Init ends ============
+  1360                           
+  1361                           	signat	_DS1307_Init,88
+  1362                           	global	_DS1307_Write
+  1363                           psect	text464,local,class=CODE,delta=2
+  1364                           global __ptext464
+  1365  048C                     __ptext464:
+  1366                           
+  1367 ;; *************** function _DS1307_Write *****************
+  1368 ;; Defined at:
+  1369 ;;		line 76 in file "C:\Users\Xplore_labZ\Saved Games\Desktop\Sample_Programs_updated\Pic\Ultra_Pic\RTC\RTC_UART\ds1307.
+       c"
+  1370 ;; Parameters:    Size  Location     Type
+  1371 ;;  dat             1    wreg     unsigned char 
+  1372 ;; Auto vars:     Size  Location     Type
+  1373 ;;  dat             1    6[COMMON] unsigned char 
+  1374 ;; Return value:  Size  Location     Type
+  1375 ;;		None               void
+  1376 ;; Registers used:
+  1377 ;;		wreg, status,2, status,0, pclath, cstack
+  1378 ;; Tracked objects:
+  1379 ;;		On entry : 0/0
+  1380 ;;		On exit  : 0/0
+  1381 ;;		Unchanged: 0/0
+  1382 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  1383 ;;      Params:         0       0       0       0       0
+  1384 ;;      Locals:         1       0       0       0       0
+  1385 ;;      Temps:          0       0       0       0       0
+  1386 ;;      Totals:         1       0       0       0       0
+  1387 ;;Total ram usage:        1 bytes
+  1388 ;; Hardware stack levels used:    1
+  1389 ;; Hardware stack levels required when called:    3
+  1390 ;; This function calls:
+  1391 ;;		_I2C_Write
+  1392 ;;		_I2C_Clock
+  1393 ;; This function is called by:
+  1394 ;;		_DS1307_Init
+  1395 ;;		_DS1307_SetTime
+  1396 ;;		_DS1307_SetDate
+  1397 ;;		_DS1307_GetTime
+  1398 ;;		_DS1307_GetDate
+  1399 ;; This function uses a non-reentrant model
+  1400 ;;
+  1401                           psect	text464
+  1402                           	file	"C:\Users\Xplore_labZ\Saved Games\Desktop\Sample_Programs_updated\Pic\Ultra_Pic\RT
+                                 C\RTC_UART\ds1307.c"
+  1403                           	line	76
+  1404                           	global	__size_of_DS1307_Write
+  1405  000D                     	__size_of_DS1307_Write	equ	__end_of_DS1307_Write-_DS1307_Write
+  1406                           	
+  1407  048C                     _DS1307_Write:	
+  1408                           	opt	stack 3
+  1409                           ; Regs used in _DS1307_Write: [wreg+status,2+status,0+pclath+cstack]
+  1410                           ;DS1307_Write@dat stored from wreg
+  1411  048C  00F6               	movwf	(DS1307_Write@dat)
+  1412                           	line	77
+  1413                           	
+  1414  048D                     l5997:	
+  1415                           ;ds1307.c: 77: I2C_Write(dat);
+  1416  048D  0876               	movf	(DS1307_Write@dat),w
+  1417  048E  120A  118A  25B9   	fcall	_I2C_Write
+              120A  118A         
+  1418                           	line	78
+  1419                           ;ds1307.c: 78: I2C_Clock();
+  1420  0493  120A  118A  24B8   	fcall	_I2C_Clock
+              120A  118A         
+  1421                           	line	79
+  1422                           	
+  1423  0498                     l1406:	
+  1424  0498  0008               	return
+  1425                           	opt stack 0
+  1426                           GLOBAL	__end_of_DS1307_Write
+  1427  0499                     	__end_of_DS1307_Write:
+  1428 ;; =============== function _DS1307_Write ends ============
+  1429                           
+  1430                           	signat	_DS1307_Write,4216
+  1431                           	global	_DisplayRtcTime
+  1432                           psect	text465,local,class=CODE,delta=2
+  1433                           global __ptext465
+  1434  073C                     __ptext465:
+  1435                           
+  1436 ;; *************** function _DisplayRtcTime *****************
+  1437 ;; Defined at:
+  1438 ;;		line 66 in file "C:\Users\Xplore_labZ\Saved Games\Desktop\Sample_Programs_updated\Pic\Ultra_Pic\RTC\RTC_UART\main.c"
+  1439 ;; Parameters:    Size  Location     Type
+  1440 ;;  hour            1    wreg     unsigned char 
+  1441 ;;  min             1    3[COMMON] unsigned char 
+  1442 ;;  sec             1    4[COMMON] unsigned char 
+  1443 ;; Auto vars:     Size  Location     Type
+  1444 ;;  hour            1    6[COMMON] unsigned char 
+  1445 ;; Return value:  Size  Location     Type
+  1446 ;;		None               void
+  1447 ;; Registers used:
+  1448 ;;		wreg, fsr0l, fsr0h, status,2, status,0, pclath, cstack
+  1449 ;; Tracked objects:
+  1450 ;;		On entry : 0/0
+  1451 ;;		On exit  : 0/0
+  1452 ;;		Unchanged: 0/0
+  1453 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  1454 ;;      Params:         2       0       0       0       0
+  1455 ;;      Locals:         1       0       0       0       0
+  1456 ;;      Temps:          1       0       0       0       0
+  1457 ;;      Totals:         4       0       0       0       0
+  1458 ;;Total ram usage:        4 bytes
+  1459 ;; Hardware stack levels used:    1
+  1460 ;; Hardware stack levels required when called:    2
+  1461 ;; This function calls:
+  1462 ;;		_UART_TxString
+  1463 ;;		_UART_TxChar
+  1464 ;; This function is called by:
+  1465 ;;		_main
+  1466 ;; This function uses a non-reentrant model
+  1467 ;;
+  1468                           psect	text465
+  1469                           	file	"C:\Users\Xplore_labZ\Saved Games\Desktop\Sample_Programs_updated\Pic\Ultra_Pic\RT
+                                 C\RTC_UART\main.c"
+  1470                           	line	66
+  1471                           	global	__size_of_DisplayRtcTime
+  1472  005C                     	__size_of_DisplayRtcTime	equ	__end_of_DisplayRtcTime-_DisplayRtcTime
+  1473                           	
+  1474  073C                     _DisplayRtcTime:	
+  1475                           	opt	stack 5
+  1476                           ; Regs used in _DisplayRtcTime: [wreg-fsr0h+status,2+status,0+pclath+cstack]
+  1477                           ;DisplayRtcTime@hour stored from wreg
+  1478  073C  00F6               	movwf	(DisplayRtcTime@hour)
+  1479                           	line	67
+  1480                           	
+  1481  073D                     l5979:	
+  1482                           ;main.c: 67: UART_TxString(" Time: ");
+  1483  073D  300A               	movlw	((STR_1-__stringbase))&0ffh
+  1484  073E  120A  118A  24D1   	fcall	_UART_TxString
+              120A  118A         
+  1485                           	line	68
+  1486                           	
+  1487  0743                     l5981:	
+  1488                           ;main.c: 68: UART_TxChar(((hour>>4) & 0x0f) + 0x30);
+  1489  0743  0876               	movf	(DisplayRtcTime@hour),w
+  1490  0744  00F5               	movwf	(??_DisplayRtcTime+0)+0
+  1491  0745  3004               	movlw	04h
+  1492  0746                     u2605:
+  1493  0746  1003               	clrc
+  1494  0747  0CF5               	rrf	(??_DisplayRtcTime+0)+0,f
+  1495  0748  3EFF               	addlw	-1
+  1496  0749  1D03               	skipz
+  1497  074A  2F46               	goto	u2605
+  1498  074B  0875               	movf	0+(??_DisplayRtcTime+0)+0,w
+  1499  074C  390F               	andlw	0Fh
+  1500  074D  3E30               	addlw	030h
+  1501  074E  120A  118A  2468   	fcall	_UART_TxChar
+              120A  118A         
+  1502                           	line	69
+  1503                           	
+  1504  0753                     l5983:	
+  1505                           ;main.c: 69: UART_TxChar((hour & 0x0f) + 0x30);
+  1506  0753  0876               	movf	(DisplayRtcTime@hour),w
+  1507  0754  390F               	andlw	0Fh
+  1508  0755  3E30               	addlw	030h
+  1509  0756  120A  118A  2468   	fcall	_UART_TxChar
+              120A  118A         
+  1510                           	line	70
+  1511                           	
+  1512  075B                     l5985:	
+  1513                           ;main.c: 70: UART_TxChar(':');
+  1514  075B  303A               	movlw	(03Ah)
+  1515  075C  120A  118A  2468   	fcall	_UART_TxChar
+              120A  118A         
+  1516                           	line	72
+  1517                           	
+  1518  0761                     l5987:	
+  1519                           ;main.c: 72: UART_TxChar(((min>>4) & 0x0f) + 0x30);
+  1520  0761  0873               	movf	(DisplayRtcTime@min),w
+  1521  0762  00F5               	movwf	(??_DisplayRtcTime+0)+0
+  1522  0763  3004               	movlw	04h
+  1523  0764                     u2615:
+  1524  0764  1003               	clrc
+  1525  0765  0CF5               	rrf	(??_DisplayRtcTime+0)+0,f
+  1526  0766  3EFF               	addlw	-1
+  1527  0767  1D03               	skipz
+  1528  0768  2F64               	goto	u2615
+  1529  0769  0875               	movf	0+(??_DisplayRtcTime+0)+0,w
+  1530  076A  390F               	andlw	0Fh
+  1531  076B  3E30               	addlw	030h
+  1532  076C  120A  118A  2468   	fcall	_UART_TxChar
+              120A  118A         
+  1533                           	line	73
+  1534                           	
+  1535  0771                     l5989:	
+  1536                           ;main.c: 73: UART_TxChar((min & 0x0f) + 0x30);
+  1537  0771  0873               	movf	(DisplayRtcTime@min),w
+  1538  0772  390F               	andlw	0Fh
+  1539  0773  3E30               	addlw	030h
+  1540  0774  120A  118A  2468   	fcall	_UART_TxChar
+              120A  118A         
+  1541                           	line	74
+  1542                           	
+  1543  0779                     l5991:	
+  1544                           ;main.c: 74: UART_TxChar(':');
+  1545  0779  303A               	movlw	(03Ah)
+  1546  077A  120A  118A  2468   	fcall	_UART_TxChar
+              120A  118A         
+  1547                           	line	76
+  1548                           	
+  1549  077F                     l5993:	
+  1550                           ;main.c: 76: UART_TxChar(((sec>>4) & 0x0f) + 0x30);
+  1551  077F  0874               	movf	(DisplayRtcTime@sec),w
+  1552  0780  00F5               	movwf	(??_DisplayRtcTime+0)+0
+  1553  0781  3004               	movlw	04h
+  1554  0782                     u2625:
+  1555  0782  1003               	clrc
+  1556  0783  0CF5               	rrf	(??_DisplayRtcTime+0)+0,f
+  1557  0784  3EFF               	addlw	-1
+  1558  0785  1D03               	skipz
+  1559  0786  2F82               	goto	u2625
+  1560  0787  0875               	movf	0+(??_DisplayRtcTime+0)+0,w
+  1561  0788  390F               	andlw	0Fh
+  1562  0789  3E30               	addlw	030h
+  1563  078A  120A  118A  2468   	fcall	_UART_TxChar
+              120A  118A         
+  1564                           	line	77
+  1565                           	
+  1566  078F                     l5995:	
+  1567                           ;main.c: 77: UART_TxChar((sec & 0x0f) + 0x30);
+  1568  078F  0874               	movf	(DisplayRtcTime@sec),w
+  1569  0790  390F               	andlw	0Fh
+  1570  0791  3E30               	addlw	030h
+  1571  0792  120A  118A  2468   	fcall	_UART_TxChar
+              120A  118A         
+  1572                           	line	79
+  1573                           	
+  1574  0797                     l2844:	
+  1575  0797  0008               	return
+  1576                           	opt stack 0
+  1577                           GLOBAL	__end_of_DisplayRtcTime
+  1578  0798                     	__end_of_DisplayRtcTime:
+  1579 ;; =============== function _DisplayRtcTime ends ============
+  1580                           
+  1581                           	signat	_DisplayRtcTime,12408
+  1582                           	global	_DisplayRtcDate
+  1583                           psect	text466,local,class=CODE,delta=2
+  1584                           global __ptext466
+  1585  06E0                     __ptext466:
+  1586                           
+  1587 ;; *************** function _DisplayRtcDate *****************
+  1588 ;; Defined at:
+  1589 ;;		line 88 in file "C:\Users\Xplore_labZ\Saved Games\Desktop\Sample_Programs_updated\Pic\Ultra_Pic\RTC\RTC_UART\main.c"
+  1590 ;; Parameters:    Size  Location     Type
+  1591 ;;  day             1    wreg     unsigned char 
+  1592 ;;  month           1    3[COMMON] unsigned char 
+  1593 ;;  year            1    4[COMMON] unsigned char 
+  1594 ;; Auto vars:     Size  Location     Type
+  1595 ;;  day             1    6[COMMON] unsigned char 
+  1596 ;; Return value:  Size  Location     Type
+  1597 ;;		None               void
+  1598 ;; Registers used:
+  1599 ;;		wreg, fsr0l, fsr0h, status,2, status,0, pclath, cstack
+  1600 ;; Tracked objects:
+  1601 ;;		On entry : 0/0
+  1602 ;;		On exit  : 0/0
+  1603 ;;		Unchanged: 0/0
+  1604 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  1605 ;;      Params:         2       0       0       0       0
+  1606 ;;      Locals:         1       0       0       0       0
+  1607 ;;      Temps:          1       0       0       0       0
+  1608 ;;      Totals:         4       0       0       0       0
+  1609 ;;Total ram usage:        4 bytes
+  1610 ;; Hardware stack levels used:    1
+  1611 ;; Hardware stack levels required when called:    2
+  1612 ;; This function calls:
+  1613 ;;		_UART_TxString
+  1614 ;;		_UART_TxChar
+  1615 ;; This function is called by:
+  1616 ;;		_main
+  1617 ;; This function uses a non-reentrant model
+  1618 ;;
+  1619                           psect	text466
+  1620                           	file	"C:\Users\Xplore_labZ\Saved Games\Desktop\Sample_Programs_updated\Pic\Ultra_Pic\RT
+                                 C\RTC_UART\main.c"
+  1621                           	line	88
+  1622                           	global	__size_of_DisplayRtcDate
+  1623  005C                     	__size_of_DisplayRtcDate	equ	__end_of_DisplayRtcDate-_DisplayRtcDate
+  1624                           	
+  1625  06E0                     _DisplayRtcDate:	
+  1626                           	opt	stack 5
+  1627                           ; Regs used in _DisplayRtcDate: [wreg-fsr0h+status,2+status,0+pclath+cstack]
+  1628                           ;DisplayRtcDate@day stored from wreg
+  1629  06E0  00F6               	movwf	(DisplayRtcDate@day)
+  1630                           	line	89
+  1631                           	
+  1632  06E1                     l5961:	
+  1633                           ;main.c: 89: UART_TxString("\n\rdate: ");
+  1634  06E1  3001               	movlw	((STR_2-__stringbase))&0ffh
+  1635  06E2  120A  118A  24D1   	fcall	_UART_TxString
+              120A  118A         
+  1636                           	line	90
+  1637                           	
+  1638  06E7                     l5963:	
+  1639                           ;main.c: 90: UART_TxChar(((day>>4) & 0x0f) + 0x30);
+  1640  06E7  0876               	movf	(DisplayRtcDate@day),w
+  1641  06E8  00F5               	movwf	(??_DisplayRtcDate+0)+0
+  1642  06E9  3004               	movlw	04h
+  1643  06EA                     u2575:
+  1644  06EA  1003               	clrc
+  1645  06EB  0CF5               	rrf	(??_DisplayRtcDate+0)+0,f
+  1646  06EC  3EFF               	addlw	-1
+  1647  06ED  1D03               	skipz
+  1648  06EE  2EEA               	goto	u2575
+  1649  06EF  0875               	movf	0+(??_DisplayRtcDate+0)+0,w
+  1650  06F0  390F               	andlw	0Fh
+  1651  06F1  3E30               	addlw	030h
+  1652  06F2  120A  118A  2468   	fcall	_UART_TxChar
+              120A  118A         
+  1653                           	line	91
+  1654                           	
+  1655  06F7                     l5965:	
+  1656                           ;main.c: 91: UART_TxChar((day & 0x0f) + 0x30);
+  1657  06F7  0876               	movf	(DisplayRtcDate@day),w
+  1658  06F8  390F               	andlw	0Fh
+  1659  06F9  3E30               	addlw	030h
+  1660  06FA  120A  118A  2468   	fcall	_UART_TxChar
+              120A  118A         
+  1661                           	line	92
+  1662                           	
+  1663  06FF                     l5967:	
+  1664                           ;main.c: 92: UART_TxChar('/');
+  1665  06FF  302F               	movlw	(02Fh)
+  1666  0700  120A  118A  2468   	fcall	_UART_TxChar
+              120A  118A         
+  1667                           	line	94
+  1668                           	
+  1669  0705                     l5969:	
+  1670                           ;main.c: 94: UART_TxChar(((month>>4) & 0x0f) + 0x30);
+  1671  0705  0873               	movf	(DisplayRtcDate@month),w
+  1672  0706  00F5               	movwf	(??_DisplayRtcDate+0)+0
+  1673  0707  3004               	movlw	04h
+  1674  0708                     u2585:
+  1675  0708  1003               	clrc
+  1676  0709  0CF5               	rrf	(??_DisplayRtcDate+0)+0,f
+  1677  070A  3EFF               	addlw	-1
+  1678  070B  1D03               	skipz
+  1679  070C  2F08               	goto	u2585
+  1680  070D  0875               	movf	0+(??_DisplayRtcDate+0)+0,w
+  1681  070E  390F               	andlw	0Fh
+  1682  070F  3E30               	addlw	030h
+  1683  0710  120A  118A  2468   	fcall	_UART_TxChar
+              120A  118A         
+  1684                           	line	95
+  1685                           	
+  1686  0715                     l5971:	
+  1687                           ;main.c: 95: UART_TxChar((month & 0x0f) + 0x30);
+  1688  0715  0873               	movf	(DisplayRtcDate@month),w
+  1689  0716  390F               	andlw	0Fh
+  1690  0717  3E30               	addlw	030h
+  1691  0718  120A  118A  2468   	fcall	_UART_TxChar
+              120A  118A         
+  1692                           	line	96
+  1693                           	
+  1694  071D                     l5973:	
+  1695                           ;main.c: 96: UART_TxChar('/');
+  1696  071D  302F               	movlw	(02Fh)
+  1697  071E  120A  118A  2468   	fcall	_UART_TxChar
+              120A  118A         
+  1698                           	line	98
+  1699                           	
+  1700  0723                     l5975:	
+  1701                           ;main.c: 98: UART_TxChar(((year>>4) & 0x0f) + 0x30);
+  1702  0723  0874               	movf	(DisplayRtcDate@year),w
+  1703  0724  00F5               	movwf	(??_DisplayRtcDate+0)+0
+  1704  0725  3004               	movlw	04h
+  1705  0726                     u2595:
+  1706  0726  1003               	clrc
+  1707  0727  0CF5               	rrf	(??_DisplayRtcDate+0)+0,f
+  1708  0728  3EFF               	addlw	-1
+  1709  0729  1D03               	skipz
+  1710  072A  2F26               	goto	u2595
+  1711  072B  0875               	movf	0+(??_DisplayRtcDate+0)+0,w
+  1712  072C  390F               	andlw	0Fh
+  1713  072D  3E30               	addlw	030h
+  1714  072E  120A  118A  2468   	fcall	_UART_TxChar
+              120A  118A         
+  1715                           	line	99
+  1716                           	
+  1717  0733                     l5977:	
+  1718                           ;main.c: 99: UART_TxChar((year & 0x0f) + 0x30);
+  1719  0733  0874               	movf	(DisplayRtcDate@year),w
+  1720  0734  390F               	andlw	0Fh
+  1721  0735  3E30               	addlw	030h
+  1722  0736  120A  118A  2468   	fcall	_UART_TxChar
+              120A  118A         
+  1723                           	line	101
+  1724                           	
+  1725  073B                     l2847:	
+  1726  073B  0008               	return
+  1727                           	opt stack 0
+  1728                           GLOBAL	__end_of_DisplayRtcDate
+  1729  073C                     	__end_of_DisplayRtcDate:
+  1730 ;; =============== function _DisplayRtcDate ends ============
+  1731                           
+  1732                           	signat	_DisplayRtcDate,12408
+  1733                           	global	_I2C_NoAck
+  1734                           psect	text467,local,class=CODE,delta=2
+  1735                           global __ptext467
+  1736  0480                     __ptext467:
+  1737                           
+  1738 ;; *************** function _I2C_NoAck *****************
+  1739 ;; Defined at:
+  1740 ;;		line 264 in file "C:\Users\Xplore_labZ\Saved Games\Desktop\Sample_Programs_updated\Pic\Ultra_Pic\RTC\RTC_UART\i2c.c"
+  1741 ;; Parameters:    Size  Location     Type
+  1742 ;;		None
+  1743 ;; Auto vars:     Size  Location     Type
+  1744 ;;		None
+  1745 ;; Return value:  Size  Location     Type
+  1746 ;;		None               void
+  1747 ;; Registers used:
+  1748 ;;		wreg, status,2, status,0, pclath, cstack
+  1749 ;; Tracked objects:
+  1750 ;;		On entry : 0/0
+  1751 ;;		On exit  : 0/0
+  1752 ;;		Unchanged: 0/0
+  1753 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  1754 ;;      Params:         0       0       0       0       0
+  1755 ;;      Locals:         0       0       0       0       0
+  1756 ;;      Temps:          0       0       0       0       0
+  1757 ;;      Totals:         0       0       0       0       0
+  1758 ;;Total ram usage:        0 bytes
+  1759 ;; Hardware stack levels used:    1
+  1760 ;; Hardware stack levels required when called:    2
+  1761 ;; This function calls:
+  1762 ;;		_I2C_Clock
+  1763 ;; This function is called by:
+  1764 ;;		_DS1307_GetTime
+  1765 ;;		_DS1307_GetDate
+  1766 ;; This function uses a non-reentrant model
+  1767 ;;
+  1768                           psect	text467
+  1769                           	file	"C:\Users\Xplore_labZ\Saved Games\Desktop\Sample_Programs_updated\Pic\Ultra_Pic\RT
+                                 C\RTC_UART\i2c.c"
+  1770                           	line	264
+  1771                           	global	__size_of_I2C_NoAck
+  1772  000C                     	__size_of_I2C_NoAck	equ	__end_of_I2C_NoAck-_I2C_NoAck
+  1773                           	
+  1774  0480                     _I2C_NoAck:	
+  1775                           	opt	stack 4
+  1776                           ; Regs used in _I2C_NoAck: [wreg+status,2+status,0+pclath+cstack]
+  1777                           	line	265
+  1778                           	
+  1779  0480                     l5955:	
+  1780                           ;i2c.c: 265: RC4 = 1;
+  1781  0480  1283               	bcf	status, 5	;RP0=0, select bank0
+  1782  0481  1303               	bcf	status, 6	;RP1=0, select bank0
+  1783  0482  1607               	bsf	(60/8),(60)&7
+  1784                           	line	266
+  1785                           	
+  1786  0483                     l5957:	
+  1787                           ;i2c.c: 266: I2C_Clock();
+  1788  0483  120A  118A  24B8   	fcall	_I2C_Clock
+              120A  118A         
+  1789                           	line	267
+  1790                           	
+  1791  0488                     l5959:	
+  1792                           ;i2c.c: 267: RC3 = 1;
+  1793  0488  1283               	bcf	status, 5	;RP0=0, select bank0
+  1794  0489  1303               	bcf	status, 6	;RP1=0, select bank0
+  1795  048A  1587               	bsf	(59/8),(59)&7
+  1796                           	line	268
+  1797                           	
+  1798  048B                     l2133:	
+  1799  048B  0008               	return
+  1800                           	opt stack 0
+  1801                           GLOBAL	__end_of_I2C_NoAck
+  1802  048C                     	__end_of_I2C_NoAck:
+  1803 ;; =============== function _I2C_NoAck ends ============
+  1804                           
+  1805                           	signat	_I2C_NoAck,88
+  1806                           	global	_I2C_Ack
+  1807                           psect	text468,local,class=CODE,delta=2
+  1808                           global __ptext468
+  1809  0474                     __ptext468:
+  1810                           
+  1811 ;; *************** function _I2C_Ack *****************
+  1812 ;; Defined at:
+  1813 ;;		line 244 in file "C:\Users\Xplore_labZ\Saved Games\Desktop\Sample_Programs_updated\Pic\Ultra_Pic\RTC\RTC_UART\i2c.c"
+  1814 ;; Parameters:    Size  Location     Type
+  1815 ;;		None
+  1816 ;; Auto vars:     Size  Location     Type
+  1817 ;;		None
+  1818 ;; Return value:  Size  Location     Type
+  1819 ;;		None               void
+  1820 ;; Registers used:
+  1821 ;;		wreg, status,2, status,0, pclath, cstack
+  1822 ;; Tracked objects:
+  1823 ;;		On entry : 0/0
+  1824 ;;		On exit  : 0/0
+  1825 ;;		Unchanged: 0/0
+  1826 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  1827 ;;      Params:         0       0       0       0       0
+  1828 ;;      Locals:         0       0       0       0       0
+  1829 ;;      Temps:          0       0       0       0       0
+  1830 ;;      Totals:         0       0       0       0       0
+  1831 ;;Total ram usage:        0 bytes
+  1832 ;; Hardware stack levels used:    1
+  1833 ;; Hardware stack levels required when called:    2
+  1834 ;; This function calls:
+  1835 ;;		_I2C_Clock
+  1836 ;; This function is called by:
+  1837 ;;		_DS1307_GetTime
+  1838 ;;		_DS1307_GetDate
+  1839 ;; This function uses a non-reentrant model
+  1840 ;;
+  1841                           psect	text468
+  1842                           	file	"C:\Users\Xplore_labZ\Saved Games\Desktop\Sample_Programs_updated\Pic\Ultra_Pic\RT
+                                 C\RTC_UART\i2c.c"
+  1843                           	line	244
+  1844                           	global	__size_of_I2C_Ack
+  1845  000C                     	__size_of_I2C_Ack	equ	__end_of_I2C_Ack-_I2C_Ack
+  1846                           	
+  1847  0474                     _I2C_Ack:	
+  1848                           	opt	stack 4
+  1849                           ; Regs used in _I2C_Ack: [wreg+status,2+status,0+pclath+cstack]
+  1850                           	line	245
+  1851                           	
+  1852  0474                     l5949:	
+  1853                           ;i2c.c: 245: RC4 = 0;
+  1854  0474  1283               	bcf	status, 5	;RP0=0, select bank0
+  1855  0475  1303               	bcf	status, 6	;RP1=0, select bank0
+  1856  0476  1207               	bcf	(60/8),(60)&7
+  1857                           	line	246
+  1858                           	
+  1859  0477                     l5951:	
+  1860                           ;i2c.c: 246: I2C_Clock();
+  1861  0477  120A  118A  24B8   	fcall	_I2C_Clock
+              120A  118A         
+  1862                           	line	247
+  1863                           	
+  1864  047C                     l5953:	
+  1865                           ;i2c.c: 247: RC4 = 1;
+  1866  047C  1283               	bcf	status, 5	;RP0=0, select bank0
+  1867  047D  1303               	bcf	status, 6	;RP1=0, select bank0
+  1868  047E  1607               	bsf	(60/8),(60)&7
+  1869                           	line	248
+  1870                           	
+  1871  047F                     l2130:	
+  1872  047F  0008               	return
+  1873                           	opt stack 0
+  1874                           GLOBAL	__end_of_I2C_Ack
+  1875  0480                     	__end_of_I2C_Ack:
+  1876 ;; =============== function _I2C_Ack ends ============
+  1877                           
+  1878                           	signat	_I2C_Ack,88
+  1879                           	global	_DS1307_Read
+  1880                           psect	text469,local,class=CODE,delta=2
+  1881                           global __ptext469
+  1882  045D                     __ptext469:
+  1883                           
+  1884 ;; *************** function _DS1307_Read *****************
+  1885 ;; Defined at:
+  1886 ;;		line 95 in file "C:\Users\Xplore_labZ\Saved Games\Desktop\Sample_Programs_updated\Pic\Ultra_Pic\RTC\RTC_UART\ds1307.
+       c"
+  1887 ;; Parameters:    Size  Location     Type
+  1888 ;;		None
+  1889 ;; Auto vars:     Size  Location     Type
+  1890 ;;  dat             1    7[COMMON] unsigned char 
+  1891 ;; Return value:  Size  Location     Type
+  1892 ;;                  1    wreg      unsigned char 
+  1893 ;; Registers used:
+  1894 ;;		wreg, status,2, status,0, pclath, cstack
+  1895 ;; Tracked objects:
+  1896 ;;		On entry : 0/0
+  1897 ;;		On exit  : 0/0
+  1898 ;;		Unchanged: 0/0
+  1899 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  1900 ;;      Params:         0       0       0       0       0
+  1901 ;;      Locals:         1       0       0       0       0
+  1902 ;;      Temps:          1       0       0       0       0
+  1903 ;;      Totals:         2       0       0       0       0
+  1904 ;;Total ram usage:        2 bytes
+  1905 ;; Hardware stack levels used:    1
+  1906 ;; Hardware stack levels required when called:    2
+  1907 ;; This function calls:
+  1908 ;;		_I2C_Read
+  1909 ;; This function is called by:
+  1910 ;;		_DS1307_GetTime
+  1911 ;;		_DS1307_GetDate
+  1912 ;; This function uses a non-reentrant model
+  1913 ;;
+  1914                           psect	text469
+  1915                           	file	"C:\Users\Xplore_labZ\Saved Games\Desktop\Sample_Programs_updated\Pic\Ultra_Pic\RT
+                                 C\RTC_UART\ds1307.c"
+  1916                           	line	95
+  1917                           	global	__size_of_DS1307_Read
+  1918  000B                     	__size_of_DS1307_Read	equ	__end_of_DS1307_Read-_DS1307_Read
+  1919                           	
+  1920  045D                     _DS1307_Read:	
+  1921                           	opt	stack 4
+  1922                           ; Regs used in _DS1307_Read: [wreg+status,2+status,0+pclath+cstack]
+  1923                           	line	97
+  1924                           	
+  1925  045D                     l5943:	
+  1926                           ;ds1307.c: 96: unsigned char dat;
+  1927                           ;ds1307.c: 97: dat = I2C_Read();
+  1928  045D  120A  118A  25EE   	fcall	_I2C_Read
+              120A  118A         
+  1929  0462  00F6               	movwf	(??_DS1307_Read+0)+0
+  1930  0463  0876               	movf	(??_DS1307_Read+0)+0,w
+  1931  0464  00F7               	movwf	(DS1307_Read@dat)
+  1932                           	line	98
+  1933                           	
+  1934  0465                     l5945:	
+  1935                           ;ds1307.c: 98: return(dat);
+  1936  0465  0877               	movf	(DS1307_Read@dat),w
+  1937  0466  2C67               	goto	l1409
+  1938                           	
+  1939  0467                     l5947:	
+  1940                           	line	99
+  1941                           	
+  1942  0467                     l1409:	
+  1943  0467  0008               	return
+  1944                           	opt stack 0
+  1945                           GLOBAL	__end_of_DS1307_Read
+  1946  0468                     	__end_of_DS1307_Read:
+  1947 ;; =============== function _DS1307_Read ends ============
+  1948                           
+  1949                           	signat	_DS1307_Read,89
+  1950                           	global	_I2C_Write
+  1951                           psect	text470,local,class=CODE,delta=2
+  1952                           global __ptext470
+  1953  05B9                     __ptext470:
+  1954                           
+  1955 ;; *************** function _I2C_Write *****************
+  1956 ;; Defined at:
+  1957 ;;		line 169 in file "C:\Users\Xplore_labZ\Saved Games\Desktop\Sample_Programs_updated\Pic\Ultra_Pic\RTC\RTC_UART\i2c.c"
+  1958 ;; Parameters:    Size  Location     Type
+  1959 ;;  dat             1    wreg     unsigned char 
+  1960 ;; Auto vars:     Size  Location     Type
+  1961 ;;  dat             1    4[COMMON] unsigned char 
+  1962 ;;  i               1    5[COMMON] unsigned char 
+  1963 ;; Return value:  Size  Location     Type
+  1964 ;;		None               void
+  1965 ;; Registers used:
+  1966 ;;		wreg, status,2, status,0, pclath, cstack
+  1967 ;; Tracked objects:
+  1968 ;;		On entry : 0/0
+  1969 ;;		On exit  : 0/0
+  1970 ;;		Unchanged: 0/0
+  1971 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  1972 ;;      Params:         0       0       0       0       0
+  1973 ;;      Locals:         2       0       0       0       0
+  1974 ;;      Temps:          2       0       0       0       0
+  1975 ;;      Totals:         4       0       0       0       0
+  1976 ;;Total ram usage:        4 bytes
+  1977 ;; Hardware stack levels used:    1
+  1978 ;; Hardware stack levels required when called:    2
+  1979 ;; This function calls:
+  1980 ;;		_I2C_Clock
+  1981 ;; This function is called by:
+  1982 ;;		_DS1307_Write
+  1983 ;; This function uses a non-reentrant model
+  1984 ;;
+  1985                           psect	text470
+  1986                           	file	"C:\Users\Xplore_labZ\Saved Games\Desktop\Sample_Programs_updated\Pic\Ultra_Pic\RT
+                                 C\RTC_UART\i2c.c"
+  1987                           	line	169
+  1988                           	global	__size_of_I2C_Write
+  1989  0035                     	__size_of_I2C_Write	equ	__end_of_I2C_Write-_I2C_Write
+  1990                           	
+  1991  05B9                     _I2C_Write:	
+  1992                           	opt	stack 3
+  1993                           ; Regs used in _I2C_Write: [wreg+status,2+status,0+pclath+cstack]
+  1994                           ;I2C_Write@dat stored from wreg
+  1995                           	line	172
+  1996  05B9  00F4               	movwf	(I2C_Write@dat)
+  1997                           	
+  1998  05BA                     l5927:	
+  1999                           ;i2c.c: 170: unsigned char i;
+  2000                           ;i2c.c: 172: for(i=0;i<8;i++)
+  2001  05BA  01F5               	clrf	(I2C_Write@i)
+  2002                           	
+  2003  05BB                     l5929:	
+  2004  05BB  3008               	movlw	(08h)
+  2005  05BC  0275               	subwf	(I2C_Write@i),w
+  2006  05BD  1C03               	skipc
+  2007  05BE  2DC0               	goto	u2521
+  2008  05BF  2DC1               	goto	u2520
+  2009  05C0                     u2521:
+  2010  05C0  2DC3               	goto	l5933
+  2011  05C1                     u2520:
+  2012  05C1  2DEA               	goto	l2121
+  2013                           	
+  2014  05C2                     l5931:	
+  2015  05C2  2DEA               	goto	l2121
+  2016                           	line	173
+  2017                           	
+  2018  05C3                     l2120:	
+  2019                           	line	174
+  2020                           	
+  2021  05C3                     l5933:	
+  2022                           ;i2c.c: 173: {
+  2023                           ;i2c.c: 174: RC4 = (dat & 0x80)>>7;
+  2024  05C3  0874               	movf	(I2C_Write@dat),w
+  2025  05C4  00F2               	movwf	(??_I2C_Write+0)+0
+  2026  05C5  3007               	movlw	07h
+  2027  05C6                     u2535:
+  2028  05C6  1003               	clrc
+  2029  05C7  0CF2               	rrf	(??_I2C_Write+0)+0,f
+  2030  05C8  3EFF               	addlw	-1
+  2031  05C9  1D03               	skipz
+  2032  05CA  2DC6               	goto	u2535
+  2033  05CB  1872               	btfsc	0+(??_I2C_Write+0)+0,0
+  2034  05CC  2DCE               	goto	u2541
+  2035  05CD  2DD2               	goto	u2540
+  2036                           	
+  2037  05CE                     u2541:
+  2038  05CE  1283               	bcf	status, 5	;RP0=0, select bank0
+  2039  05CF  1303               	bcf	status, 6	;RP1=0, select bank0
+  2040  05D0  1607               	bsf	(60/8),(60)&7
+  2041  05D1  2DD5               	goto	u2554
+  2042  05D2                     u2540:
+  2043  05D2  1283               	bcf	status, 5	;RP0=0, select bank0
+  2044  05D3  1303               	bcf	status, 6	;RP1=0, select bank0
+  2045  05D4  1207               	bcf	(60/8),(60)&7
+  2046  05D5                     u2554:
+  2047                           	line	175
+  2048                           	
+  2049  05D5                     l5935:	
+  2050                           ;i2c.c: 175: I2C_Clock();
+  2051  05D5  120A  118A  24B8   	fcall	_I2C_Clock
+              120A  118A         
+  2052                           	line	176
+  2053                           	
+  2054  05DA                     l5937:	
+  2055                           ;i2c.c: 176: dat = dat<<1;
+  2056  05DA  0874               	movf	(I2C_Write@dat),w
+  2057  05DB  00F2               	movwf	(??_I2C_Write+0)+0
+  2058  05DC  0772               	addwf	(??_I2C_Write+0)+0,w
+  2059  05DD  00F3               	movwf	(??_I2C_Write+1)+0
+  2060  05DE  0873               	movf	(??_I2C_Write+1)+0,w
+  2061  05DF  00F4               	movwf	(I2C_Write@dat)
+  2062                           	line	172
+  2063                           	
+  2064  05E0                     l5939:	
+  2065  05E0  3001               	movlw	(01h)
+  2066  05E1  00F2               	movwf	(??_I2C_Write+0)+0
+  2067  05E2  0872               	movf	(??_I2C_Write+0)+0,w
+  2068  05E3  07F5               	addwf	(I2C_Write@i),f
+  2069                           	
+  2070  05E4                     l5941:	
+  2071  05E4  3008               	movlw	(08h)
+  2072  05E5  0275               	subwf	(I2C_Write@i),w
+  2073  05E6  1C03               	skipc
+  2074  05E7  2DE9               	goto	u2561
+  2075  05E8  2DEA               	goto	u2560
+  2076  05E9                     u2561:
+  2077  05E9  2DC3               	goto	l5933
+  2078  05EA                     u2560:
+  2079                           	
+  2080  05EA                     l2121:	
+  2081                           	line	178
+  2082                           ;i2c.c: 177: }
+  2083                           ;i2c.c: 178: RC4 = 1;
+  2084  05EA  1283               	bcf	status, 5	;RP0=0, select bank0
+  2085  05EB  1303               	bcf	status, 6	;RP1=0, select bank0
+  2086  05EC  1607               	bsf	(60/8),(60)&7
+  2087                           	line	180
+  2088                           	
+  2089  05ED                     l2122:	
+  2090  05ED  0008               	return
+  2091                           	opt stack 0
+  2092                           GLOBAL	__end_of_I2C_Write
+  2093  05EE                     	__end_of_I2C_Write:
+  2094 ;; =============== function _I2C_Write ends ============
+  2095                           
+  2096                           	signat	_I2C_Write,4216
+  2097                           	global	_UART_TxString
+  2098                           psect	text471,local,class=CODE,delta=2
+  2099                           global __ptext471
+  2100  04D1                     __ptext471:
+  2101                           
+  2102 ;; *************** function _UART_TxString *****************
+  2103 ;; Defined at:
+  2104 ;;		line 107 in file "C:\Users\Xplore_labZ\Saved Games\Desktop\Sample_Programs_updated\Pic\Ultra_Pic\RTC\RTC_UART\uart.c
+       "
+  2105 ;; Parameters:    Size  Location     Type
+  2106 ;;  string_ptr      1    wreg     PTR unsigned char 
+  2107 ;;		 -> STR_2(9), STR_1(8), 
+  2108 ;; Auto vars:     Size  Location     Type
+  2109 ;;  string_ptr      1    2[COMMON] PTR unsigned char 
+  2110 ;;		 -> STR_2(9), STR_1(8), 
+  2111 ;; Return value:  Size  Location     Type
+  2112 ;;		None               void
+  2113 ;; Registers used:
+  2114 ;;		wreg, fsr0l, fsr0h, status,2, status,0, pclath, cstack
+  2115 ;; Tracked objects:
+  2116 ;;		On entry : 0/0
+  2117 ;;		On exit  : 0/0
+  2118 ;;		Unchanged: 0/0
+  2119 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  2120 ;;      Params:         0       0       0       0       0
+  2121 ;;      Locals:         1       0       0       0       0
+  2122 ;;      Temps:          1       0       0       0       0
+  2123 ;;      Totals:         2       0       0       0       0
+  2124 ;;Total ram usage:        2 bytes
+  2125 ;; Hardware stack levels used:    1
+  2126 ;; Hardware stack levels required when called:    1
+  2127 ;; This function calls:
+  2128 ;;		_UART_TxChar
+  2129 ;; This function is called by:
+  2130 ;;		_DisplayRtcTime
+  2131 ;;		_DisplayRtcDate
+  2132 ;; This function uses a non-reentrant model
+  2133 ;;
+  2134                           psect	text471
+  2135                           	file	"C:\Users\Xplore_labZ\Saved Games\Desktop\Sample_Programs_updated\Pic\Ultra_Pic\RT
+                                 C\RTC_UART\uart.c"
+  2136                           	line	107
+  2137                           	global	__size_of_UART_TxString
+  2138  0021                     	__size_of_UART_TxString	equ	__end_of_UART_TxString-_UART_TxString
+  2139                           	
+  2140  04D1                     _UART_TxString:	
+  2141                           	opt	stack 5
+  2142                           ; Regs used in _UART_TxString: [wreg-fsr0h+status,2+status,0+pclath+cstack]
+  2143                           ;UART_TxString@string_ptr stored from wreg
+  2144  04D1  00F2               	movwf	(UART_TxString@string_ptr)
+  2145                           	line	108
+  2146                           	
+  2147  04D2                     l5919:	
+  2148                           ;uart.c: 108: while(*string_ptr)
+  2149  04D2  2CE4               	goto	l5925
+  2150                           	
+  2151  04D3                     l3548:	
+  2152                           	line	109
+  2153                           	
+  2154  04D3                     l5921:	
+  2155                           ;uart.c: 109: UART_TxChar(*string_ptr++);
+  2156  04D3  0872               	movf	(UART_TxString@string_ptr),w
+  2157  04D4  0084               	movwf	fsr0
+  2158  04D5  120A  118A  2003   	fcall	stringdir
+              120A  118A         
+  2159  04DA  120A  118A  2468   	fcall	_UART_TxChar
+              120A  118A         
+  2160                           	
+  2161  04DF                     l5923:	
+  2162  04DF  3001               	movlw	(01h)
+  2163  04E0  00F1               	movwf	(??_UART_TxString+0)+0
+  2164  04E1  0871               	movf	(??_UART_TxString+0)+0,w
+  2165  04E2  07F2               	addwf	(UART_TxString@string_ptr),f
+  2166  04E3  2CE4               	goto	l5925
+  2167                           	
+  2168  04E4                     l3547:	
+  2169                           	line	108
+  2170                           	
+  2171  04E4                     l5925:	
+  2172  04E4  0872               	movf	(UART_TxString@string_ptr),w
+  2173  04E5  0084               	movwf	fsr0
+  2174  04E6  120A  118A  2003   	fcall	stringdir
+              120A  118A         
+  2175  04EB  3800               	iorlw	0
+  2176  04EC  1D03               	skipz
+  2177  04ED  2CEF               	goto	u2511
+  2178  04EE  2CF0               	goto	u2510
+  2179  04EF                     u2511:
+  2180  04EF  2CD3               	goto	l5921
+  2181  04F0                     u2510:
+  2182  04F0  2CF1               	goto	l3550
+  2183                           	
+  2184  04F1                     l3549:	
+  2185                           	line	110
+  2186                           	
+  2187  04F1                     l3550:	
+  2188  04F1  0008               	return
+  2189                           	opt stack 0
+  2190                           GLOBAL	__end_of_UART_TxString
+  2191  04F2                     	__end_of_UART_TxString:
+  2192 ;; =============== function _UART_TxString ends ============
+  2193                           
+  2194                           	signat	_UART_TxString,4216
+  2195                           	global	_I2C_Read
+  2196                           psect	text472,local,class=CODE,delta=2
+  2197                           global __ptext472
+  2198  05EE                     __ptext472:
+  2199                           
+  2200 ;; *************** function _I2C_Read *****************
+  2201 ;; Defined at:
+  2202 ;;		line 207 in file "C:\Users\Xplore_labZ\Saved Games\Desktop\Sample_Programs_updated\Pic\Ultra_Pic\RTC\RTC_UART\i2c.c"
+  2203 ;; Parameters:    Size  Location     Type
+  2204 ;;		None
+  2205 ;; Auto vars:     Size  Location     Type
+  2206 ;;  dat             1    5[COMMON] unsigned char 
+  2207 ;;  i               1    4[COMMON] unsigned char 
+  2208 ;; Return value:  Size  Location     Type
+  2209 ;;                  1    wreg      unsigned char 
+  2210 ;; Registers used:
+  2211 ;;		wreg, status,2, status,0, pclath, cstack
+  2212 ;; Tracked objects:
+  2213 ;;		On entry : 0/0
+  2214 ;;		On exit  : 0/0
+  2215 ;;		Unchanged: 0/0
+  2216 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  2217 ;;      Params:         0       0       0       0       0
+  2218 ;;      Locals:         2       0       0       0       0
+  2219 ;;      Temps:          2       0       0       0       0
+  2220 ;;      Totals:         4       0       0       0       0
+  2221 ;;Total ram usage:        4 bytes
+  2222 ;; Hardware stack levels used:    1
+  2223 ;; Hardware stack levels required when called:    1
+  2224 ;; This function calls:
+  2225 ;;		_delay_us
+  2226 ;; This function is called by:
+  2227 ;;		_DS1307_Read
+  2228 ;; This function uses a non-reentrant model
+  2229 ;;
+  2230                           psect	text472
+  2231                           	file	"C:\Users\Xplore_labZ\Saved Games\Desktop\Sample_Programs_updated\Pic\Ultra_Pic\RT
+                                 C\RTC_UART\i2c.c"
+  2232                           	line	207
+  2233                           	global	__size_of_I2C_Read
+  2234  0042                     	__size_of_I2C_Read	equ	__end_of_I2C_Read-_I2C_Read
+  2235                           	
+  2236  05EE                     _I2C_Read:	
+  2237                           	opt	stack 4
+  2238                           ; Regs used in _I2C_Read: [wreg+status,2+status,0+pclath+cstack]
+  2239                           	line	208
+  2240                           	
+  2241  05EE                     l5895:	
+  2242                           ;i2c.c: 208: unsigned char i, dat=0x00;
+  2243  05EE  01F5               	clrf	(I2C_Read@dat)
+  2244                           	line	210
+  2245                           ;i2c.c: 210: TRISC4=1;
+  2246  05EF  1683               	bsf	status, 5	;RP0=1, select bank1
+  2247  05F0  1303               	bcf	status, 6	;RP1=0, select bank1
+  2248  05F1  1607               	bsf	(1084/8)^080h,(1084)&7
+  2249                           	line	211
+  2250                           ;i2c.c: 211: for(i=0;i<8;i++)
+  2251  05F2  01F4               	clrf	(I2C_Read@i)
+  2252                           	
+  2253  05F3                     l5897:	
+  2254  05F3  3008               	movlw	(08h)
+  2255  05F4  0274               	subwf	(I2C_Read@i),w
+  2256  05F5  1C03               	skipc
+  2257  05F6  2DF8               	goto	u2491
+  2258  05F7  2DF9               	goto	u2490
+  2259  05F8                     u2491:
+  2260  05F8  2DFB               	goto	l5901
+  2261  05F9                     u2490:
+  2262  05F9  2E2A               	goto	l2126
+  2263                           	
+  2264  05FA                     l5899:	
+  2265  05FA  2E2A               	goto	l2126
+  2266                           	line	212
+  2267                           	
+  2268  05FB                     l2125:	
+  2269                           	line	213
+  2270                           	
+  2271  05FB                     l5901:	
+  2272                           ;i2c.c: 212: {
+  2273                           ;i2c.c: 213: delay_us(1);
+  2274  05FB  3001               	movlw	low(01h)
+  2275  05FC  00F0               	movwf	(?_delay_us)
+  2276  05FD  3000               	movlw	high(01h)
+  2277  05FE  00F1               	movwf	((?_delay_us))+1
+  2278  05FF  120A  118A  24A8   	fcall	_delay_us
+              120A  118A         
+  2279                           	line	216
+  2280                           	
+  2281  0604                     l5903:	
+  2282                           ;i2c.c: 216: RC3 = 1;
+  2283  0604  1283               	bcf	status, 5	;RP0=0, select bank0
+  2284  0605  1303               	bcf	status, 6	;RP1=0, select bank0
+  2285  0606  1587               	bsf	(59/8),(59)&7
+  2286                           	line	217
+  2287                           ;i2c.c: 217: delay_us(1);
+  2288  0607  3001               	movlw	low(01h)
+  2289  0608  00F0               	movwf	(?_delay_us)
+  2290  0609  3000               	movlw	high(01h)
+  2291  060A  00F1               	movwf	((?_delay_us))+1
+  2292  060B  120A  118A  24A8   	fcall	_delay_us
+              120A  118A         
+  2293                           	line	219
+  2294                           	
+  2295  0610                     l5905:	
+  2296                           ;i2c.c: 219: dat = dat<<1;
+  2297  0610  0875               	movf	(I2C_Read@dat),w
+  2298  0611  00F2               	movwf	(??_I2C_Read+0)+0
+  2299  0612  0772               	addwf	(??_I2C_Read+0)+0,w
+  2300  0613  00F3               	movwf	(??_I2C_Read+1)+0
+  2301  0614  0873               	movf	(??_I2C_Read+1)+0,w
+  2302  0615  00F5               	movwf	(I2C_Read@dat)
+  2303                           	line	220
+  2304                           	
+  2305  0616                     l5907:	
+  2306                           ;i2c.c: 220: dat = dat | RC4;
+  2307  0616  3000               	movlw	0
+  2308  0617  1283               	bcf	status, 5	;RP0=0, select bank0
+  2309  0618  1303               	bcf	status, 6	;RP1=0, select bank0
+  2310  0619  1A07               	btfsc	(60/8),(60)&7
+  2311  061A  3001               	movlw	1
+  2312  061B  0475               	iorwf	(I2C_Read@dat),w
+  2313  061C  00F2               	movwf	(??_I2C_Read+0)+0
+  2314  061D  0872               	movf	(??_I2C_Read+0)+0,w
+  2315  061E  00F5               	movwf	(I2C_Read@dat)
+  2316                           	line	222
+  2317                           	
+  2318  061F                     l5909:	
+  2319                           ;i2c.c: 222: RC3 = 0;
+  2320  061F  1187               	bcf	(59/8),(59)&7
+  2321                           	line	211
+  2322                           	
+  2323  0620                     l5911:	
+  2324  0620  3001               	movlw	(01h)
+  2325  0621  00F2               	movwf	(??_I2C_Read+0)+0
+  2326  0622  0872               	movf	(??_I2C_Read+0)+0,w
+  2327  0623  07F4               	addwf	(I2C_Read@i),f
+  2328                           	
+  2329  0624                     l5913:	
+  2330  0624  3008               	movlw	(08h)
+  2331  0625  0274               	subwf	(I2C_Read@i),w
+  2332  0626  1C03               	skipc
+  2333  0627  2E29               	goto	u2501
+  2334  0628  2E2A               	goto	u2500
+  2335  0629                     u2501:
+  2336  0629  2DFB               	goto	l5901
+  2337  062A                     u2500:
+  2338                           	
+  2339  062A                     l2126:	
+  2340                           	line	224
+  2341                           ;i2c.c: 223: }
+  2342                           ;i2c.c: 224: TRISC4=0;
+  2343  062A  1683               	bsf	status, 5	;RP0=1, select bank1
+  2344  062B  1303               	bcf	status, 6	;RP1=0, select bank1
+  2345  062C  1207               	bcf	(1084/8)^080h,(1084)&7
+  2346                           	line	225
+  2347                           	
+  2348  062D                     l5915:	
+  2349                           ;i2c.c: 225: return dat;
+  2350  062D  0875               	movf	(I2C_Read@dat),w
+  2351  062E  2E2F               	goto	l2127
+  2352                           	
+  2353  062F                     l5917:	
+  2354                           	line	226
+  2355                           	
+  2356  062F                     l2127:	
+  2357  062F  0008               	return
+  2358                           	opt stack 0
+  2359                           GLOBAL	__end_of_I2C_Read
+  2360  0630                     	__end_of_I2C_Read:
+  2361 ;; =============== function _I2C_Read ends ============
+  2362                           
+  2363                           	signat	_I2C_Read,89
+  2364                           	global	_I2C_Clock
+  2365                           psect	text473,local,class=CODE,delta=2
+  2366                           global __ptext473
+  2367  04B8                     __ptext473:
+  2368                           
+  2369 ;; *************** function _I2C_Clock *****************
+  2370 ;; Defined at:
+  2371 ;;		line 56 in file "C:\Users\Xplore_labZ\Saved Games\Desktop\Sample_Programs_updated\Pic\Ultra_Pic\RTC\RTC_UART\i2c.c"
+  2372 ;; Parameters:    Size  Location     Type
+  2373 ;;		None
+  2374 ;; Auto vars:     Size  Location     Type
+  2375 ;;		None
+  2376 ;; Return value:  Size  Location     Type
+  2377 ;;		None               void
+  2378 ;; Registers used:
+  2379 ;;		wreg, status,2, status,0, pclath, cstack
+  2380 ;; Tracked objects:
+  2381 ;;		On entry : 0/0
+  2382 ;;		On exit  : 0/0
+  2383 ;;		Unchanged: 0/0
+  2384 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  2385 ;;      Params:         0       0       0       0       0
+  2386 ;;      Locals:         0       0       0       0       0
+  2387 ;;      Temps:          0       0       0       0       0
+  2388 ;;      Totals:         0       0       0       0       0
+  2389 ;;Total ram usage:        0 bytes
+  2390 ;; Hardware stack levels used:    1
+  2391 ;; Hardware stack levels required when called:    1
+  2392 ;; This function calls:
+  2393 ;;		_delay_us
+  2394 ;; This function is called by:
+  2395 ;;		_DS1307_Write
+  2396 ;;		_I2C_Write
+  2397 ;;		_I2C_Ack
+  2398 ;;		_I2C_NoAck
+  2399 ;; This function uses a non-reentrant model
+  2400 ;;
+  2401                           psect	text473
+  2402                           	file	"C:\Users\Xplore_labZ\Saved Games\Desktop\Sample_Programs_updated\Pic\Ultra_Pic\RT
+                                 C\RTC_UART\i2c.c"
+  2403                           	line	56
+  2404                           	global	__size_of_I2C_Clock
+  2405  0019                     	__size_of_I2C_Clock	equ	__end_of_I2C_Clock-_I2C_Clock
+  2406                           	
+  2407  04B8                     _I2C_Clock:	
+  2408                           	opt	stack 4
+  2409                           ; Regs used in _I2C_Clock: [wreg+status,2+status,0+pclath+cstack]
+  2410                           	line	57
+  2411                           	
+  2412  04B8                     l5889:	
+  2413                           ;i2c.c: 57: delay_us(1);
+  2414  04B8  3001               	movlw	low(01h)
+  2415  04B9  00F0               	movwf	(?_delay_us)
+  2416  04BA  3000               	movlw	high(01h)
+  2417  04BB  00F1               	movwf	((?_delay_us))+1
+  2418  04BC  120A  118A  24A8   	fcall	_delay_us
+              120A  118A         
+  2419                           	line	58
+  2420                           	
+  2421  04C1                     l5891:	
+  2422                           ;i2c.c: 58: RC3 = 1;
+  2423  04C1  1283               	bcf	status, 5	;RP0=0, select bank0
+  2424  04C2  1303               	bcf	status, 6	;RP1=0, select bank0
+  2425  04C3  1587               	bsf	(59/8),(59)&7
+  2426                           	line	60
+  2427                           ;i2c.c: 60: delay_us(1);
+  2428  04C4  3001               	movlw	low(01h)
+  2429  04C5  00F0               	movwf	(?_delay_us)
+  2430  04C6  3000               	movlw	high(01h)
+  2431  04C7  00F1               	movwf	((?_delay_us))+1
+  2432  04C8  120A  118A  24A8   	fcall	_delay_us
+              120A  118A         
+  2433                           	line	61
+  2434                           	
+  2435  04CD                     l5893:	
+  2436                           ;i2c.c: 61: RC3 = 0;
+  2437  04CD  1283               	bcf	status, 5	;RP0=0, select bank0
+  2438  04CE  1303               	bcf	status, 6	;RP1=0, select bank0
+  2439  04CF  1187               	bcf	(59/8),(59)&7
+  2440                           	line	62
+  2441                           	
+  2442  04D0                     l2111:	
+  2443  04D0  0008               	return
+  2444                           	opt stack 0
+  2445                           GLOBAL	__end_of_I2C_Clock
+  2446  04D1                     	__end_of_I2C_Clock:
+  2447 ;; =============== function _I2C_Clock ends ============
+  2448                           
+  2449                           	signat	_I2C_Clock,88
+  2450                           	global	_I2C_Stop
+  2451                           psect	text474,local,class=CODE,delta=2
+  2452                           global __ptext474
+  2453  0514                     __ptext474:
+  2454                           
+  2455 ;; *************** function _I2C_Stop *****************
+  2456 ;; Defined at:
+  2457 ;;		line 128 in file "C:\Users\Xplore_labZ\Saved Games\Desktop\Sample_Programs_updated\Pic\Ultra_Pic\RTC\RTC_UART\i2c.c"
+  2458 ;; Parameters:    Size  Location     Type
+  2459 ;;		None
+  2460 ;; Auto vars:     Size  Location     Type
+  2461 ;;		None
+  2462 ;; Return value:  Size  Location     Type
+  2463 ;;		None               void
+  2464 ;; Registers used:
+  2465 ;;		wreg, status,2, status,0, pclath, cstack
+  2466 ;; Tracked objects:
+  2467 ;;		On entry : 0/0
+  2468 ;;		On exit  : 0/0
+  2469 ;;		Unchanged: 0/0
+  2470 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  2471 ;;      Params:         0       0       0       0       0
+  2472 ;;      Locals:         0       0       0       0       0
+  2473 ;;      Temps:          0       0       0       0       0
+  2474 ;;      Totals:         0       0       0       0       0
+  2475 ;;Total ram usage:        0 bytes
+  2476 ;; Hardware stack levels used:    1
+  2477 ;; Hardware stack levels required when called:    1
+  2478 ;; This function calls:
+  2479 ;;		_delay_us
+  2480 ;; This function is called by:
+  2481 ;;		_DS1307_Init
+  2482 ;;		_DS1307_SetTime
+  2483 ;;		_DS1307_SetDate
+  2484 ;;		_DS1307_GetTime
+  2485 ;;		_DS1307_GetDate
+  2486 ;; This function uses a non-reentrant model
+  2487 ;;
+  2488                           psect	text474
+  2489                           	file	"C:\Users\Xplore_labZ\Saved Games\Desktop\Sample_Programs_updated\Pic\Ultra_Pic\RT
+                                 C\RTC_UART\i2c.c"
+  2490                           	line	128
+  2491                           	global	__size_of_I2C_Stop
+  2492  0028                     	__size_of_I2C_Stop	equ	__end_of_I2C_Stop-_I2C_Stop
+  2493                           	
+  2494  0514                     _I2C_Stop:	
+  2495                           	opt	stack 5
+  2496                           ; Regs used in _I2C_Stop: [wreg+status,2+status,0+pclath+cstack]
+  2497                           	line	130
+  2498                           	
+  2499  0514                     l5879:	
+  2500                           ;i2c.c: 130: RC3 = 0;
+  2501  0514  1283               	bcf	status, 5	;RP0=0, select bank0
+  2502  0515  1303               	bcf	status, 6	;RP1=0, select bank0
+  2503  0516  1187               	bcf	(59/8),(59)&7
+  2504                           	line	131
+  2505                           	
+  2506  0517                     l5881:	
+  2507                           ;i2c.c: 131: delay_us(1);
+  2508  0517  3001               	movlw	low(01h)
+  2509  0518  00F0               	movwf	(?_delay_us)
+  2510  0519  3000               	movlw	high(01h)
+  2511  051A  00F1               	movwf	((?_delay_us))+1
+  2512  051B  120A  118A  24A8   	fcall	_delay_us
+              120A  118A         
+  2513                           	line	133
+  2514                           	
+  2515  0520                     l5883:	
+  2516                           ;i2c.c: 133: RC4 = 0;
+  2517  0520  1283               	bcf	status, 5	;RP0=0, select bank0
+  2518  0521  1303               	bcf	status, 6	;RP1=0, select bank0
+  2519  0522  1207               	bcf	(60/8),(60)&7
+  2520                           	line	134
+  2521                           ;i2c.c: 134: delay_us(1);
+  2522  0523  3001               	movlw	low(01h)
+  2523  0524  00F0               	movwf	(?_delay_us)
+  2524  0525  3000               	movlw	high(01h)
+  2525  0526  00F1               	movwf	((?_delay_us))+1
+  2526  0527  120A  118A  24A8   	fcall	_delay_us
+              120A  118A         
+  2527                           	line	136
+  2528                           	
+  2529  052C                     l5885:	
+  2530                           ;i2c.c: 136: RC3 = 1;
+  2531  052C  1283               	bcf	status, 5	;RP0=0, select bank0
+  2532  052D  1303               	bcf	status, 6	;RP1=0, select bank0
+  2533  052E  1587               	bsf	(59/8),(59)&7
+  2534                           	line	137
+  2535                           ;i2c.c: 137: delay_us(1);
+  2536  052F  3001               	movlw	low(01h)
+  2537  0530  00F0               	movwf	(?_delay_us)
+  2538  0531  3000               	movlw	high(01h)
+  2539  0532  00F1               	movwf	((?_delay_us))+1
+  2540  0533  120A  118A  24A8   	fcall	_delay_us
+              120A  118A         
+  2541                           	line	139
+  2542                           	
+  2543  0538                     l5887:	
+  2544                           ;i2c.c: 139: RC4 = 1;
+  2545  0538  1283               	bcf	status, 5	;RP0=0, select bank0
+  2546  0539  1303               	bcf	status, 6	;RP1=0, select bank0
+  2547  053A  1607               	bsf	(60/8),(60)&7
+  2548                           	line	140
+  2549                           	
+  2550  053B                     l2117:	
+  2551  053B  0008               	return
+  2552                           	opt stack 0
+  2553                           GLOBAL	__end_of_I2C_Stop
+  2554  053C                     	__end_of_I2C_Stop:
+  2555 ;; =============== function _I2C_Stop ends ============
+  2556                           
+  2557                           	signat	_I2C_Stop,88
+  2558                           	global	_I2C_Start
+  2559                           psect	text475,local,class=CODE,delta=2
+  2560                           global __ptext475
+  2561  053C                     __ptext475:
+  2562                           
+  2563 ;; *************** function _I2C_Start *****************
+  2564 ;; Defined at:
+  2565 ;;		line 88 in file "C:\Users\Xplore_labZ\Saved Games\Desktop\Sample_Programs_updated\Pic\Ultra_Pic\RTC\RTC_UART\i2c.c"
+  2566 ;; Parameters:    Size  Location     Type
+  2567 ;;		None
+  2568 ;; Auto vars:     Size  Location     Type
+  2569 ;;		None
+  2570 ;; Return value:  Size  Location     Type
+  2571 ;;		None               void
+  2572 ;; Registers used:
+  2573 ;;		wreg, status,2, status,0, pclath, cstack
+  2574 ;; Tracked objects:
+  2575 ;;		On entry : 0/0
+  2576 ;;		On exit  : 0/0
+  2577 ;;		Unchanged: 0/0
+  2578 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  2579 ;;      Params:         0       0       0       0       0
+  2580 ;;      Locals:         0       0       0       0       0
+  2581 ;;      Temps:          0       0       0       0       0
+  2582 ;;      Totals:         0       0       0       0       0
+  2583 ;;Total ram usage:        0 bytes
+  2584 ;; Hardware stack levels used:    1
+  2585 ;; Hardware stack levels required when called:    1
+  2586 ;; This function calls:
+  2587 ;;		_delay_us
+  2588 ;; This function is called by:
+  2589 ;;		_DS1307_Init
+  2590 ;;		_DS1307_SetTime
+  2591 ;;		_DS1307_SetDate
+  2592 ;;		_DS1307_GetTime
+  2593 ;;		_DS1307_GetDate
+  2594 ;; This function uses a non-reentrant model
+  2595 ;;
+  2596                           psect	text475
+  2597                           	file	"C:\Users\Xplore_labZ\Saved Games\Desktop\Sample_Programs_updated\Pic\Ultra_Pic\RT
+                                 C\RTC_UART\i2c.c"
+  2598                           	line	88
+  2599                           	global	__size_of_I2C_Start
+  2600  0029                     	__size_of_I2C_Start	equ	__end_of_I2C_Start-_I2C_Start
+  2601                           	
+  2602  053C                     _I2C_Start:	
+  2603                           	opt	stack 5
+  2604                           ; Regs used in _I2C_Start: [wreg+status,2+status,0+pclath+cstack]
+  2605                           	line	90
+  2606                           	
+  2607  053C                     l5869:	
+  2608                           ;i2c.c: 90: RC3 = 0;
+  2609  053C  1283               	bcf	status, 5	;RP0=0, select bank0
+  2610  053D  1303               	bcf	status, 6	;RP1=0, select bank0
+  2611  053E  1187               	bcf	(59/8),(59)&7
+  2612                           	line	92
+  2613                           ;i2c.c: 92: RC4 = 1;
+  2614  053F  1607               	bsf	(60/8),(60)&7
+  2615                           	line	93
+  2616                           	
+  2617  0540                     l5871:	
+  2618                           ;i2c.c: 93: delay_us(1);
+  2619  0540  3001               	movlw	low(01h)
+  2620  0541  00F0               	movwf	(?_delay_us)
+  2621  0542  3000               	movlw	high(01h)
+  2622  0543  00F1               	movwf	((?_delay_us))+1
+  2623  0544  120A  118A  24A8   	fcall	_delay_us
+              120A  118A         
+  2624                           	line	95
+  2625                           	
+  2626  0549                     l5873:	
+  2627                           ;i2c.c: 95: RC3 = 1;
+  2628  0549  1283               	bcf	status, 5	;RP0=0, select bank0
+  2629  054A  1303               	bcf	status, 6	;RP1=0, select bank0
+  2630  054B  1587               	bsf	(59/8),(59)&7
+  2631                           	line	96
+  2632                           ;i2c.c: 96: delay_us(1);
+  2633  054C  3001               	movlw	low(01h)
+  2634  054D  00F0               	movwf	(?_delay_us)
+  2635  054E  3000               	movlw	high(01h)
+  2636  054F  00F1               	movwf	((?_delay_us))+1
+  2637  0550  120A  118A  24A8   	fcall	_delay_us
+              120A  118A         
+  2638                           	line	98
+  2639                           	
+  2640  0555                     l5875:	
+  2641                           ;i2c.c: 98: RC4 = 0;
+  2642  0555  1283               	bcf	status, 5	;RP0=0, select bank0
+  2643  0556  1303               	bcf	status, 6	;RP1=0, select bank0
+  2644  0557  1207               	bcf	(60/8),(60)&7
+  2645                           	line	99
+  2646                           ;i2c.c: 99: delay_us(1);
+  2647  0558  3001               	movlw	low(01h)
+  2648  0559  00F0               	movwf	(?_delay_us)
+  2649  055A  3000               	movlw	high(01h)
+  2650  055B  00F1               	movwf	((?_delay_us))+1
+  2651  055C  120A  118A  24A8   	fcall	_delay_us
+              120A  118A         
+  2652                           	line	101
+  2653                           	
+  2654  0561                     l5877:	
+  2655                           ;i2c.c: 101: RC3 = 0;
+  2656  0561  1283               	bcf	status, 5	;RP0=0, select bank0
+  2657  0562  1303               	bcf	status, 6	;RP1=0, select bank0
+  2658  0563  1187               	bcf	(59/8),(59)&7
+  2659                           	line	103
+  2660                           	
+  2661  0564                     l2114:	
+  2662  0564  0008               	return
+  2663                           	opt stack 0
+  2664                           GLOBAL	__end_of_I2C_Start
+  2665  0565                     	__end_of_I2C_Start:
+  2666 ;; =============== function _I2C_Start ends ============
+  2667                           
+  2668                           	signat	_I2C_Start,88
+  2669                           	global	_UART_TxChar
+  2670                           psect	text476,local,class=CODE,delta=2
+  2671                           global __ptext476
+  2672  0468                     __ptext476:
+  2673                           
+  2674 ;; *************** function _UART_TxChar *****************
+  2675 ;; Defined at:
+  2676 ;;		line 80 in file "C:\Users\Xplore_labZ\Saved Games\Desktop\Sample_Programs_updated\Pic\Ultra_Pic\RTC\RTC_UART\uart.c"
+  2677 ;; Parameters:    Size  Location     Type
+  2678 ;;  ch              1    wreg     unsigned char 
+  2679 ;; Auto vars:     Size  Location     Type
+  2680 ;;  ch              1    0[COMMON] unsigned char 
+  2681 ;; Return value:  Size  Location     Type
+  2682 ;;		None               void
+  2683 ;; Registers used:
+  2684 ;;		wreg
+  2685 ;; Tracked objects:
+  2686 ;;		On entry : 0/0
+  2687 ;;		On exit  : 0/0
+  2688 ;;		Unchanged: 0/0
+  2689 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  2690 ;;      Params:         0       0       0       0       0
+  2691 ;;      Locals:         1       0       0       0       0
+  2692 ;;      Temps:          0       0       0       0       0
+  2693 ;;      Totals:         1       0       0       0       0
+  2694 ;;Total ram usage:        1 bytes
+  2695 ;; Hardware stack levels used:    1
+  2696 ;; This function calls:
+  2697 ;;		Nothing
+  2698 ;; This function is called by:
+  2699 ;;		_DisplayRtcTime
+  2700 ;;		_DisplayRtcDate
+  2701 ;;		_UART_TxString
+  2702 ;;		_UART_RxString
+  2703 ;;		_UART_TxNumber
+  2704 ;; This function uses a non-reentrant model
+  2705 ;;
+  2706                           psect	text476
+  2707                           	file	"C:\Users\Xplore_labZ\Saved Games\Desktop\Sample_Programs_updated\Pic\Ultra_Pic\RT
+                                 C\RTC_UART\uart.c"
+  2708                           	line	80
+  2709                           	global	__size_of_UART_TxChar
+  2710  000C                     	__size_of_UART_TxChar	equ	__end_of_UART_TxChar-_UART_TxChar
+  2711                           	
+  2712  0468                     _UART_TxChar:	
+  2713                           	opt	stack 6
+  2714                           ; Regs used in _UART_TxChar: [wreg]
+  2715                           ;UART_TxChar@ch stored from wreg
+  2716  0468  00F0               	movwf	(UART_TxChar@ch)
+  2717                           	line	81
+  2718                           	
+  2719  0469                     l5853:	
+  2720                           ;uart.c: 81: while(TXIF==0);
+  2721  0469  2C6A               	goto	l3541
+  2722                           	
+  2723  046A                     l3542:	
+  2724                           	
+  2725  046A                     l3541:	
+  2726  046A  1283               	bcf	status, 5	;RP0=0, select bank0
+  2727  046B  1303               	bcf	status, 6	;RP1=0, select bank0
+  2728  046C  1E0C               	btfss	(100/8),(100)&7
+  2729  046D  2C6F               	goto	u2461
+  2730  046E  2C70               	goto	u2460
+  2731  046F                     u2461:
+  2732  046F  2C6A               	goto	l3541
+  2733  0470                     u2460:
+  2734                           	
+  2735  0470                     l3543:	
+  2736                           	line	82
+  2737                           ;uart.c: 82: TXIF=0;
+  2738  0470  120C               	bcf	(100/8),(100)&7
+  2739                           	line	83
+  2740                           	
+  2741  0471                     l5855:	
+  2742                           ;uart.c: 83: TXREG=ch;
+  2743  0471  0870               	movf	(UART_TxChar@ch),w
+  2744  0472  0099               	movwf	(25)	;volatile
+  2745                           	line	84
+  2746                           	
+  2747  0473                     l3544:	
+  2748  0473  0008               	return
+  2749                           	opt stack 0
+  2750                           GLOBAL	__end_of_UART_TxChar
+  2751  0474                     	__end_of_UART_TxChar:
+  2752 ;; =============== function _UART_TxChar ends ============
+  2753                           
+  2754                           	signat	_UART_TxChar,4216
+  2755                           	global	_UART_Init
+  2756                           psect	text477,local,class=CODE,delta=2
+  2757                           global __ptext477
+  2758  0499                     __ptext477:
+  2759                           
+  2760 ;; *************** function _UART_Init *****************
+  2761 ;; Defined at:
+  2762 ;;		line 31 in file "C:\Users\Xplore_labZ\Saved Games\Desktop\Sample_Programs_updated\Pic\Ultra_Pic\RTC\RTC_UART\uart.c"
+  2763 ;; Parameters:    Size  Location     Type
+  2764 ;;		None
+  2765 ;; Auto vars:     Size  Location     Type
+  2766 ;;		None
+  2767 ;; Return value:  Size  Location     Type
+  2768 ;;		None               void
+  2769 ;; Registers used:
+  2770 ;;		wreg
+  2771 ;; Tracked objects:
+  2772 ;;		On entry : 0/0
+  2773 ;;		On exit  : 0/0
+  2774 ;;		Unchanged: 0/0
+  2775 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  2776 ;;      Params:         0       0       0       0       0
+  2777 ;;      Locals:         0       0       0       0       0
+  2778 ;;      Temps:          0       0       0       0       0
+  2779 ;;      Totals:         0       0       0       0       0
+  2780 ;;Total ram usage:        0 bytes
+  2781 ;; Hardware stack levels used:    1
+  2782 ;; This function calls:
+  2783 ;;		Nothing
+  2784 ;; This function is called by:
+  2785 ;;		_main
+  2786 ;; This function uses a non-reentrant model
+  2787 ;;
+  2788                           psect	text477
+  2789                           	file	"C:\Users\Xplore_labZ\Saved Games\Desktop\Sample_Programs_updated\Pic\Ultra_Pic\RT
+                                 C\RTC_UART\uart.c"
+  2790                           	line	31
+  2791                           	global	__size_of_UART_Init
+  2792  000F                     	__size_of_UART_Init	equ	__end_of_UART_Init-_UART_Init
+  2793                           	
+  2794  0499                     _UART_Init:	
+  2795                           	opt	stack 7
+  2796                           ; Regs used in _UART_Init: [wreg]
+  2797                           	line	32
+  2798                           	
+  2799  0499                     l5851:	
+  2800                           ;uart.c: 32: TRISC=0x80;
+  2801  0499  3080               	movlw	(080h)
+  2802  049A  1683               	bsf	status, 5	;RP0=1, select bank1
+  2803  049B  1303               	bcf	status, 6	;RP1=0, select bank1
+  2804  049C  0087               	movwf	(135)^080h	;volatile
+  2805                           	line	33
+  2806                           ;uart.c: 33: TXSTA=0x20;
+  2807  049D  3020               	movlw	(020h)
+  2808  049E  0098               	movwf	(152)^080h	;volatile
+  2809                           	line	34
+  2810                           ;uart.c: 34: RCSTA=0x90;
+  2811  049F  3090               	movlw	(090h)
+  2812  04A0  1283               	bcf	status, 5	;RP0=0, select bank0
+  2813  04A1  1303               	bcf	status, 6	;RP1=0, select bank0
+  2814  04A2  0098               	movwf	(24)	;volatile
+  2815                           	line	35
+  2816                           ;uart.c: 35: SPBRG=31;
+  2817  04A3  301F               	movlw	(01Fh)
+  2818  04A4  1683               	bsf	status, 5	;RP0=1, select bank1
+  2819  04A5  1303               	bcf	status, 6	;RP1=0, select bank1
+  2820  04A6  0099               	movwf	(153)^080h	;volatile
+  2821                           	line	36
+  2822                           	
+  2823  04A7                     l3532:	
+  2824  04A7  0008               	return
+  2825                           	opt stack 0
+  2826                           GLOBAL	__end_of_UART_Init
+  2827  04A8                     	__end_of_UART_Init:
+  2828 ;; =============== function _UART_Init ends ============
+  2829                           
+  2830                           	signat	_UART_Init,88
+  2831                           	global	_I2C_Init
+  2832                           psect	text478,local,class=CODE,delta=2
+  2833                           global __ptext478
+  2834  0458                     __ptext478:
+  2835                           
+  2836 ;; *************** function _I2C_Init *****************
+  2837 ;; Defined at:
+  2838 ;;		line 39 in file "C:\Users\Xplore_labZ\Saved Games\Desktop\Sample_Programs_updated\Pic\Ultra_Pic\RTC\RTC_UART\i2c.c"
+  2839 ;; Parameters:    Size  Location     Type
+  2840 ;;		None
+  2841 ;; Auto vars:     Size  Location     Type
+  2842 ;;		None
+  2843 ;; Return value:  Size  Location     Type
+  2844 ;;		None               void
+  2845 ;; Registers used:
+  2846 ;;		None
+  2847 ;; Tracked objects:
+  2848 ;;		On entry : 0/0
+  2849 ;;		On exit  : 0/0
+  2850 ;;		Unchanged: 0/0
+  2851 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  2852 ;;      Params:         0       0       0       0       0
+  2853 ;;      Locals:         0       0       0       0       0
+  2854 ;;      Temps:          0       0       0       0       0
+  2855 ;;      Totals:         0       0       0       0       0
+  2856 ;;Total ram usage:        0 bytes
+  2857 ;; Hardware stack levels used:    1
+  2858 ;; This function calls:
+  2859 ;;		Nothing
+  2860 ;; This function is called by:
+  2861 ;;		_DS1307_Init
+  2862 ;; This function uses a non-reentrant model
+  2863 ;;
+  2864                           psect	text478
+  2865                           	file	"C:\Users\Xplore_labZ\Saved Games\Desktop\Sample_Programs_updated\Pic\Ultra_Pic\RT
+                                 C\RTC_UART\i2c.c"
+  2866                           	line	39
+  2867                           	global	__size_of_I2C_Init
+  2868  0005                     	__size_of_I2C_Init	equ	__end_of_I2C_Init-_I2C_Init
+  2869                           	
+  2870  0458                     _I2C_Init:	
+  2871                           	opt	stack 6
+  2872                           ; Regs used in _I2C_Init: []
+  2873                           	line	40
+  2874                           	
+  2875  0458                     l5849:	
+  2876                           ;i2c.c: 40: TRISC3=0;
+  2877  0458  1683               	bsf	status, 5	;RP0=1, select bank1
+  2878  0459  1303               	bcf	status, 6	;RP1=0, select bank1
+  2879  045A  1187               	bcf	(1083/8)^080h,(1083)&7
+  2880                           	line	41
+  2881                           ;i2c.c: 41: TRISC4=0;
+  2882  045B  1207               	bcf	(1084/8)^080h,(1084)&7
+  2883                           	line	42
+  2884                           	
+  2885  045C                     l2108:	
+  2886  045C  0008               	return
+  2887                           	opt stack 0
+  2888                           GLOBAL	__end_of_I2C_Init
+  2889  045D                     	__end_of_I2C_Init:
+  2890 ;; =============== function _I2C_Init ends ============
+  2891                           
+  2892                           	signat	_I2C_Init,88
+  2893                           	global	_delay_us
+  2894                           psect	text479,local,class=CODE,delta=2
+  2895                           global __ptext479
+  2896  04A8                     __ptext479:
+  2897                           
+  2898 ;; *************** function _delay_us *****************
+  2899 ;; Defined at:
+  2900 ;;		line 26 in file "C:\Users\Xplore_labZ\Saved Games\Desktop\Sample_Programs_updated\Pic\Ultra_Pic\RTC\RTC_UART\delay.c
+       "
+  2901 ;; Parameters:    Size  Location     Type
+  2902 ;;  us_count        2    0[COMMON] unsigned int 
+  2903 ;; Auto vars:     Size  Location     Type
+  2904 ;;		None
+  2905 ;; Return value:  Size  Location     Type
+  2906 ;;		None               void
+  2907 ;; Registers used:
+  2908 ;;		wreg, status,2, status,0
+  2909 ;; Tracked objects:
+  2910 ;;		On entry : 0/0
+  2911 ;;		On exit  : 0/0
+  2912 ;;		Unchanged: 0/0
+  2913 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+  2914 ;;      Params:         2       0       0       0       0
+  2915 ;;      Locals:         0       0       0       0       0
+  2916 ;;      Temps:          0       0       0       0       0
+  2917 ;;      Totals:         2       0       0       0       0
+  2918 ;;Total ram usage:        2 bytes
+  2919 ;; Hardware stack levels used:    1
+  2920 ;; This function calls:
+  2921 ;;		Nothing
+  2922 ;; This function is called by:
+  2923 ;;		_I2C_Clock
+  2924 ;;		_I2C_Start
+  2925 ;;		_I2C_Stop
+  2926 ;;		_I2C_Read
+  2927 ;;		_delay_ms
+  2928 ;; This function uses a non-reentrant model
+  2929 ;;
+  2930                           psect	text479
+  2931                           	file	"C:\Users\Xplore_labZ\Saved Games\Desktop\Sample_Programs_updated\Pic\Ultra_Pic\RT
+                                 C\RTC_UART\delay.c"
+  2932                           	line	26
+  2933                           	global	__size_of_delay_us
+  2934  0010                     	__size_of_delay_us	equ	__end_of_delay_us-_delay_us
+  2935                           	
+  2936  04A8                     _delay_us:	
+  2937                           	opt	stack 4
+  2938                           ; Regs used in _delay_us: [wreg+status,2+status,0]
+  2939                           	line	27
+  2940                           	
+  2941  04A8                     l5827:	
+  2942                           ;delay.c: 27: while(us_count!=0)
+  2943  04A8  2CB0               	goto	l5831
+  2944                           	
+  2945  04A9                     l686:	
+  2946                           	line	29
+  2947                           	
+  2948  04A9                     l5829:	
+  2949                           ;delay.c: 28: {
+  2950                           ;delay.c: 29: us_count--;
+  2951  04A9  3001               	movlw	low(01h)
+  2952  04AA  02F0               	subwf	(delay_us@us_count),f
+  2953  04AB  3000               	movlw	high(01h)
+  2954  04AC  1C03               	skipc
+  2955  04AD  03F1               	decf	(delay_us@us_count+1),f
+  2956  04AE  02F1               	subwf	(delay_us@us_count+1),f
+  2957  04AF  2CB0               	goto	l5831
+  2958                           	line	30
+  2959                           	
+  2960  04B0                     l685:	
+  2961                           	line	27
+  2962                           	
+  2963  04B0                     l5831:	
+  2964  04B0  0871               	movf	((delay_us@us_count+1)),w
+  2965  04B1  0470               	iorwf	((delay_us@us_count)),w
+  2966  04B2  1D03               	skipz
+  2967  04B3  2CB5               	goto	u2431
+  2968  04B4  2CB6               	goto	u2430
+  2969  04B5                     u2431:
+  2970  04B5  2CA9               	goto	l5829
+  2971  04B6                     u2430:
+  2972  04B6  2CB7               	goto	l688
+  2973                           	
+  2974  04B7                     l687:	
+  2975                           	line	31
+  2976                           	
+  2977  04B7                     l688:	
+  2978  04B7  0008               	return
+  2979                           	opt stack 0
+  2980                           GLOBAL	__end_of_delay_us
+  2981  04B8                     	__end_of_delay_us:
+  2982 ;; =============== function _delay_us ends ============
+  2983                           
+  2984                           	signat	_delay_us,4216
+  2985                           psect	text480,local,class=CODE,delta=2
+  2986                           global __ptext480
+  2987  0000                     __ptext480:
+  2988                           	global	btemp
+  2989  007E                     	btemp set 07Eh
+  2990                           
+  2991                           	DABS	1,126,2	;btemp
+  2992                           	global	wtemp0
+  2993  007E                     	wtemp0 set btemp
+
+
+HI-TECH Software PICC Macro Assembler V9.83 build 10920 
+Symbol Table                                                                                   Mon Dec 24 22:22:25 2012
+
+     __size_of_I2C_Clock 0019       __size_of_I2C_NoAck 000C                        pc 0002  
+     __size_of_I2C_Start 0029       __size_of_I2C_Write 0035                       _RD 0C60  
+                     _WR 0C61                       fsr 0004                      l685 04B0  
+                    l686 04A9                      l687 04B7                      l688 04B7  
+                    _GIE 005F                      _RC3 003B                      _RC4 003C  
+        __end_of_I2C_Ack 0480                      fsr0 0004                      indf 0000  
+           _DS1307_Write 048C                     l2111 04D0                     l2120 05C3  
+                   l2121 05EA                     l2114 0564                     l2122 05ED  
+                   l2130 047F                     l1403 0513                     l2108 045C  
+                   l1412 058E                     l2117 053B                     l2125 05FB  
+                   l2133 048B                     l1421 06DF                     l2126 062A  
+                   l1406 0498                     l2127 062F                     l1415 05B8  
+                   l1409 0467                     l1418 0687                     l6001 04F7  
+                   l6003 04FC                     l6011 0566                     l3532 04A7  
+                   l3541 046A                     l6005 0502                     l6013 0590  
+                   l6021 066D                     l3542 046A                     l3550 04F1  
+                   l3543 0470                     l6007 0508                     l6023 0672  
+                   l6015 0631                     l6031 06C5                     l3544 0473  
+                   l2840 07FD                     l6009 050E                     l6017 0652  
+                   l6033 06CA                     l6025 0689                     l2841 07FD  
+                   l6041 07DD                     l3547 04E4                     l6019 065D  
+                   l6027 06AA                     l6043 07EB                     l6035 0798  
+                   l3548 04D3                     l2844 0797                     l3549 04F1  
+                   l6029 06B5                     l6037 07BF                     l2838 07BF  
+                   l2847 073B                     l2839 07FC                     l6039 07CD  
+                   l5901 05FB                     l5831 04B0                     l5911 0620  
+                   l5903 0604                     l5913 0624                     l5905 0610  
+                   l5921 04D3                     l5827 04A8                     l5851 0499  
+                   l5915 062D                     l5907 0616                     l5923 04DF  
+                   l5931 05C2                     l5829 04A9                     l5853 0469  
+                   l5917 062F                     l5909 061F                     l5925 04E4  
+                   l5941 05E4                     l5933 05C3                     l5855 0471  
+                   l5871 0540                     l5919 04D2                     l5935 05D5  
+                   l5927 05BA                     l5943 045D                     l5951 0477  
+                   l5849 0458                     l5873 0549                     l5881 0517  
+                   l5937 05DA                     l5929 05BB                     l5945 0465  
+                   l5953 047C                     l5961 06E1                     l5875 0555  
+                   l5883 0520                     l5891 04C1                     l5939 05E0  
+                   l5947 0467                     l5955 0480                     l5971 0715  
+                   l5963 06E7                     l5877 0561                     l5869 053C  
+                   l5885 052C                     l5893 04CD                     l5949 0474  
+                   l5957 0483                     l5973 071D                     l5965 06F7  
+                   l5981 0743                     l5887 0538                     l5879 0514  
+                   l5895 05EE                     l5959 0488                     l5975 0723  
+                   l5967 06FF                     l5991 0779                     l5983 0753  
+                   l5889 04B8                     l5897 05F3                     l5977 0733  
+                   l5969 0705                     l5993 077F                     l5985 075B  
+                   l5899 05FA                     l5995 078F                     l5987 0761  
+                   l5979 073D                     l5989 0771                     l5997 048D  
+                   l5999 04F2                     STR_1 0012                     STR_2 0009  
+                   u2500 062A                     u2501 0629                     u2430 04B6  
+                   u2510 04F0                     u2431 04B5                     u2511 04EF  
+                   u2520 05C1                     u2521 05C0                     u2460 0470  
+                   u2540 05D2                     u2461 046F                     u2541 05CE  
+                   u2605 0746                     u2535 05C6                     u2615 0764  
+                   u2560 05EA                     u2561 05E9                     u2625 0782  
+                   u2490 05F9                     u2554 05D5                     u2491 05F8  
+                   u2575 06EA                     u2585 0708                     u2595 0726  
+                   _RCIF 0065                     _WREN 0C62                     _TXIF 0064  
+                   _main 0798         __end_of_I2C_Init 045D         __end_of_I2C_Read 0630  
+                   btemp 007E         __end_of_I2C_Stop 053C                     start 0000  
+       DS1307_SetDate@dd 0079         DS1307_SetDate@mm 0077         DS1307_SetDate@yy 0078  
+                  ?_main 0070                    _EEADR 010D                    _CARRY 0018  
+                  _RCREG 001A                    _RCSTA 0018                    _SPBRG 0099  
+                  _TRISC 0087                    _TXREG 0019                    _TXSTA 0098  
+       DS1307_SetTime@hh 0079         DS1307_SetTime@mm 0077         DS1307_SetTime@ss 0078  
+     __size_of_UART_Init 000F           _DS1307_GetDate 0688           _DS1307_GetTime 0630  
+      __end_of_I2C_Clock 04D1        __end_of_I2C_NoAck 048C        __end_of_I2C_Start 0565  
+      __end_of_I2C_Write 05EE                    pclath 000A           _DS1307_SetDate 058F  
+         _DS1307_SetTime 0565                    status 0003                    wtemp0 007E  
+           __end_of_main 0800                ??_I2C_Ack 0072                   ??_main 007C  
+      DisplayRtcDate@day 0076   __end_of_DS1307_GetDate 06E0   __end_of_DS1307_GetTime 0688  
+              I2C_Read@i 0074   __end_of_DS1307_SetDate 05B9                   _EEDATA 010C  
+                 _EECON1 018C                   _EECON2 018D   __end_of_DS1307_SetTime 058F  
+                 _TRISC3 043B                   _TRISC4 043C        DisplayRtcTime@min 0073  
+      DisplayRtcTime@sec 0074         __end_of_delay_us 04B8             ?_UART_TxChar 0070  
+      __end_of_UART_Init 04A8                ?_I2C_Init 0070                ?_I2C_Read 0070  
+        ?_DS1307_GetDate 0078                ?_I2C_Stop 0070          ?_DS1307_GetTime 0078  
+        ?_DS1307_SetDate 0077          ?_DS1307_SetTime 0077    __end_of_UART_TxString 04F2  
+         __pcstackCOMMON 0070               ??_I2C_Init 0070               ??_I2C_Read 0072  
+             ??_I2C_Stop 0072       DisplayRtcDate@year 0074            ??_DS1307_Init 0077  
+          ??_DS1307_Read 0076               __pmaintext 0798                  _I2C_Ack 0474  
+             I2C_Write@i 0075                ?_delay_us 0070                _I2C_Clock 04B8  
+              _I2C_NoAck 0480       DisplayRtcTime@hour 0076                _I2C_Start 053C  
+              _I2C_Write 05B9      __end_of_DS1307_Init 0514      __end_of_DS1307_Read 0468  
+           I2C_Write@dat 0074     __size_of_UART_TxChar 000C  __size_of_DisplayRtcDate 005C  
+__size_of_DisplayRtcTime 005C               ??_delay_us 0072                  main@day 0023  
+                main@min 0021                  main@sec 0020     end_of_initialization 0454  
+             ?_I2C_Clock 0070               ?_I2C_NoAck 0070               ?_I2C_Start 0070  
+             ?_I2C_Write 0070         ??_DS1307_GetDate 007A                _UART_Init 0499  
+       ??_DS1307_GetTime 007A         ??_DS1307_SetDate 0079         ??_DS1307_SetTime 0079  
+      __size_of_I2C_Init 0005        __size_of_I2C_Read 0042        __size_of_I2C_Stop 0028  
+            _DS1307_Init 04F2              _DS1307_Read 045D         delay_us@us_count 0070  
+             ?_UART_Init 0070      start_initialization 0454            ?_DS1307_Write 0070  
+            ??_I2C_Clock 0072              ??_I2C_NoAck 0072              ??_I2C_Start 0072  
+            ??_I2C_Write 0072          DS1307_Write@dat 0076                 ?_I2C_Ack 0070  
+         _DisplayRtcDate 06E0           _DisplayRtcTime 073C      DisplayRtcDate@month 0073  
+         ??_DS1307_Write 0076   __size_of_UART_TxString 0021            __pcstackBANK0 0020  
+      __size_of_delay_us 0010              I2C_Read@dat 0075   __end_of_DisplayRtcDate 073C  
+              __ptext460 0630                __ptext461 058F                __ptext470 05B9  
+              __ptext462 0565                __ptext471 04D1                __ptext463 04F2  
+              __ptext480 0000                __ptext472 05EE                __ptext464 048C  
+              __ptext473 04B8                __ptext465 073C                __ptext474 0514  
+              __ptext466 06E0                __ptext458 0000                __ptext475 053C  
+              __ptext467 0480                __ptext459 0688                __ptext476 0468  
+              __ptext468 0474                __ptext477 0499                __ptext469 045D  
+              __ptext478 0458                __ptext479 04A8   __end_of_DisplayRtcTime 0798  
+            ??_UART_Init 0070                __pstrings 0003                 _I2C_Init 0458  
+               _I2C_Read 05EE                 _I2C_Stop 0514            UART_TxChar@ch 0070  
+          ??_UART_TxChar 0070            _UART_TxString 04D1          ?_DisplayRtcDate 0073  
+        ?_DisplayRtcTime 0073         __size_of_I2C_Ack 000C              __stringbase 0008  
+         DS1307_Read@dat 0077                main@month 0024  UART_TxString@string_ptr 0072  
+           ?_DS1307_Init 0070             ?_DS1307_Read 0070           ?_UART_TxString 0070  
+   __end_of_DS1307_Write 0499      __end_of_UART_TxChar 0474      DS1307_GetDate@d_ptr 007B  
+    DS1307_GetDate@m_ptr 0078                 _delay_us 04A8      DS1307_GetDate@y_ptr 0079  
+          __size_of_main 0068                 main@hour 0022                 main@year 0025  
+__size_of_DS1307_GetDate 0058  __size_of_DS1307_GetTime 0058  __size_of_DS1307_SetDate 002A  
+        ??_UART_TxString 0071  __size_of_DS1307_SetTime 002A                stringcode 0003  
+            _UART_TxChar 0468                 stringdir 0003                 stringtab 0003  
+  __size_of_DS1307_Write 000D      DS1307_GetTime@h_ptr 007B      DS1307_GetTime@m_ptr 0078  
+    DS1307_GetTime@s_ptr 0079     __size_of_DS1307_Init 0022     __size_of_DS1307_Read 000B  
+       ??_DisplayRtcDate 0075         ??_DisplayRtcTime 0075  

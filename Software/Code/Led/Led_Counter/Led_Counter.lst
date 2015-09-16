@@ -1,0 +1,687 @@
+
+
+HI-TECH Software PIC LITE Macro Assembler V9.83 build 10920 
+                                                                                               Wed Dec 07 12:57:29 2011
+
+HI-TECH Software Omniscient Code Generator (Lite mode) build 10920
+     1  0000                     opt subtitle "HI-TECH Software Omniscient Code Generator (Lite mode) build 10920"
+     2                           
+     3                           opt pagewidth 120
+     4                           
+     5                           	opt lm
+     6                           
+     7                           	processor	16F877A
+     8                           clrc	macro
+     9                           	bcf	3,0
+    10  0000                     	endm
+    11                           clrz	macro
+    12                           	bcf	3,2
+    13  0000                     	endm
+    14                           setc	macro
+    15                           	bsf	3,0
+    16  0000                     	endm
+    17                           setz	macro
+    18                           	bsf	3,2
+    19  0000                     	endm
+    20                           skipc	macro
+    21                           	btfss	3,0
+    22  0000                     	endm
+    23                           skipz	macro
+    24                           	btfss	3,2
+    25  0000                     	endm
+    26                           skipnc	macro
+    27                           	btfsc	3,0
+    28  0000                     	endm
+    29                           skipnz	macro
+    30                           	btfsc	3,2
+    31  0000                     	endm
+    32  0000                     indf	equ	0
+    33  0000                     indf0	equ	0
+    34  0002                     pc	equ	2
+    35  0002                     pcl	equ	2
+    36  0003                     status	equ	3
+    37  0004                     fsr	equ	4
+    38  0004                     fsr0	equ	4
+    39  0001                     c	equ	1
+    40  0000                     z	equ	0
+    41  000A                     pclath	equ	10
+    42                           	FNCALL	_main,_delay_sec
+    43                           	FNCALL	_delay_sec,_delay_ms
+    44                           	FNCALL	_delay_ms,_delay_us
+    45                           	FNROOT	_main
+    46                           	global	_PORTA
+    47                           psect	maintext,global,class=CODE,delta=2
+    48                           global __pmaintext
+    49  07DC                     __pmaintext:
+    50  0005                     _PORTA	set	5
+    51                           	global	_PORTB
+    52  0006                     _PORTB	set	6
+    53                           	global	_PORTC
+    54  0007                     _PORTC	set	7
+    55                           	global	_PORTD
+    56  0008                     _PORTD	set	8
+    57                           	global	_PORTE
+    58  0009                     _PORTE	set	9
+    59                           	global	_CARRY
+    60  0018                     _CARRY	set	24
+    61                           	global	_GIE
+    62  005F                     _GIE	set	95
+    63                           	global	_TRISA
+    64  0085                     _TRISA	set	133
+    65                           	global	_TRISB
+    66  0086                     _TRISB	set	134
+    67                           	global	_TRISC
+    68  0087                     _TRISC	set	135
+    69                           	global	_TRISD
+    70  0088                     _TRISD	set	136
+    71                           	global	_TRISE
+    72  0089                     _TRISE	set	137
+    73                           	global	_EEADR
+    74  010D                     _EEADR	set	269
+    75                           	global	_EEDATA
+    76  010C                     _EEDATA	set	268
+    77                           	global	_EECON1
+    78  018C                     _EECON1	set	396
+    79                           	global	_EECON2
+    80  018D                     _EECON2	set	397
+    81                           	global	_RD
+    82  0C60                     _RD	set	3168
+    83                           	global	_WR
+    84  0C61                     _WR	set	3169
+    85                           	global	_WREN
+    86  0C62                     _WREN	set	3170
+    87                           	file	"Led_Counter.as"
+    88                           	line	#
+    89                           psect cinit,class=CODE,delta=2
+    90                           global start_initialization
+    91  079C                     start_initialization:
+    92                           
+    93                           psect cinit,class=CODE,delta=2
+    94                           global end_of_initialization
+    95                           
+    96                           ;End of C runtime variable initialization code
+    97                           
+    98  079C                     end_of_initialization:
+    99  079C  0183               clrf status
+   100  079D  120A  118A  2FDC   ljmp _main	;jump to C main() function
+   101                           psect	cstackCOMMON,class=COMMON,space=1
+   102                           global __pcstackCOMMON
+   103  0070                     __pcstackCOMMON:
+   104                           	global	?_delay_us
+   105  0070                     ?_delay_us:	; 0 bytes @ 0x0
+   106                           	global	?_delay_sec
+   107  0070                     ?_delay_sec:	; 0 bytes @ 0x0
+   108                           	global	?_main
+   109  0070                     ?_main:	; 0 bytes @ 0x0
+   110                           	global	delay_us@us_count
+   111  0070                     delay_us@us_count:	; 2 bytes @ 0x0
+   112  0070                     	ds	2
+   113                           	global	??_delay_us
+   114  0072                     ??_delay_us:	; 0 bytes @ 0x2
+   115                           	global	?_delay_ms
+   116  0072                     ?_delay_ms:	; 0 bytes @ 0x2
+   117                           	global	delay_ms@ms_count
+   118  0072                     delay_ms@ms_count:	; 2 bytes @ 0x2
+   119  0072                     	ds	2
+   120                           	global	??_delay_ms
+   121  0074                     ??_delay_ms:	; 0 bytes @ 0x4
+   122                           	global	??_delay_sec
+   123  0074                     ??_delay_sec:	; 0 bytes @ 0x4
+   124                           	global	delay_sec@sec_count
+   125  0074                     delay_sec@sec_count:	; 1 bytes @ 0x4
+   126  0074                     	ds	1
+   127                           	global	??_main
+   128  0075                     ??_main:	; 0 bytes @ 0x5
+   129  0075                     	ds	1
+   130                           	global	main@cnt
+   131  0076                     main@cnt:	; 1 bytes @ 0x6
+   132  0076                     	ds	1
+   133 ;;Data sizes: Strings 0, constant 0, data 0, bss 0, persistent 0 stack 0
+   134 ;;Auto spaces:   Size  Autos    Used
+   135 ;; COMMON          14      7       7
+   136 ;; BANK0           80      0       0
+   137 ;; BANK1           80      0       0
+   138 ;; BANK3           96      0       0
+   139 ;; BANK2           96      0       0
+   140                           
+   141 ;;
+   142 ;; Pointer list with targets:
+   143                           
+   144                           
+   145                           
+   146 ;;
+   147 ;; Critical Paths under _main in COMMON
+   148 ;;
+   149 ;;   _main->_delay_sec
+   150 ;;   _delay_sec->_delay_ms
+   151 ;;   _delay_ms->_delay_us
+   152 ;;
+   153 ;; Critical Paths under _main in BANK0
+   154 ;;
+   155 ;;   None.
+   156 ;;
+   157 ;; Critical Paths under _main in BANK1
+   158 ;;
+   159 ;;   None.
+   160 ;;
+   161 ;; Critical Paths under _main in BANK3
+   162 ;;
+   163 ;;   None.
+   164 ;;
+   165 ;; Critical Paths under _main in BANK2
+   166 ;;
+   167 ;;   None.
+   168                           
+   169 ;;
+   170 ;;Main: autosize = 0, tempsize = 1, incstack = 0, save=0
+   171 ;;
+   172                           
+   173 ;;
+   174 ;;Call Graph Tables:
+   175 ;;
+   176 ;; ---------------------------------------------------------------------------------
+   177 ;; (Depth) Function   	        Calls       Base Space   Used Autos Params    Refs
+   178 ;; ---------------------------------------------------------------------------------
+   179 ;; (0) _main                                                 2     2      0     120
+   180 ;;                                              5 COMMON     2     2      0
+   181 ;;                          _delay_sec
+   182 ;; ---------------------------------------------------------------------------------
+   183 ;; (1) _delay_sec                                            1     1      0      45
+   184 ;;                                              4 COMMON     1     1      0
+   185 ;;                           _delay_ms
+   186 ;; ---------------------------------------------------------------------------------
+   187 ;; (2) _delay_ms                                             2     0      2      30
+   188 ;;                                              2 COMMON     2     0      2
+   189 ;;                           _delay_us
+   190 ;; ---------------------------------------------------------------------------------
+   191 ;; (3) _delay_us                                             2     0      2      15
+   192 ;;                                              0 COMMON     2     0      2
+   193 ;; ---------------------------------------------------------------------------------
+   194 ;; Estimated maximum stack depth 3
+   195 ;; ---------------------------------------------------------------------------------
+   196                           
+   197 ;; Call Graph Graphs:
+   198                           
+   199 ;; _main (ROOT)
+   200 ;;   _delay_sec
+   201 ;;     _delay_ms
+   202 ;;       _delay_us
+   203 ;;
+   204                           
+   205 ;; Address spaces:
+   206                           
+   207 ;;Name               Size   Autos  Total    Cost      Usage
+   208 ;;BITCOMMON            E      0       0       0        0.0%
+   209 ;;EEDATA             100      0       0       0        0.0%
+   210 ;;NULL                 0      0       0       0        0.0%
+   211 ;;CODE                 0      0       0       0        0.0%
+   212 ;;COMMON               E      7       7       1       50.0%
+   213 ;;BITSFR0              0      0       0       1        0.0%
+   214 ;;SFR0                 0      0       0       1        0.0%
+   215 ;;BITSFR1              0      0       0       2        0.0%
+   216 ;;SFR1                 0      0       0       2        0.0%
+   217 ;;STACK                0      0       3       2        0.0%
+   218 ;;ABS                  0      0       0       3        0.0%
+   219 ;;BITBANK0            50      0       0       4        0.0%
+   220 ;;BITSFR3              0      0       0       4        0.0%
+   221 ;;SFR3                 0      0       0       4        0.0%
+   222 ;;BANK0               50      0       0       5        0.0%
+   223 ;;BITSFR2              0      0       0       5        0.0%
+   224 ;;SFR2                 0      0       0       5        0.0%
+   225 ;;BITBANK1            50      0       0       6        0.0%
+   226 ;;BANK1               50      0       0       7        0.0%
+   227 ;;BITBANK3            60      0       0       8        0.0%
+   228 ;;BANK3               60      0       0       9        0.0%
+   229 ;;BITBANK2            60      0       0      10        0.0%
+   230 ;;BANK2               60      0       0      11        0.0%
+   231 ;;DATA                 0      0       0      12        0.0%
+   232                           
+   233                           	global	_main
+   234                           psect	maintext
+   235                           
+   236 ;; *************** function _main *****************
+   237 ;; Defined at:
+   238 ;;		line 21 in file "F:\Sample_Programs\Pic_Programs\Led\Led_Counter\main.c"
+   239 ;; Parameters:    Size  Location     Type
+   240 ;;		None
+   241 ;; Auto vars:     Size  Location     Type
+   242 ;;  cnt             1    6[COMMON] unsigned char 
+   243 ;; Return value:  Size  Location     Type
+   244 ;;		None               void
+   245 ;; Registers used:
+   246 ;;		wreg, status,2, status,0, pclath, cstack
+   247 ;; Tracked objects:
+   248 ;;		On entry : 17F/0
+   249 ;;		On exit  : 0/0
+   250 ;;		Unchanged: 0/0
+   251 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   252 ;;      Params:         0       0       0       0       0
+   253 ;;      Locals:         1       0       0       0       0
+   254 ;;      Temps:          1       0       0       0       0
+   255 ;;      Totals:         2       0       0       0       0
+   256 ;;Total ram usage:        2 bytes
+   257 ;; Hardware stack levels required when called:    3
+   258 ;; This function calls:
+   259 ;;		_delay_sec
+   260 ;; This function is called by:
+   261 ;;		Startup code after reset
+   262 ;; This function uses a non-reentrant model
+   263 ;;
+   264                           psect	maintext
+   265                           	file	"F:\Sample_Programs\Pic_Programs\Led\Led_Counter\main.c"
+   266                           	line	21
+   267                           	global	__size_of_main
+   268  0024                     	__size_of_main	equ	__end_of_main-_main
+   269                           	
+   270  07DC                     _main:	
+   271                           	opt	stack 5
+   272                           ; Regs used in _main: [wreg+status,2+status,0+pclath+cstack]
+   273                           	line	22
+   274                           	
+   275  07DC                     l3314:	
+   276                           ;main.c: 22: unsigned char cnt=0;
+   277  07DC  01F6               	clrf	(main@cnt)
+   278                           	line	24
+   279                           	
+   280  07DD                     l3316:	
+   281                           ;main.c: 24: TRISA=0x00;
+   282  07DD  1683               	bsf	status, 5	;RP0=1, select bank1
+   283  07DE  1303               	bcf	status, 6	;RP1=0, select bank1
+   284  07DF  0185               	clrf	(133)^080h	;volatile
+   285                           	line	25
+   286                           ;main.c: 25: TRISB=0x00;
+   287  07E0  0186               	clrf	(134)^080h	;volatile
+   288                           	line	26
+   289                           ;main.c: 26: TRISC=0x00;
+   290  07E1  0187               	clrf	(135)^080h	;volatile
+   291                           	line	27
+   292                           ;main.c: 27: TRISD=0x00;
+   293  07E2  0188               	clrf	(136)^080h	;volatile
+   294                           	line	28
+   295                           ;main.c: 28: TRISE=0x00;
+   296  07E3  0189               	clrf	(137)^080h	;volatile
+   297  07E4  2FE5               	goto	l3318
+   298                           	line	29
+   299                           ;main.c: 29: while(1)
+   300                           	
+   301  07E5                     l1386:	
+   302                           	line	33
+   303                           	
+   304  07E5                     l3318:	
+   305                           ;main.c: 30: {
+   306                           ;main.c: 33: PORTA=cnt;
+   307  07E5  0876               	movf	(main@cnt),w
+   308  07E6  1283               	bcf	status, 5	;RP0=0, select bank0
+   309  07E7  1303               	bcf	status, 6	;RP1=0, select bank0
+   310  07E8  0085               	movwf	(5)	;volatile
+   311                           	line	34
+   312                           	
+   313  07E9                     l3320:	
+   314                           ;main.c: 34: PORTB=cnt;
+   315  07E9  0876               	movf	(main@cnt),w
+   316  07EA  0086               	movwf	(6)	;volatile
+   317                           	line	35
+   318                           	
+   319  07EB                     l3322:	
+   320                           ;main.c: 35: PORTC=cnt;
+   321  07EB  0876               	movf	(main@cnt),w
+   322  07EC  0087               	movwf	(7)	;volatile
+   323                           	line	36
+   324                           	
+   325  07ED                     l3324:	
+   326                           ;main.c: 36: PORTD=cnt;
+   327  07ED  0876               	movf	(main@cnt),w
+   328  07EE  0088               	movwf	(8)	;volatile
+   329                           	line	37
+   330                           	
+   331  07EF                     l3326:	
+   332                           ;main.c: 37: PORTE=cnt;
+   333  07EF  0876               	movf	(main@cnt),w
+   334  07F0  0089               	movwf	(9)	;volatile
+   335                           	line	40
+   336                           	
+   337  07F1                     l3328:	
+   338                           ;main.c: 40: delay_sec(1);
+   339  07F1  3001               	movlw	(01h)
+   340  07F2  120A  118A  27AE   	fcall	_delay_sec
+              120A  118A         
+   341                           	line	41
+   342                           	
+   343  07F7                     l3330:	
+   344                           ;main.c: 41: cnt++;
+   345  07F7  3001               	movlw	(01h)
+   346  07F8  00F5               	movwf	(??_main+0)+0
+   347  07F9  0875               	movf	(??_main+0)+0,w
+   348  07FA  07F6               	addwf	(main@cnt),f
+   349  07FB  2FE5               	goto	l3318
+   350                           	line	42
+   351                           	
+   352  07FC                     l1387:	
+   353                           	line	29
+   354  07FC  2FE5               	goto	l3318
+   355                           	
+   356  07FD                     l1388:	
+   357                           	line	43
+   358                           	
+   359  07FD                     l1389:	
+   360                           	global	start
+   361  07FD  120A  118A  2800   	ljmp	start
+   362                           	opt stack 0
+   363                           GLOBAL	__end_of_main
+   364  0800                     	__end_of_main:
+   365 ;; =============== function _main ends ============
+   366                           
+   367                           	signat	_main,88
+   368                           	global	_delay_sec
+   369                           psect	text83,local,class=CODE,delta=2
+   370                           global __ptext83
+   371  07AE                     __ptext83:
+   372                           
+   373 ;; *************** function _delay_sec *****************
+   374 ;; Defined at:
+   375 ;;		line 74 in file "F:\Sample_Programs\Pic_Programs\Led\Led_Counter\delay.c"
+   376 ;; Parameters:    Size  Location     Type
+   377 ;;  sec_count       1    wreg     unsigned char 
+   378 ;; Auto vars:     Size  Location     Type
+   379 ;;  sec_count       1    4[COMMON] unsigned char 
+   380 ;; Return value:  Size  Location     Type
+   381 ;;		None               void
+   382 ;; Registers used:
+   383 ;;		wreg, status,2, status,0, pclath, cstack
+   384 ;; Tracked objects:
+   385 ;;		On entry : 0/0
+   386 ;;		On exit  : 0/0
+   387 ;;		Unchanged: 0/0
+   388 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   389 ;;      Params:         0       0       0       0       0
+   390 ;;      Locals:         1       0       0       0       0
+   391 ;;      Temps:          0       0       0       0       0
+   392 ;;      Totals:         1       0       0       0       0
+   393 ;;Total ram usage:        1 bytes
+   394 ;; Hardware stack levels used:    1
+   395 ;; Hardware stack levels required when called:    2
+   396 ;; This function calls:
+   397 ;;		_delay_ms
+   398 ;; This function is called by:
+   399 ;;		_main
+   400 ;; This function uses a non-reentrant model
+   401 ;;
+   402                           psect	text83
+   403                           	file	"F:\Sample_Programs\Pic_Programs\Led\Led_Counter\delay.c"
+   404                           	line	74
+   405                           	global	__size_of_delay_sec
+   406  0015                     	__size_of_delay_sec	equ	__end_of_delay_sec-_delay_sec
+   407                           	
+   408  07AE                     _delay_sec:	
+   409                           	opt	stack 5
+   410                           ; Regs used in _delay_sec: [wreg+status,2+status,0+pclath+cstack]
+   411                           ;delay_sec@sec_count stored from wreg
+   412  07AE  00F4               	movwf	(delay_sec@sec_count)
+   413                           	line	77
+   414                           	
+   415  07AF                     l3306:	
+   416                           ;delay.c: 77: while(sec_count!=0)
+   417  07AF  2FBC               	goto	l3312
+   418                           	
+   419  07B0                     l697:	
+   420                           	line	79
+   421                           	
+   422  07B0                     l3308:	
+   423                           ;delay.c: 78: {
+   424                           ;delay.c: 79: delay_ms(1000);
+   425  07B0  30E8               	movlw	low(03E8h)
+   426  07B1  00F2               	movwf	(?_delay_ms)
+   427  07B2  3003               	movlw	high(03E8h)
+   428  07B3  00F3               	movwf	((?_delay_ms))+1
+   429  07B4  120A  118A  27C3   	fcall	_delay_ms
+              120A  118A         
+   430                           	line	80
+   431                           	
+   432  07B9                     l3310:	
+   433                           ;delay.c: 80: sec_count--;
+   434  07B9  3001               	movlw	low(01h)
+   435  07BA  02F4               	subwf	(delay_sec@sec_count),f
+   436  07BB  2FBC               	goto	l3312
+   437                           	line	81
+   438                           	
+   439  07BC                     l696:	
+   440                           	line	77
+   441                           	
+   442  07BC                     l3312:	
+   443  07BC  08F4               	movf	(delay_sec@sec_count),f
+   444  07BD  1D03               	skipz
+   445  07BE  2FC0               	goto	u2241
+   446  07BF  2FC1               	goto	u2240
+   447  07C0                     u2241:
+   448  07C0  2FB0               	goto	l3308
+   449  07C1                     u2240:
+   450  07C1  2FC2               	goto	l699
+   451                           	
+   452  07C2                     l698:	
+   453                           	line	82
+   454                           	
+   455  07C2                     l699:	
+   456  07C2  0008               	return
+   457                           	opt stack 0
+   458                           GLOBAL	__end_of_delay_sec
+   459  07C3                     	__end_of_delay_sec:
+   460 ;; =============== function _delay_sec ends ============
+   461                           
+   462                           	signat	_delay_sec,4216
+   463                           	global	_delay_ms
+   464                           psect	text84,local,class=CODE,delta=2
+   465                           global __ptext84
+   466  07C3                     __ptext84:
+   467                           
+   468 ;; *************** function _delay_ms *****************
+   469 ;; Defined at:
+   470 ;;		line 46 in file "F:\Sample_Programs\Pic_Programs\Led\Led_Counter\delay.c"
+   471 ;; Parameters:    Size  Location     Type
+   472 ;;  ms_count        2    2[COMMON] unsigned int 
+   473 ;; Auto vars:     Size  Location     Type
+   474 ;;		None
+   475 ;; Return value:  Size  Location     Type
+   476 ;;		None               void
+   477 ;; Registers used:
+   478 ;;		wreg, status,2, status,0, pclath, cstack
+   479 ;; Tracked objects:
+   480 ;;		On entry : 0/0
+   481 ;;		On exit  : 0/0
+   482 ;;		Unchanged: 0/0
+   483 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   484 ;;      Params:         2       0       0       0       0
+   485 ;;      Locals:         0       0       0       0       0
+   486 ;;      Temps:          0       0       0       0       0
+   487 ;;      Totals:         2       0       0       0       0
+   488 ;;Total ram usage:        2 bytes
+   489 ;; Hardware stack levels used:    1
+   490 ;; Hardware stack levels required when called:    1
+   491 ;; This function calls:
+   492 ;;		_delay_us
+   493 ;; This function is called by:
+   494 ;;		_delay_sec
+   495 ;; This function uses a non-reentrant model
+   496 ;;
+   497                           psect	text84
+   498                           	file	"F:\Sample_Programs\Pic_Programs\Led\Led_Counter\delay.c"
+   499                           	line	46
+   500                           	global	__size_of_delay_ms
+   501  0019                     	__size_of_delay_ms	equ	__end_of_delay_ms-_delay_ms
+   502                           	
+   503  07C3                     _delay_ms:	
+   504                           	opt	stack 5
+   505                           ; Regs used in _delay_ms: [wreg+status,2+status,0+pclath+cstack]
+   506                           	line	47
+   507                           	
+   508  07C3                     l3298:	
+   509                           ;delay.c: 47: while(ms_count!=0)
+   510  07C3  2FD4               	goto	l3304
+   511                           	
+   512  07C4                     l691:	
+   513                           	line	49
+   514                           	
+   515  07C4                     l3300:	
+   516                           ;delay.c: 48: {
+   517                           ;delay.c: 49: delay_us(112);
+   518  07C4  3070               	movlw	low(070h)
+   519  07C5  00F0               	movwf	(?_delay_us)
+   520  07C6  3000               	movlw	high(070h)
+   521  07C7  00F1               	movwf	((?_delay_us))+1
+   522  07C8  120A  118A  27A0   	fcall	_delay_us
+              120A  118A         
+   523                           	line	50
+   524                           	
+   525  07CD                     l3302:	
+   526                           ;delay.c: 50: ms_count--;
+   527  07CD  3001               	movlw	low(01h)
+   528  07CE  02F2               	subwf	(delay_ms@ms_count),f
+   529  07CF  3000               	movlw	high(01h)
+   530  07D0  1C03               	skipc
+   531  07D1  03F3               	decf	(delay_ms@ms_count+1),f
+   532  07D2  02F3               	subwf	(delay_ms@ms_count+1),f
+   533  07D3  2FD4               	goto	l3304
+   534                           	line	51
+   535                           	
+   536  07D4                     l690:	
+   537                           	line	47
+   538                           	
+   539  07D4                     l3304:	
+   540  07D4  0873               	movf	((delay_ms@ms_count+1)),w
+   541  07D5  0472               	iorwf	((delay_ms@ms_count)),w
+   542  07D6  1D03               	skipz
+   543  07D7  2FD9               	goto	u2231
+   544  07D8  2FDA               	goto	u2230
+   545  07D9                     u2231:
+   546  07D9  2FC4               	goto	l3300
+   547  07DA                     u2230:
+   548  07DA  2FDB               	goto	l693
+   549                           	
+   550  07DB                     l692:	
+   551                           	line	53
+   552                           	
+   553  07DB                     l693:	
+   554  07DB  0008               	return
+   555                           	opt stack 0
+   556                           GLOBAL	__end_of_delay_ms
+   557  07DC                     	__end_of_delay_ms:
+   558 ;; =============== function _delay_ms ends ============
+   559                           
+   560                           	signat	_delay_ms,4216
+   561                           	global	_delay_us
+   562                           psect	text85,local,class=CODE,delta=2
+   563                           global __ptext85
+   564  07A0                     __ptext85:
+   565                           
+   566 ;; *************** function _delay_us *****************
+   567 ;; Defined at:
+   568 ;;		line 26 in file "F:\Sample_Programs\Pic_Programs\Led\Led_Counter\delay.c"
+   569 ;; Parameters:    Size  Location     Type
+   570 ;;  us_count        2    0[COMMON] unsigned int 
+   571 ;; Auto vars:     Size  Location     Type
+   572 ;;		None
+   573 ;; Return value:  Size  Location     Type
+   574 ;;		None               void
+   575 ;; Registers used:
+   576 ;;		wreg, status,2, status,0
+   577 ;; Tracked objects:
+   578 ;;		On entry : 0/0
+   579 ;;		On exit  : 0/0
+   580 ;;		Unchanged: 0/0
+   581 ;; Data sizes:     COMMON   BANK0   BANK1   BANK3   BANK2
+   582 ;;      Params:         2       0       0       0       0
+   583 ;;      Locals:         0       0       0       0       0
+   584 ;;      Temps:          0       0       0       0       0
+   585 ;;      Totals:         2       0       0       0       0
+   586 ;;Total ram usage:        2 bytes
+   587 ;; Hardware stack levels used:    1
+   588 ;; This function calls:
+   589 ;;		Nothing
+   590 ;; This function is called by:
+   591 ;;		_delay_ms
+   592 ;; This function uses a non-reentrant model
+   593 ;;
+   594                           psect	text85
+   595                           	file	"F:\Sample_Programs\Pic_Programs\Led\Led_Counter\delay.c"
+   596                           	line	26
+   597                           	global	__size_of_delay_us
+   598  000E                     	__size_of_delay_us	equ	__end_of_delay_us-_delay_us
+   599                           	
+   600  07A0                     _delay_us:	
+   601                           	opt	stack 5
+   602                           ; Regs used in _delay_us: [wreg+status,2+status,0]
+   603                           	
+   604  07A0                     l685:	
+   605                           	line	28
+   606                           	
+   607  07A0                     l2436:	
+   608                           ;delay.c: 27: {
+   609                           ;delay.c: 28: us_count--;
+   610  07A0  3001               	movlw	low(01h)
+   611  07A1  02F0               	subwf	(delay_us@us_count),f
+   612  07A2  3000               	movlw	high(01h)
+   613  07A3  1C03               	skipc
+   614  07A4  03F1               	decf	(delay_us@us_count+1),f
+   615  07A5  02F1               	subwf	(delay_us@us_count+1),f
+   616                           	line	29
+   617                           	
+   618  07A6                     l2438:	
+   619                           ;delay.c: 29: }while(us_count);
+   620  07A6  0871               	movf	((delay_us@us_count+1)),w
+   621  07A7  0470               	iorwf	((delay_us@us_count)),w
+   622  07A8  1D03               	skipz
+   623  07A9  2FAB               	goto	u11
+   624  07AA  2FAC               	goto	u10
+   625  07AB                     u11:
+   626  07AB  2FA0               	goto	l685
+   627  07AC                     u10:
+   628  07AC  2FAD               	goto	l687
+   629                           	
+   630  07AD                     l686:	
+   631                           	line	30
+   632                           	
+   633  07AD                     l687:	
+   634  07AD  0008               	return
+   635                           	opt stack 0
+   636                           GLOBAL	__end_of_delay_us
+   637  07AE                     	__end_of_delay_us:
+   638 ;; =============== function _delay_us ends ============
+   639                           
+   640                           	signat	_delay_us,4216
+   641                           psect	text86,local,class=CODE,delta=2
+   642                           global __ptext86
+   643  0000                     __ptext86:
+   644                           	global	btemp
+   645  007E                     	btemp set 07Eh
+   646                           
+   647                           	DABS	1,126,2	;btemp
+   648                           	global	wtemp0
+   649  007E                     	wtemp0 set btemp
+
+
+HI-TECH Software PICC Macro Assembler V9.83 build 10920 
+Symbol Table                                                                                   Wed Dec 07 12:57:29 2011
+
+                  _RD 0C60                    u10 07AC                    u11 07AB                    _WR 0C61  
+                 l690 07D4                   l691 07C4                   l692 07DB                   l685 07A0  
+                 l693 07DB                   l686 07AD                   l687 07AD                   l696 07BC  
+                 l697 07B0                   l698 07C2                   l699 07C2                   _GIE 005F  
+                l3300 07C4                  l3302 07CD                  l3310 07B9                  l3304 07D4  
+                l3312 07BC                  l3320 07E9                  l3306 07AF                  l3330 07F7  
+                l3322 07EB                  l1386 07E5                  l3314 07DC                  l1387 07FC  
+                l2436 07A0                  l3308 07B0                  l1388 07FD                  l3324 07ED  
+                l3316 07DD                  l1389 07FD                  l2438 07A6                  l3326 07EF  
+                l3318 07E5                  l3328 07F1                  l3298 07C3                  u2230 07DA  
+                u2231 07D9                  u2240 07C1                  u2241 07C0                  _WREN 0C62  
+                _main 07DC                  btemp 007E                  start 0000                 ?_main 0070  
+               _EEADR 010D                 _CARRY 0018                 _PORTA 0005                 _PORTB 0006  
+               _PORTC 0007                 _PORTD 0008                 _PORTE 0009                 _TRISA 0085  
+               _TRISB 0086                 _TRISC 0087                 _TRISD 0088                 _TRISE 0089  
+               status 0003                 wtemp0 007E          __end_of_main 0800                ??_main 0075  
+              _EEDATA 010C                _EECON1 018C                _EECON2 018D      __end_of_delay_ms 07DC  
+    __end_of_delay_us 07AE        __pcstackCOMMON 0070    __size_of_delay_sec 0015            __pmaintext 07DC  
+           ?_delay_ms 0072             ?_delay_us 0070     __end_of_delay_sec 07C3      delay_ms@ms_count 0072  
+          ??_delay_ms 0074            ??_delay_us 0072               main@cnt 0076  end_of_initialization 079C  
+    delay_us@us_count 0070   start_initialization 079C     __size_of_delay_ms 0019     __size_of_delay_us 000E  
+           _delay_sec 07AE    delay_sec@sec_count 0074            ?_delay_sec 0070              _delay_ms 07C3  
+            _delay_us 07A0              __ptext83 07AE              __ptext84 07C3              __ptext85 07A0  
+            __ptext86 0000         __size_of_main 0024           ??_delay_sec 0074  

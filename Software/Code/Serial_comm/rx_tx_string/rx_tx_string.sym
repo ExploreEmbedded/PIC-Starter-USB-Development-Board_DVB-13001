@@ -1,0 +1,192 @@
+_RD C60 0 ABS
+__size_of_UART_TxString 0 0 ABS
+_WR C61 0 ABS
+_UART_RxChar 755 0 CODE
+_UART_TxChar 760 0 CODE
+__S0 800 0 ABS
+__S1 74 0 ABS
+__S2 0 0 ABS
+_GIE 5F 0 ABS
+__Hintentry 0 0 CODE
+__Lintentry 0 0 CODE
+?_UART_RxChar 70 0 COMMON
+?_UART_TxChar 70 0 COMMON
+_RCIF 65 0 ABS
+_TXIF 64 0 ABS
+_WREN C62 0 ABS
+__end_of_UART_TxString 7A5 0 CODE
+??_UART_RxChar 70 0 COMMON
+_main 7A5 0 CODE
+btemp 7E 0 ABS
+_exit 0 0 CODE
+start 0 0 CODE
+??_UART_TxChar 70 0 COMMON
+_RCREG 1A 0 ABS
+_RCSTA 18 0 ABS
+_TRISC 87 0 ABS
+_TXREG 19 0 ABS
+reset_vec 0 0 CODE
+_SPBRG 99 0 ABS
+_TXSTA 98 0 ABS
+_EEADR 10D 0 ABS
+wtemp0 7E 0 ABS
+_CARRY 18 0 ABS
+__Hconfig 0 0 CONFIG
+__Lconfig 0 0 CONFIG
+__Hram 0 0 ABS
+__Lram 0 0 ABS
+?_main 70 0 COMMON
+__Hfunctab 0 0 CODE
+__Lfunctab 0 0 CODE
+UART_RxString@string_ptr 72 0 COMMON
+_EECON1 18C 0 ABS
+UART_TxString@string_ptr 71 0 COMMON
+_EECON2 18D 0 ABS
+__Hcommon 0 0 ABS
+__Lcommon 0 0 ABS
+__Heeprom_data 0 0 EEDATA
+__Leeprom_data 0 0 EEDATA
+__size_of_UART_Init 0 0 ABS
+_EEDATA 10C 0 ABS
+__Habs1 0 0 ABS
+__Labs1 0 0 ABS
+__Hsfr0 0 0 ABS
+__Lsfr0 0 0 ABS
+__Hsfr1 0 0 ABS
+__Lsfr1 0 0 ABS
+__Hsfr2 0 0 ABS
+__Lsfr2 0 0 ABS
+__Hsfr3 0 0 ABS
+__Lsfr3 0 0 ABS
+__ptext120 7D1 0 CODE
+__ptext121 77B 0 CODE
+__ptext122 760 0 CODE
+__ptext123 755 0 CODE
+__end_of_UART_Init 77B 0 CODE
+__end_of_UART_RxChar 760 0 CODE
+__ptext124 76C 0 CODE
+__Hcode 0 0 ABS
+__Lcode 0 0 ABS
+__ptext125 0 0 CODE
+??_main 74 0 COMMON
+__HcstackBANK0 0 0 ABS
+__LcstackBANK0 0 0 ABS
+__pcstackBANK0 20 0 BANK0
+??_UART_Init 70 0 COMMON
+__Hinit 0 0 CODE
+__Linit 0 0 CODE
+__end_of_main 7D1 0 CODE
+__Htext 0 0 ABS
+__Ltext 0 0 ABS
+__ptext119 0 0 CODE
+end_of_initialization 751 0 CODE
+_UART_Init 76C 0 CODE
+__end_of_UART_RxString 800 0 CODE
+__Hstrings 0 0 ABS
+__Lstrings 0 0 ABS
+__pstrings 3 0 STRING
+_UART_RxString 7D1 0 CODE
+_UART_TxString 77B 0 CODE
+__Hbank0 0 0 ABS
+__Lbank0 0 0 ABS
+__Hbank1 0 0 ABS
+__Lbank1 0 0 ABS
+__Hbank2 0 0 ABS
+__Lbank2 0 0 ABS
+__Hbank3 0 0 ABS
+__Lbank3 0 0 ABS
+__size_of_UART_RxChar 0 0 ABS
+__Hpowerup 0 0 CODE
+__Lpowerup 0 0 CODE
+__Hclrtext 0 0 ABS
+__Lclrtext 0 0 ABS
+??_UART_RxString 71 0 COMMON
+??_UART_TxString 73 0 COMMON
+__Hidloc 0 0 IDLOC
+__Lidloc 0 0 IDLOC
+main@msg 20 0 BANK0
+__Hcinit 0 0 ABS
+__Lcinit 0 0 ABS
+__size_of_main 0 0 ABS
+__size_of_UART_RxString 0 0 ABS
+?_UART_Init 70 0 COMMON
+UART_TxChar@ch 70 0 COMMON
+__Hend_init 3 0 CODE
+__Lend_init 0 0 CODE
+?_UART_RxString 70 0 COMMON
+?_UART_TxString 71 0 COMMON
+__Hreset_vec 0 0 CODE
+__Lreset_vec 0 0 CODE
+__size_of_UART_TxChar 0 0 ABS
+UART_RxString@ch 73 0 COMMON
+intlevel0 0 0 CODE
+intlevel1 0 0 CODE
+intlevel2 0 0 CODE
+intlevel3 0 0 CODE
+intlevel4 0 0 CODE
+intlevel5 0 0 CODE
+__HcstackCOMMON 0 0 ABS
+__LcstackCOMMON 0 0 ABS
+__pcstackCOMMON 70 0 COMMON
+start_initialization 751 0 CODE
+__Hmaintext 0 0 ABS
+__Lmaintext 0 0 ABS
+__pmaintext 7A5 0 CODE
+__end_of_UART_TxChar 76C 0 CODE
+%segments
+reset_vec 0 5 CODE 0
+cstackCOMMON 70 73 COMMON 70
+cstackBANK0 20 51 BANK0 20
+strings 6 7B STRING 6
+text120 FA2 FFF CODE FA2
+maintext F4A FA1 CODE F4A
+text121 EF6 F49 CODE EF6
+text124 ED8 EF5 CODE ED8
+text122 EC0 ED7 CODE EC0
+text123 EAA EBF CODE EAA
+cinit EA2 EA9 CODE EA2
+%locals
+startup.obj
+startup.as
+64 0 0 CODE
+rx_tx_string.obj
+rx_tx_string.as
+172 751 0 CODE
+173 752 0 CODE
+F:\work_space\Sample_Programs_updated\Pic\Pro_Pic\Serial_comm\rx_tx_string\main.c
+21 7A5 0 CODE
+26 7AB 0 CODE
+27 7B4 0 CODE
+29 7BA 0 CODE
+30 7C3 0 CODE
+23 7CD 0 CODE
+33 7CE 0 CODE
+F:\work_space\Sample_Programs_updated\Pic\Pro_Pic\Serial_comm\rx_tx_string\uart.c
+139 7D1 0 CODE
+143 7D2 0 CODE
+144 7DA 0 CODE
+146 7E0 0 CODE
+148 7ED 0 CODE
+149 7F1 0 CODE
+151 7F2 0 CODE
+152 7F9 0 CODE
+141 7FE 0 CODE
+154 7FF 0 CODE
+108 77B 0 CODE
+109 77C 0 CODE
+108 793 0 CODE
+110 7A4 0 CODE
+80 760 0 CODE
+81 761 0 CODE
+82 768 0 CODE
+83 769 0 CODE
+84 76B 0 CODE
+55 755 0 CODE
+56 75C 0 CODE
+57 75D 0 CODE
+58 75F 0 CODE
+32 76C 0 CODE
+33 770 0 CODE
+34 772 0 CODE
+35 776 0 CODE
+36 77A 0 CODE

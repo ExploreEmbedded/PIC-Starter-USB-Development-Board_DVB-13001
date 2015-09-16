@@ -1,0 +1,11 @@
+_UART_TxString: CODE, 1638 0 33
+_UART_TxNumber: CODE, 1874 0 174
+_UART_Init: CODE, 1561 0 15
+_delay_us: CODE, 1576 0 16
+_main: CODE, 1671 0 57
+___lwdiv: CODE, 1796 0 78
+___lwmod: CODE, 1728 0 68
+_delay_ms: CODE, 1613 0 25
+_delay_sec: CODE, 1592 0 21
+_UART_TxChar: CODE, 1549 0 12
+Total: 499

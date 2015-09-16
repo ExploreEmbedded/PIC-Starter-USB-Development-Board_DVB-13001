@@ -1,0 +1,316 @@
+___lwdiv@dividend 72 0 COMMON
+___lwdiv@counter 77 0 COMMON
+_RD C60 0 ABS
+_GO FA 0 ABS
+_WR C61 0 ABS
+__size_of_LCD_CmdWrite 0 0 ABS
+_RD0 40 0 ABS
+_RD1 41 0 ABS
+_RD2 42 0 ABS
+__S0 800 0 ABS
+__S1 7C 0 ABS
+__S2 0 0 ABS
+__size_of_LCD_DisplayString 0 0 ABS
+_GIE 5F 0 ABS
+__Hintentry 0 0 CODE
+__Lintentry 0 0 CODE
+_ADON F8 0 ABS
+_WREN C62 0 ABS
+__end_of_LCD_Init 650 0 CODE
+??_LCD_GoToLineTwo 75 0 COMMON
+_main 650 0 CODE
+btemp 7E 0 ABS
+_exit 0 0 CODE
+start 0 0 CODE
+_TRISB 86 0 ABS
+reset_vec 0 0 CODE
+_TRISD 88 0 ABS
+_PORTB 6 0 ABS
+_EEADR 10D 0 ABS
+wtemp0 7E 0 ABS
+__size_of_LCD_DisplayNumber 0 0 ABS
+_CARRY 18 0 ABS
+__Hconfig 0 0 CONFIG
+__Lconfig 0 0 CONFIG
+?___lwmod 70 0 COMMON
+__Hram 0 0 ABS
+__Lram 0 0 ABS
+_LCD_CmdWrite 5CD 0 CODE
+?_main 70 0 COMMON
+_LCD_DisplayString 609 0 CODE
+_ADC_Init 59C 0 CODE
+_LCD_Init 62A 0 CODE
+__Hfunctab 0 0 CODE
+__Lfunctab 0 0 CODE
+_ADCON0 1F 0 ABS
+_ADCON1 9F 0 ABS
+_EECON1 18C 0 ABS
+_EECON2 18D 0 ABS
+__Hcommon 0 0 ABS
+__Lcommon 0 0 ABS
+__Heeprom_data 0 0 EEDATA
+__Leeprom_data 0 0 EEDATA
+__end_of_LCD_GoToLineTwo 59C 0 CODE
+_delay_ms 5B4 0 CODE
+_EEDATA 10C 0 ABS
+?___lwdiv 70 0 COMMON
+delay_ms@ms_count 72 0 COMMON
+_ADRESH 1E 0 ABS
+__Habs1 0 0 ABS
+__Labs1 0 0 ABS
+_ADRESL 9E 0 ABS
+__Hsfr0 0 0 ABS
+_delay_us 5A4 0 CODE
+__Lsfr0 0 0 ABS
+__Hsfr1 0 0 ABS
+__Lsfr1 0 0 ABS
+__Hsfr2 0 0 ABS
+__Lsfr2 0 0 ABS
+__Hsfr3 0 0 ABS
+__Lsfr3 0 0 ABS
+LCD_DisplayNumber@num 78 0 COMMON
+__size_of_LCD_DataWrite 0 0 ABS
+__ptext170 62A 0 CODE
+??_LCD_DataWrite 74 0 COMMON
+??___lwmod 74 0 COMMON
+__ptext171 5EB 0 CODE
+?_ADC_StartConversion 72 0 COMMON
+__Hcode 0 0 ABS
+__Lcode 0 0 ABS
+__ptext172 5CD 0 CODE
+?_LCD_CmdWrite 70 0 COMMON
+__ptext173 5B4 0 CODE
+??_main 7A 0 COMMON
+__end_of_delay_us 5B4 0 CODE
+__ptext174 682 0 CODE
+__Hinit 0 0 CODE
+__Linit 0 0 CODE
+delay_us@us_count 70 0 COMMON
+__end_of_main 682 0 CODE
+LCD_DataWrite@dat 74 0 COMMON
+__end_of_LCD_CmdWrite 5EB 0 CODE
+__Htext 0 0 ABS
+__Ltext 0 0 ABS
+__ptext175 6C0 0 CODE
+__ptext166 0 0 CODE
+_LCD_DataWrite 5EB 0 CODE
+_LCD_GoToLineTwo 595 0 CODE
+__ptext176 704 0 CODE
+?_ADC_Init 70 0 COMMON
+?_LCD_Init 70 0 COMMON
+end_of_initialization 591 0 CODE
+__ptext167 752 0 CODE
+__ptext177 5A4 0 CODE
+__ptext168 609 0 CODE
+__ptext178 59C 0 CODE
+__ptext169 595 0 CODE
+__ptext179 0 0 CODE
+_LCD_DisplayNumber 752 0 CODE
+__size_of_ADC_Init 0 0 ABS
+?_delay_ms 72 0 COMMON
+__Hstrings 0 0 ABS
+__Lstrings 0 0 ABS
+__pstrings 3 0 STRING
+??___lwdiv 74 0 COMMON
+__Hbank0 0 0 ABS
+__Lbank0 0 0 ABS
+__Hbank1 0 0 ABS
+__Lbank1 0 0 ABS
+__Hbank2 0 0 ABS
+__Lbank2 0 0 ABS
+?_delay_us 70 0 COMMON
+__Hbank3 0 0 ABS
+__Lbank3 0 0 ABS
+__Hpowerup 0 0 CODE
+__Lpowerup 0 0 CODE
+__end_of_LCD_DataWrite 609 0 CODE
+LCD_DisplayString@string_ptr 76 0 COMMON
+ADC_StartConversion@channel 76 0 COMMON
+__Hclrtext 0 0 ABS
+__Lclrtext 0 0 ABS
+__end_of___lwdiv 752 0 CODE
+__Hidloc 0 0 IDLOC
+__Lidloc 0 0 IDLOC
+??_LCD_CmdWrite 74 0 COMMON
+_ADC_StartConversion 682 0 CODE
+___lwmod 6C0 0 CODE
+??_ADC_StartConversion 74 0 COMMON
+__size_of_delay_ms 0 0 ABS
+__size_of_delay_us 0 0 ABS
+__Hcinit 0 0 ABS
+__Lcinit 0 0 ABS
+___lwdiv 704 0 CODE
+__size_of_main 0 0 ABS
+__end_of_LCD_DisplayString 62A 0 CODE
+?_LCD_DataWrite 70 0 COMMON
+??_ADC_Init 70 0 COMMON
+??_LCD_Init 75 0 COMMON
+__size_of_LCD_Init 0 0 ABS
+__end_of_ADC_StartConversion 6C0 0 CODE
+__size_of___lwdiv 0 0 ABS
+__end_of_LCD_DisplayNumber 800 0 CODE
+__end_of___lwmod 704 0 CODE
+___lwmod@divisor 70 0 COMMON
+??_delay_ms 74 0 COMMON
+__Hend_init 3 0 CODE
+__Lend_init 0 0 CODE
+??_LCD_DisplayNumber 7A 0 COMMON
+___lwdiv@divisor 70 0 COMMON
+__end_of_delay_ms 5CD 0 CODE
+__size_of_LCD_GoToLineTwo 0 0 ABS
+__Hreset_vec 0 0 CODE
+__Lreset_vec 0 0 CODE
+??_LCD_DisplayString 75 0 COMMON
+__size_of_ADC_StartConversion 0 0 ABS
+?_LCD_DisplayString 70 0 COMMON
+??_delay_us 72 0 COMMON
+intlevel0 0 0 CODE
+intlevel1 0 0 CODE
+intlevel2 0 0 CODE
+intlevel3 0 0 CODE
+intlevel4 0 0 CODE
+intlevel5 0 0 CODE
+?_LCD_DisplayNumber 78 0 COMMON
+__size_of___lwmod 0 0 ABS
+__HcstackCOMMON 0 0 ABS
+__LcstackCOMMON 0 0 ABS
+__pcstackCOMMON 70 0 COMMON
+LCD_CmdWrite@cmd 74 0 COMMON
+?_LCD_GoToLineTwo 70 0 COMMON
+start_initialization 591 0 CODE
+___lwdiv@quotient 75 0 COMMON
+__end_of_ADC_Init 5A4 0 CODE
+main@adc_result 7A 0 COMMON
+__Hmaintext 0 0 ABS
+__Lmaintext 0 0 ABS
+__pmaintext 650 0 CODE
+___lwmod@dividend 72 0 COMMON
+___lwmod@counter 75 0 COMMON
+%segments
+reset_vec 0 5 CODE 0
+cstackCOMMON 70 7B COMMON 70
+text167 EA4 FFF CODE EA4
+text176 E08 EA3 CODE E08
+text175 D80 E07 CODE D80
+text174 D04 D7F CODE D04
+maintext CA0 D03 CODE CA0
+text170 C54 C9F CODE C54
+text168 C12 C53 CODE C12
+text171 BD6 C11 CODE BD6
+text172 B9A BD5 CODE B9A
+text173 B68 B99 CODE B68
+strings 6 33 STRING 6
+text177 B48 B67 CODE B48
+text178 B38 B47 CODE B38
+text169 B2A B37 CODE B2A
+cinit B22 B29 CODE B22
+%locals
+startup.obj
+startup.as
+65 0 0 CODE
+Single_Channel.obj
+Single_Channel.as
+154 591 0 CODE
+155 592 0 CODE
+C:\Users\Xplore_labZ\Saved Games\Desktop\Sample_Programs_updated\Pic\Ultra_Pic\Adc\Single_Channel\main.c
+23 650 0 CODE
+26 655 0 CODE
+29 65A 0 CODE
+35 661 0 CODE
+38 66D 0 CODE
+39 672 0 CODE
+32 67E 0 CODE
+43 67F 0 CODE
+C:\Users\Xplore_labZ\Saved Games\Desktop\Sample_Programs_updated\Pic\Ultra_Pic\Adc\Single_Channel\lcd_8_bit.c
+285 752 0 CODE
+286 768 0 CODE
+288 77D 0 CODE
+289 793 0 CODE
+291 7A8 0 CODE
+292 7BE 0 CODE
+294 7D3 0 CODE
+296 7E9 0 CODE
+298 7FF 0 CODE
+248 609 0 CODE
+249 60A 0 CODE
+250 60B 0 CODE
+249 61C 0 CODE
+251 629 0 CODE
+130 595 0 CODE
+131 59B 0 CODE
+68 62A 0 CODE
+70 633 0 CODE
+71 636 0 CODE
+73 637 0 CODE
+74 63D 0 CODE
+75 643 0 CODE
+76 649 0 CODE
+78 64F 0 CODE
+219 5EB 0 CODE
+220 5F0 0 CODE
+221 5F1 0 CODE
+222 5F2 0 CODE
+223 5F3 0 CODE
+224 5FC 0 CODE
+226 5FF 0 CODE
+228 608 0 CODE
+187 5CD 0 CODE
+188 5D2 0 CODE
+189 5D3 0 CODE
+190 5D4 0 CODE
+191 5D5 0 CODE
+192 5DE 0 CODE
+194 5E1 0 CODE
+195 5EA 0 CODE
+C:\Users\Xplore_labZ\Saved Games\Desktop\Sample_Programs_updated\Pic\Ultra_Pic\Adc\Single_Channel\delay.c
+48 5B4 0 CODE
+50 5B5 0 CODE
+51 5BE 0 CODE
+48 5C5 0 CODE
+54 5CC 0 CODE
+C:\Users\Xplore_labZ\Saved Games\Desktop\Sample_Programs_updated\Pic\Ultra_Pic\Adc\Single_Channel\adc.c
+41 682 0 CODE
+42 683 0 CODE
+43 69C 0 CODE
+45 6A5 0 CODE
+46 6A8 0 CODE
+48 6AE 0 CODE
+49 6BF 0 CODE
+C:\Program Files\HI-TECH Software\PICC\9.83\sources\lwmod.c
+8 6C0 0 CODE
+9 6C6 0 CODE
+10 6C9 0 CODE
+11 6CA 0 CODE
+12 6D1 0 CODE
+10 6D6 0 CODE
+15 6DC 0 CODE
+16 6E6 0 CODE
+17 6ED 0 CODE
+18 6F4 0 CODE
+20 6FC 0 CODE
+21 703 0 CODE
+C:\Program Files\HI-TECH Software\PICC\9.83\sources\lwdiv.c
+9 704 0 CODE
+10 706 0 CODE
+11 70C 0 CODE
+12 70F 0 CODE
+13 710 0 CODE
+14 717 0 CODE
+12 71C 0 CODE
+17 722 0 CODE
+18 729 0 CODE
+19 733 0 CODE
+20 739 0 CODE
+22 73B 0 CODE
+23 742 0 CODE
+25 74A 0 CODE
+26 751 0 CODE
+C:\Users\Xplore_labZ\Saved Games\Desktop\Sample_Programs_updated\Pic\Ultra_Pic\Adc\Single_Channel\delay.c
+27 5A4 0 CODE
+29 5A5 0 CODE
+27 5AC 0 CODE
+31 5B3 0 CODE
+C:\Users\Xplore_labZ\Saved Games\Desktop\Sample_Programs_updated\Pic\Ultra_Pic\Adc\Single_Channel\adc.c
+26 59C 0 CODE
+27 59F 0 CODE
+28 5A3 0 CODE
